@@ -46,9 +46,61 @@ Architecture explainers:
 
 The core scanner currently uses only the Python standard library, so there is no required `pip install` step.
 
+You do still need a working Python 3 installation on the machine where you run the scanner.
+
+Recommended official Python sources:
+
+- Windows: [python.org Windows downloads](https://www.python.org/downloads/windows/)
+- Linux and Unix guidance: [Python docs: Using Python on Unix platforms](https://docs.python.org/3/using/unix.html)
+- Virtual environments: [Python Packaging User Guide: Installing Packages](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+
+### Windows setup
+
+A typical Windows setup is:
+
+1. Install Python 3 from the official Windows download page.
+2. During installation, make sure Python is added to `PATH` if the installer gives you that option.
+3. From the project root, create and activate a virtual environment.
+
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
+python app.py --help
+```
+
+If `python` is not recognized on Windows, try the Python launcher instead:
+
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+py app.py --help
+```
+
+### Linux setup
+
+Many Linux systems already have Python 3 installed, but some do not provide the `python` command by default, and some do not include the `venv` module until you install an extra package.
+
+A common Ubuntu or Debian setup looks like this:
+
+```bash
+sudo apt update
+sudo apt install python-is-python3
+sudo apt install python3-venv
+python -m venv .venv
+source .venv/bin/activate
+python app.py --help
+```
+
+What those packages do:
+
+- `python-is-python3`: makes the `python` command point to Python 3 on distributions where only `python3` is present by default
+- `python3-venv`: installs the standard-library virtual environment support used by `python -m venv`
+
+If your distribution already has `python` and `venv` working, you may not need those extra packages. In that case this shorter flow is enough:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python app.py --help
 ```
 
