@@ -1,0 +1,7 @@
+boto3==1.39.0
+cryptography==45.0.0
+paramiko==3.5.0
+PyJWT==2.9.0
+pyOpenSSL==24.2.1
+hvac==2.3.0
+akeyless-python==1.0.0

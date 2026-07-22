@@ -1,0 +1,488 @@
+{
+  "vendor_families": [
+    {
+      "label": "Spring",
+      "patterns": [
+        "spring"
+      ]
+    },
+    {
+      "label": "Microsoft Platform",
+      "patterns": [
+        "microsoft.aspnetcore",
+        "microsoft.data.sqlclient",
+        "system.data.sqlclient",
+        "system.net.http",
+        "microsoft.identitymodel"
+      ]
+    },
+    {
+      "label": "Java Persistence / SQL",
+      "patterns": [
+        "jakarta.persistence",
+        "javax.sql",
+        "java.sql"
+      ]
+    },
+    {
+      "label": "Go Standard Library",
+      "patterns": [
+        "database/sql"
+      ]
+    },
+    {
+      "label": "Java Core IO",
+      "patterns": [
+        "java.io.",
+        "java.util."
+      ]
+    },
+    {
+      "label": "Thales Luna HSM",
+      "patterns": [
+        "com.safenetinc.luna",
+        "lunaprovider",
+        "lunaslotmanager"
+      ]
+    },
+    {
+      "label": "Oracle GoldenGate",
+      "patterns": [
+        "goldengate",
+        "thalesoracleggkeyproviderplugin"
+      ]
+    },
+    {
+      "label": "Custom Your Wrapper",
+      "patterns": [
+        "com.thales.cm.rest.cmhelper",
+        "ciphertrustmanagerhelper",
+        "cmrestprotect",
+        "cmrestsign",
+        "cmrestmac",
+        "/api/v1/crypto/",
+        "/api/v1/vault/keys2/"
+      ]
+    },
+    {
+      "label": "Thales Centralized Mgmt (CRDP,CADP)",
+      "patterns": [
+        "/v1/protect",
+        "/v1/reveal",
+        "/v1/protectbulk",
+        "/v1/revealbulk",
+        "/v2/protect",
+        "/v2/reveal",
+        "/v2/protectbulk",
+        "/v2/revealbulk",
+        "crdp/sampleapp",
+        "crdprestclient",
+        "crdprequestbuilder",
+        "ciphertextdata",
+        "protectrequest",
+        "revealrequest",
+        "com.centralmanagement",
+        "com.centralmanagement.centralmanagementprovider",
+        "com.centralmanagement.registerclientparameters",
+        "com.centralmanagement.policy.cryptomanager"
+      ]
+    },
+    {
+      "label": "Custom Thales CRDP",
+      "patterns": [
+        "thalescadpprotectrevealhelper",
+        "thalesprotectrevealhelper",
+        "thalesrestprotectrevealhelper"
+      ]
+    },
+    {
+      "label": "Custom Your Web Service",
+      "patterns": [
+        "thalesgcpprotectserveropenai",
+        "thalesprotectgatewayservice",
+        "authenticateRequest",
+        "protectInputAndCallLLM",
+        "protectInput",
+        "revealInput",
+        "/protectInputAndCallLLM",
+        "/protectInput",
+        "/revealInput"
+      ]
+    },
+    {
+      "label": "Thales CT-VL",
+      "patterns": [
+        "vts/rest/v2.0/tokenize",
+        "vts/rest/v2.0/detokenize",
+        "tokengroup",
+        "tokentemplate",
+        "ff1_tok_group",
+        "ff1_tok_template",
+        "vts_ip_address",
+        "vaultless tokenization",
+        "ct-vl"
+      ]
+    },
+    {
+      "label": "Generic KMIP",
+      "patterns": [
+        "kmipsession",
+        "kmipcipher",
+        "kmipgcmkeyinformation",
+        "kmipgcmspec",
+        "kmipivspec",
+        "kmipcryptoresult",
+        "kmipkey",
+        "kmipdata",
+        "kmipresponse",
+        "kmip.h",
+        "libkmip",
+        "kmipclient",
+        "register_kmip",
+        "locate_kmip",
+        "get_kmip",
+        "destroy_kmip",
+        "kmip_open",
+        "kmip_close"
+      ]
+    },
+    {
+      "label": "Thales KMIP",
+      "patterns": [
+        "naeclientcertificate"
+      ]
+    },
+    {
+      "label": "Thales CADP PKCS11",
+      "patterns": [
+        "cadp_pkcs11.properties",
+        "cadp/cadp.h",
+        "ciphertrust_pkcs11_client",
+        "ciphertrust_cadp_pkcs11",
+        "thalescadppkcs11",
+        "cadppkcs11",
+        "cadp-pkcs11"
+      ]
+    },
+    {
+      "label": "Thales CADP / CipherTrust",
+      "patterns": [
+        "thales",
+        "ciphertrust",
+        "cadp",
+        "ingrian",
+        "keysecure",
+        "ciphertrust.cadp.netcore",
+        "cadp.netcore.crypto",
+        "cadp.netcore.keymanagement",
+        "cadp.netcore.sessions",
+        "naesession",
+        "naekeymanagement",
+        "naersakey",
+        "cadp.netcore_properties.xml",
+        "cadp_capi.h",
+        "cadp_pkcs11.properties",
+        "cadp_capi.properties",
+        "i_c_initialize",
+        "i_c_opensession",
+        "i_c_createcipherspec",
+        "i_c_crypt_enhanced",
+        "i_c_setuserspec",
+        "i_c_getuserspec",
+        "ciphertrust\\protect",
+        "ciphertrust\\manager",
+        "com.ingrian.security.nae",
+        "thalescadpscalasigningservice",
+        "ciphertrustprotectclient",
+        "ciphertrustrubygateway",
+        "thalescadprubysigningservice"
+      ]
+    },
+    {
+      "label": "Vormetric",
+      "patterns": [
+        "vormetric",
+        "vpkcs11",
+        "vorpkcs11",
+        "pkcs11interop"
+      ]
+    },
+    {
+      "label": "Voltage",
+      "patterns": [
+        "voltage",
+        "securedata",
+        "dataprotection",
+        "datamasking",
+        "simpleapi"
+      ]
+    },
+    {
+      "label": "Protegrity",
+      "patterns": [
+        "protegrity",
+        "applicationprotector",
+        "developerjava",
+        "protector",
+        "appython"
+      ]
+    },
+    {
+      "label": "AWS CloudHSM",
+      "patterns": [
+        "cloudhsm",
+        "cavium",
+        "libcloudhsm",
+        "cloudhsm_pkcs11",
+        "amazon.cloudhsm"
+      ]
+    },
+    {
+      "label": "AWS KMS",
+      "patterns": [
+        "@aws-sdk/client-kms",
+        "amazon.keymanagementservice",
+        "awskms",
+        "awskmsclientbuilder",
+        "kmsclient"
+      ]
+    },
+    {
+      "label": "AWS S3 Encryption",
+      "patterns": [
+        "amazons3encryption",
+        "kmsencryptionmaterialsprovider",
+        "encryptionmaterials",
+        "staticencryptionmaterialsprovider",
+        "ssecustomerkey"
+      ]
+    },
+    {
+      "label": "AWS Certificate Manager / PCA",
+      "patterns": [
+        "awscertificatemanager",
+        "describecertificaterequest",
+        "exportcertificaterequest",
+        "awspca",
+        "issuecertificaterequest",
+        "getcertificaterequest",
+        "listcertificateauthoritiesrequest",
+        "certificateauthorityarn"
+      ]
+    },
+    {
+      "label": "AWS Secrets Manager",
+      "patterns": [
+        "secretsmanager",
+        "getsecretvaluerequest",
+        "secretbinary",
+        "secretstring"
+      ]
+    },
+    {
+      "label": "AWS Encryption SDK",
+      "patterns": [
+        "encryptionsdk",
+        "awsencryptionsdk",
+        "awcrypto",
+        "kmsmasterkeyprovider",
+        "materialproviders",
+        "ikeyring",
+        "createawskmskeyringinput",
+        "createawskmsmultikeyringinput"
+      ]
+    },
+    {
+      "label": "Oracle OCI KMS",
+      "patterns": [
+        "com.oracle.bmc.keymanagement",
+        "kmsmanagementclient",
+        "kmscryptoclient",
+        "oci-java-sdk-keymanagement"
+      ]
+    },
+    {
+      "label": "Oracle Certificates / CA",
+      "patterns": [
+        "certificatesmanagement",
+        "certificatesclient",
+        "createcertificateauthorityrequest",
+        "createcertificaterequest",
+        "getcertificateauthorityrequest",
+        "getcabundlerequest",
+        "getcertificateauthoritybundlerequest",
+        "createcertificateauthoritydetails",
+        "createcertificatedetails"
+      ]
+    },
+    {
+      "label": "Oracle Secrets / Vault",
+      "patterns": [
+        "vaultsclient",
+        "createsecretrequest",
+        "getsecretrequest",
+        "createsecretdetails",
+        "com.oracle.bmc.vault.model.secret"
+      ]
+    },
+    {
+      "label": "Oracle PKI / Wallet",
+      "patterns": [
+        "oraclewallet",
+        "oraclesecretstore",
+        "oraclepki",
+        "osdt_core",
+        "osdt_cert",
+        "cwallet.sso",
+        "ewallet.p12"
+      ]
+    },
+    {
+      "label": "Azure Managed HSM",
+      "patterns": [
+        "managedhsm",
+        "azure.security.keyvault.administration",
+        "managedhsm.azure.net"
+      ]
+    },
+    {
+      "label": "Azure Key Vault",
+      "patterns": [
+        "azure.security.keyvault",
+        "com.microsoft.azure.keyvault",
+        "keyvaultclient",
+        "keyvaultconfiguration"
+      ]
+    },
+    {
+      "label": "HashiCorp Vault",
+      "patterns": [
+        "github.com/hashicorp/vault/api",
+        "hashicorp/vault/api",
+        "node-vault",
+        "hvac",
+        "vault.logical",
+        "vault.transit",
+        "/v1/transit/encrypt/",
+        "/v1/transit/decrypt/",
+        "/v1/transit/sign/",
+        "/v1/transit/verify/",
+        "auth/approle/login",
+        "vault\\transit",
+        "vault\\client",
+        "com.bettercloud.vault",
+        "hashicorpvault",
+        "/v1/transit/",
+        "vaultrs",
+        "vault-ruby",
+        "hashicorpvaulttransitrubyservice",
+        "hashicorpvaulttransitrustservice"
+      ]
+    },
+    {
+      "label": "Akeyless",
+      "patterns": [
+        "akeyless",
+        "io.akeyless",
+        "io.akeyless.client",
+        "akeyless-java",
+        "akeyless-python",
+        "akeyless-javascript",
+        "akeyless-csharp-netcore",
+        "github.com/akeylesslabs/akeyless-go",
+        "api.akeyless.io",
+        "provision-certificate",
+        "verify-pkcs1",
+        "upload-rsa",
+        "update-ssh-cert-issuer",
+        "create-dynamic-secret",
+        "rotate-key",
+        "akeyless\\api",
+        "akeyless\\v2",
+        "akeylessphp",
+        "akeylessscala",
+        "akeyless-ruby",
+        "akeyless_openapi",
+        "akeylessrustgateway",
+        "akeylessrubygateway"
+      ]
+    },
+    {
+      "label": "GCP Cloud HSM",
+      "patterns": [
+        "com.google.cloud.kms.v1.protectionlevel",
+        "com.google.cloud.kms.v1.cryptokeyversiontemplate",
+        "protectionlevel",
+        "cryptokeyversiontemplate"
+      ]
+    },
+    {
+      "label": "GCP Cloud KMS",
+      "patterns": [
+        "cloud.google.com/go/kms",
+        "google.cloud.kms",
+        "com.google.cloud.kms.v1.keymanagementserviceclient",
+        "com.google.cloud.kms.v1.cryptokeyname",
+        "keymanagementserviceclient"
+      ]
+    },
+    {
+      "label": "Bouncy Castle",
+      "patterns": [
+        "bouncycastle",
+        "bcprov",
+        "bcpkix",
+        "bc-fips"
+      ]
+    },
+    {
+      "label": "OpenSSL",
+      "patterns": [
+        "openssl",
+        "libssl",
+        "libcrypto",
+        "pyopenssl"
+      ]
+    },
+    {
+      "label": "JWT / Identity",
+      "patterns": [
+        "jsonwebtoken",
+        "jjwt",
+        "jose",
+        "jwt",
+        "oidc",
+        "oauth"
+      ]
+    },
+    {
+      "label": "SSH",
+      "patterns": [
+        "ssh",
+        "paramiko"
+      ]
+    },
+    {
+      "label": "Certificate / PKI",
+      "patterns": [
+        "x509",
+        "certificate",
+        "keystore",
+        "truststore",
+        "pkcs12",
+        "pkcs7"
+      ]
+    },
+    {
+      "label": "Language Runtime Crypto",
+      "patterns": [
+        "system.security.cryptography",
+        "java.security",
+        "javax.crypto",
+        "cryptography",
+        "crypto"
+      ]
+    }
+  ],
+  "fallback_label": "Other / General"
+}

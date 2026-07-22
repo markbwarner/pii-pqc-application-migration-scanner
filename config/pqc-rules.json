@@ -1,0 +1,84 @@
+{
+  "pqc_rules": [
+    {
+      "category": "PQC_CAPABLE_ALGORITHM",
+      "algorithm": "PQC-capable primitive",
+      "migration_class": "DEPENDENCY_DRIVEN",
+      "severity": "low",
+      "confidence": 0.92,
+      "pattern": "\\bML-KEM\\b|\\bMLKEM\\b|\\bML-KEM-(?:512|768|1024)\\b|\\bML-DSA\\b|\\bMLDSA\\b|\\bML-DSA-(?:44|65|87)\\b|\\bSLH-DSA\\b|\\bSLHDSA\\b|\\bFN-DSA\\b|\\bFNDSA\\b|\\bHQC\\b|\\bDilithium\\b|\\bDilithium(?:2|3|5)\\b|\\bKyber\\b|\\bKyber(?:512|768|1024)\\b|\\bFalcon\\b|\\bFalcon(?:-?512|-?1024)\\b|\\bSPHINCS\\+\\b|\\bSPHINCSPLUS\\b|\\bSPHINCS\\+-SHA(?:2|KE)-\\w+\\b|\\bXMSS\\b|\\bXMSSMT\\b|\\bLMS\\b|\\bHSS\\b|\\bX25519MLKEM768\\b|\\bSecP256r1MLKEM768\\b|\\bX25519Kyber768Draft00\\b|\\bFrodoKEM\\b|\\bFrodo\\b|\\bClassic McEliece\\b|\\bMcEliece\\b|\\bBIKE\\b|\\bNTRU\\b|\\bSABER\\b"
+    },
+    {
+      "category": "ASYMMETRIC_ALGORITHM",
+      "algorithm": "RSA",
+      "migration_class": "CUSTOM_REFACTOR",
+      "severity": "high",
+      "confidence": 0.95,
+      "pattern": "\\bRSA\\b|RSAPrivateKey|RSAPublicKey|SHA(?:1|224|256|384|512)withRSA|KeyPairGenerator\\.getInstance\\(\"RSA\"\\)|SignatureAlgorithm\\.RS\\d+|algorithm:\\s*RSA\\b|RSA\\.Create\\(|rsa\\.GenerateKey\\(|rsaEncryption"
+    },
+    {
+      "category": "ASYMMETRIC_ALGORITHM",
+      "algorithm": "ECC",
+      "migration_class": "APPLICATION_SIGNING",
+      "severity": "high",
+      "confidence": 0.93,
+      "pattern": "\\bECDSA\\b|\\bECDH\\b|\\bEC\\b|ES(?:256|384|512)\\b|SHA(?:224|256|384|512)withECDSA|KeyAgreement\\.getInstance\\(\"ECDH\"\\)|ECDsa\\.Create\\(|elliptic\\.P(?:256|384|521)\\(|ecdh\\."
+    },
+    {
+      "category": "CERTIFICATE_USAGE",
+      "algorithm": "X.509/Keystore",
+      "migration_class": "PKI_CERTIFICATE_LIFECYCLE",
+      "severity": "medium",
+      "confidence": 0.9,
+      "pattern": "X509Certificate|X509Certificate2|CertificateFactory|KeyStore|getCertificate\\(|getKey\\(|getEntry\\(|load_cert_chain|KeyStore\\.load\\(|KeyStore\\.getInstance\\(\"(?:PKCS12|JKS|JCEKS)\"\\)|TrustManagerFactory|\\.p12\\b|\\.pfx\\b|\\.jks\\b|\\.jceks\\b|\\.pem\\b|\\.crt\\b|\\.cer\\b|\\.csr\\b|pkcs12|truststore|keystore|cert-manager|certificate[A-Za-z0-9_]*|x509\\.ParseCertificate|tls\\.LoadX509KeyPair|BouncyCastleProvider|Security\\.addProvider\\(new\\s+BouncyCastleProvider|org\\.bouncycastle|DataMasking|usingProperty\\(secureData\\)|SecureData\\.(?:CC|AUTO|ORA-DATE)|SSECustomerKey|X509EncodedKeySpec|signingCertURL|AWSCertificateManager(?:ClientBuilder)?|DescribeCertificateRequest|ExportCertificateRequest|AWSPCA(?:ClientBuilder)?|IssueCertificateRequest|GetCertificateRequest|ListCertificateAuthoritiesRequest|CertificateAuthorityArn|Secret(?:Binary|String)|OracleWallet|OracleSecretStore|oraclepki|osdt_core|osdt_cert|cwallet\\.sso|ewallet\\.p12|CertificatesManagementClient|CreateCertificateAuthorityRequest|CreateCertificateRequest|GetCertificateAuthorityRequest|CreateSecretRequest|GetSecretRequest|CertificatesClient|GetCaBundleRequest|GetCertificateAuthorityBundleRequest"
+    },
+    {
+      "category": "TLS_CONFIGURATION",
+      "algorithm": "TLS/mTLS",
+      "migration_class": "PROTOCOL_STACK",
+      "severity": "medium",
+      "confidence": 0.9,
+      "pattern": "SSLContext|TrustManager|KeyManager|TLSv1(?:_2|_3)?|create_default_context|client-auth|ingress.*tls|kind:\\s*Ingress\\b|\\bmtls\\b|secretName:.*tls|ca-chain|minimum_version|tls\\.Config|HttpClientHandler|ServerCertificateCustomValidationCallback|SslStream|tls\\.LoadX509KeyPair"
+    },
+    {
+      "category": "JWT_OR_TOKEN_SIGNING",
+      "algorithm": "JWT asymmetric signing",
+      "migration_class": "APPLICATION_SIGNING",
+      "severity": "high",
+      "confidence": 0.9,
+      "pattern": "Jwts\\.builder|jsonwebtoken|jwt\\.sign|JWT|JWS|RS256|ES256|PS256|SignatureAlgorithm\\.(?:RS|ES|PS)\\d+|JwtSecurityTokenHandler|RsaSecurityKey|TokenValidationParameters|golang-jwt|jwt\\.NewWithClaims"
+    },
+    {
+      "category": "SSH_USAGE",
+      "algorithm": "SSH",
+      "migration_class": "PROTOCOL_STACK",
+      "severity": "medium",
+      "confidence": 0.87,
+      "pattern": "ssh-rsa|known_hosts|authorized_keys|StrictHostKeyChecking|paramiko|JSch|SSHClient|SshClient|Renci\\.SshNet|golang\\.org/x/crypto/ssh|ssh\\.ClientConfig|ssh\\.ParsePrivateKey"
+    },
+    {
+      "category": "KMS_OR_HSM_ASYMMETRIC",
+      "algorithm": "KMS/HSM",
+      "migration_class": "DEPENDENCY_DRIVEN",
+      "severity": "high",
+      "confidence": 0.85,
+      "pattern": "\\bKmsClient\\b|\\bAWSKMS\\b|AmazonKeyManagementServiceClient|AsymmetricSign|CloudKMS|KeyVault|ManagedHsm|KeyClient|CryptographyClient|Google\\.Cloud\\.Kms|cloud\\.google\\.com/go/kms|PKCS11|HSM|boto3\\.client\\([\\'\\\"]kms|CipherTrust\\.CADP|CADP_for_JAVA|IngrianProvider|NAESession|NAEKey|NAEPrivateKey|NAEPublicKey|SignVerifySpec|Azure\\.Security\\.KeyVault\\.(?:Keys|Cryptography|Administration)|Amazon\\.CloudHSM|CloudHSM|cloudhsm|cloudhsmv2|libcloudhsm_pkcs11|Cavium|CertList|CentralManagementProvider|RegisterClientParameters|CryptoDataUtility|com\\.ingrian|com\\.gemalto\\.ps\\.keysecure\\.crypto|C_(?:Initialize|OpenSession|Login|SignInit|Sign|VerifyInit|Verify|GenerateKeyPair|FindObjectsInit|FindObjects)\\b|CKM_(?:RSA_PKCS|ECDSA)|CKO_PRIVATE_KEY|managedhsm\\.azure\\.net|Vormetric|Vpkcs11Session|com\\.vormetric\\.pkcs11|Net\\.Pkcs11Interop|vorpkcs11\\.dll|VPKCS11LIBPATH|CKM_THALES_[A-Z0-9_]+|CKO_THALES_[A-Z0-9_]+|Voltage|Voltage Fusion|SecureData(?: Appliance| SimpleAPI)?|SimpleAPI|com\\.outerbay\\.foundation\\.components\\.datamasking|DataMasking|usingProperty\\(secureData\\)|SecureData\\.(?:CC|AUTO|ORA-DATE)|Protegrity|Application Protector|AP Java|Protector|create_session|protect\\(|unprotect\\(|reprotect\\(|ProtegrityDeveloperJava|ApplicationProtectorJava|Encrypted Resilient Package|Policy Management REST API|AWSKMSClientBuilder|KMSEncryptionMaterialsProvider|AmazonS3Encryption(?:ClientBuilder)?|EncryptionMaterials|StaticEncryptionMaterialsProvider|ListPublicKeysRequest|AWSSecretsManager(?:ClientBuilder)?|GetSecretValueRequest|AwsCrypto|KmsMasterKeyProvider|MaterialProviders|IKeyring|CreateAwsKms(?:Multi)?KeyringInput|software\\.amazon\\.awssdk\\.services\\.kms\\.KmsClient|KmsManagementClient|KmsCryptoClient|VaultsClient|OracleWallet|OracleSecretStore|ThalesOracleGGKeyProviderPlugIn|goldengate|ogg|CertificatesManagementClient|CreateCertificateAuthorityRequest|CreateCertificateRequest|GetCertificateAuthorityRequest|VaultsClient|CreateSecretRequest|GetSecretRequest|CipherTrustManagerHelper|cmRESTProtect|cmRESTSign|cmRESTMac|/api/v1/crypto/(?:encrypt|decrypt|sign|signv|mac|macv)|/api/v1/vault/keys2/|ThalesCADPProtectRevealHelper|ThalesProtectRevealHelper|ThalesRestProtectRevealHelper|CentralManagementProvider|RegisterClientParameters|CipherTextData|CryptoManager|protectData|revealData|reprotectData|/v1/protect|/v1/reveal|ThalesGCPProtectServerOpenAI|ThalesProtectGatewayService|authenticateRequest|protectInputAndCallLLM|protectInput|revealInput|/protectInputAndCallLLM|/protectInput|/revealInput|Spark\\.before\\(\"/(?:protectInputAndCallLLM|protectInput|revealInput)\"|CentralManagementProvider|RegisterClientParameters|CryptoManager|ThalesRestProtectRevealHelper|CADP\\.NetCore\\.(?:Crypto|KeyManagement|Sessions)|NaeSession|NaeKeyManagement|NaeRsaKey|CADP\\.NETCore_Properties\\.xml|cadp_capi\\.h|I_C_(?:CreateCipherSpec|Crypt_Enhanced|SetUserSpec|GetUserSpec|CloseSession|Fini)|KMIP(?:Session|Cipher|GCMKeyInformation|GCMSpec|IvSpec|CryptoResult|Key|Data|Response)|NAEClientCertificate|kmip\\.h|libkmip|kmipclient|/vts/rest/v2\\.0/(?:tokenize|detokenize)|tokengroup|tokentemplate|FF1_Tok_Group|FF1_Tok_Template|CT-VL|CADP_PKCS11\\.properties|cadp/cadp\\.h|SunPKCS11|CKM_RSA_PKCS|C_SignInit|github\\.com/hashicorp/vault/api|node-vault|\\bhvac\\b|vault\\.(?:logical|transit)|/v1/transit/(?:encrypt|decrypt|sign|verify)|auth/approle/login|Akeyless|io\\.akeyless|github\\.com/akeylesslabs/akeyless-go|api\\.akeyless\\.io|provision-certificate|verify-pkcs1|upload-rsa|update-ssh-cert-issuer|create-dynamic-secret|rotate-key"
+    },
+    {
+      "category": "CODE_SIGNING",
+      "algorithm": "Artifact/code signing",
+      "migration_class": "DEPENDENCY_DRIVEN",
+      "severity": "high",
+      "confidence": 0.85,
+      "pattern": "jarsigner|signtool|codesign|cosign|SignedCms|SignerInfo|SignedXml|XmlDsig|notarytool|gpg\\s+--detach-sign"
+    },
+    {
+      "category": "LEGACY_CRYPTO_HYGIENE",
+      "algorithm": "SHA-1/MD5/weak key size",
+      "migration_class": "DEPENDENCY_DRIVEN",
+      "severity": "medium",
+      "confidence": 0.84,
+      "pattern": "\\bSHA-1\\b|\\bMD5\\b|SHA1withRSA|md5WithRSAEncryption|size:\\s*1024\\b|rsa\\.GenerateKey\\([^\\n]*1024"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "example/pqc-php-service",
+  "require": {
+    "firebase/php-jwt": "^6.10",
+    "phpseclib/phpseclib": "^3.0"
+  }
+}

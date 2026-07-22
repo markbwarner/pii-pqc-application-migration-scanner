@@ -1,0 +1,44 @@
+﻿apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: customer-api
+  annotations:
+    cert-manager.io/cluster-issuer: customer-api-issuer
+spec:
+  tls:
+    - hosts:
+        - customer-api.example.com
+      secretName: customer-api-tls
+  rules:
+    - host: customer-api.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: customer-api
+                port:
+                  number: 8443
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: customer-api-client-cert
+spec:
+  secretName: customer-api-client-pkcs12
+  issuerRef:
+    name: customer-api-issuer
+    kind: ClusterIssuer
+  commonName: customer-api-client
+  dnsNames:
+    - customer-api.example.com
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  keystores:
+    pkcs12:
+      create: true
+      passwordSecretRef:
+        name: customer-api-keystore-password
+        key: password

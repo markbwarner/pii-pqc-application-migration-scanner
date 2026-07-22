@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application PQC Readiness Scanner Assessment Tool</title>
+  <style>
+    :root {
+      --ink: #132238;
+      --muted: #58677a;
+      --brand: #005bbb;
+      --brand-dark: #003f82;
+      --accent: #0f8b8d;
+      --surface: #f6f8fb;
+      --line: #d9e1ec;
+      --page-width: 8.5in;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #dfe7f2;
+    }
+
+    .page {
+      width: var(--page-width);
+      min-height: 11in;
+      margin: 0 auto 18px;
+      background: white;
+      padding: 0.72in;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(17, 32, 56, 0.12);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top right, rgba(15, 139, 141, 0.16), transparent 28%),
+        radial-gradient(circle at left 20% top 10%, rgba(0, 91, 187, 0.13), transparent 24%),
+        linear-gradient(135deg, #f8fbff 0%, #edf4fb 100%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      background: rgba(0, 91, 187, 0.1);
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3 { margin: 0; line-height: 1.1; }
+    h1 { font-size: 30px; max-width: 6.4in; margin-bottom: 16px; }
+    h2 { font-size: 22px; margin-bottom: 14px; }
+    h3 { font-size: 15px; margin-bottom: 8px; }
+
+    p {
+      margin: 0 0 12px;
+      line-height: 1.5;
+      font-size: 13.1px;
+      color: var(--muted);
+    }
+
+    .lede {
+      font-size: 15px;
+      max-width: 6.7in;
+      color: #314157;
+      margin-bottom: 22px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .benefit-band {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 22px 0 18px;
+    }
+
+    .benefit {
+      padding: 15px 14px;
+      border-radius: 16px;
+      background: #0f2036;
+      color: white;
+      min-height: 110px;
+    }
+
+    .benefit .label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 7px;
+    }
+
+    .benefit .copy {
+      font-size: 12px;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .card, .panel, .stack, .report-box, .matrix-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: white;
+    }
+
+    .card {
+      padding: 16px;
+      min-height: 146px;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    .panel {
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbfe 100%);
+    }
+
+    .stack {
+      overflow: hidden;
+    }
+
+    .stack .row {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stack .row:last-child { border-bottom: 0; }
+
+    .row-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .callout {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-left: 5px solid var(--accent);
+      background: #effbfb;
+      border-radius: 0 16px 16px 0;
+      color: #244049;
+    }
+
+    .report-box {
+      padding: 18px;
+      background: #0f1d31;
+      color: #dbe7f7;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11.5px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .matrix-box {
+      overflow: hidden;
+      margin-top: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      color: var(--muted);
+    }
+
+    th {
+      background: #f7fbff;
+      color: var(--brand-dark);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    li { margin-bottom: 7px; }
+
+    .footer {
+      position: absolute;
+      left: 0.72in;
+      right: 0.72in;
+      bottom: 0.48in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: #71839a;
+    }
+  </style>
+</head>
+<body>
+  <section class="page hero">
+    <div class="eyebrow">Thales PQC Migration Assessment</div>
+    <h1>Application PQC Readiness Scanner Assessment Tool</h1>
+    <p class="lede">
+      A source-code and dependency assessment accelerator that finds quantum-vulnerable cryptography touchpoints,
+      separates implementation from reference-only evidence, and turns raw findings into a migration worklist.
+    </p>
+
+    <div class="benefit-band">
+      <div class="benefit">
+        <span class="label">Migration Clarity</span>
+        <span class="copy">Shows where RSA, ECC, cert, TLS, JWT, SSH, and KMS patterns actually sit in application code and configuration.</span>
+      </div>
+      <div class="benefit">
+        <span class="label">Better Prioritization</span>
+        <span class="copy">Separates frontend awareness, backend implementation, infrastructure configuration, and reference-only artifacts.</span>
+      </div>
+      <div class="benefit">
+        <span class="label">Actionable Planning</span>
+        <span class="copy">Produces per-file findings, likely change targets, complexity ratings, CBOM enrichment, and migration work packages.</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h2>Why It Matters</h2>
+        <p>
+          Many organizations can produce a crypto inventory, but that still leaves the harder question unanswered:
+          which files, services, certificates, and integration points are most likely to drive post-quantum migration effort?
+        </p>
+        <p>
+          PQC transitions cut across certificate lifecycles, JWT and token signing, mTLS configuration, SSH operations,
+          KMS dependencies, and code-signing workflows. Teams need evidence that maps these concerns back to real files and likely owners.
+        </p>
+        <div class="callout">
+          This scanner is designed for migration planning, not just inventory. It highlights categories such as
+          <strong>`ASYMMETRIC_ALGORITHM`, `CERTIFICATE_USAGE`, `TLS_CONFIGURATION`, `JWT_OR_TOKEN_SIGNING`, `SSH_USAGE`, and `KMS_OR_HSM_ASYMMETRIC`</strong>
+          and explains which findings are likely implementation work versus reference-only awareness.
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="row">
+          <div class="row-title">Questions It Answers</div>
+          <p>Where quantum-vulnerable crypto patterns appear, which files are likely real migration owners, and which findings are configuration, dependency, or reference-only evidence.</p>
+        </div>
+        <div class="row">
+          <div class="row-title">Typical Application Tiers</div>
+          <p>Spring Boot, .NET, Python, Go, Node.js, React, Angular, Kubernetes configuration, package manifests, and certificate or keystore handling code.</p>
+        </div>
+        <div class="row">
+          <div class="row-title">Planning Value</div>
+          <p>Helps architects and delivery teams scope certificate, protocol, signing, and dependency-driven workstreams before detailed remediation begins.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Application PQC Readiness Scanner Assessment Tool</span>
+      <span>Page 1</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>Executive Summary And How The Scanner Works</h2>
+    <div class="grid-2">
+      <div class="panel">
+        <h3>PQC-Focused Discovery</h3>
+        <p>
+          The scanner uses source patterns, dependency evidence, and file classification heuristics to find likely post-quantum migration touchpoints.
+        </p>
+        <ul>
+          <li>Implementation categories such as RSA, ECC, certificates, TLS, JWT, SSH, KMS, and code signing</li>
+          <li>Dependency and CBOM enrichment across JVM, .NET, npm, Go, and Python ecosystems</li>
+          <li>Per-file summaries, likely change targets, and recommended migration actions</li>
+          <li>Reference-only filtering so frontend, docs, and passive dependency files do not get mistaken for primary implementation owners</li>
+        </ul>
+        <p>
+          This helps teams move from general crypto awareness to a more practical answer: what needs review first, by whom, and why.
+        </p>
+      </div>
+      <div class="panel">
+        <h3>What The Scanner Produces</h3>
+        <p>
+          The current migration project can scan PII, PQC, or both together while keeping each domain separate in output.
+        </p>
+        <ul>
+          <li><code>--scan pii</code></li>
+          <li><code>--scan pqc</code></li>
+          <li><code>--scan pii,pqc</code></li>
+          <li>JSON, CSV, and HTML reporting</li>
+          <li>CBOM import and export support</li>        </ul>
+        <p>
+          PQC findings retain their own domain, category totals, complexity distribution, and recommended-action summary so they are not hidden inside PII results.
+        </p>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <strong>What It Classifies</strong>
+        <p>Frontend, backend, infrastructure config, test, docs, implementation-heavy files, and reference-only artifacts.</p>
+      </div>
+      <div class="card">
+        <strong>What It Scores</strong>
+        <p>Low, medium, and high PQC migration complexity using findings, integration patterns, and likely implementation ownership.</p>
+      </div>
+      <div class="card">
+        <strong>Why It Helps</strong>
+        <p>Turns crypto discovery into a migration backlog by highlighting likely change targets, work packages, and platform-specific hotspots.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 22px;">Executive Summary Snapshot</h2>
+    <div class="report-box">Root path: E:\codex\work\migration\sample_code
+Scan domains: pqc
+Files scanned: 55
+Files with findings: 12
+Dependency references: 119
+Files with PQC indicators: 12
+Total PQC findings: 115
+PQC likely change targets: 9
+
+Executive summary:
+  Dependency enrichment summary:
+    - dependency_reference_total: 119
+    - cbom_component_total: 82
+    - imported_cbom_component_total: 0
+  PQC recommended change action summary:
+    - reference_only_frontend: 1
+    - reference_only_or_low_priority: 2
+    - review_pqc_application_signing: 5
+    - review_pqc_dependency_and_kms: 1
+    - review_pqc_protocol_stack: 3
+  PQC category summary:
+    - ASYMMETRIC_ALGORITHM: 13
+    - CERTIFICATE_USAGE: 49
+    - CODE_SIGNING: 6
+    - JWT_OR_TOKEN_SIGNING: 23
+    - KMS_OR_HSM_ASYMMETRIC: 6
+    - SSH_USAGE: 10
+    - TLS_CONFIGURATION: 8
+  PQC complexity distribution:
+    - high: 10
+    - medium: 1
+    - low: 1</div>
+
+    <div class="callout">
+      The PQC executive summary is meant to help teams answer not just where crypto appears, but whether the issue is more likely certificate lifecycle work, protocol-stack work, signing modernization, or dependency and KMS/HSM review.
+    </div>
+
+    <div class="matrix-box">
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>cdxgen / CBOM-style tools</th>
+            <th>Crypto discovery scanners</th>
+            <th>Thales PQC scanner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary purpose</td>
+            <td>Produce crypto/component inventory and BOM artifacts</td>
+            <td>Find cryptographic assets, keys, certs, algorithms, libraries</td>
+            <td>Explain migration impact in application code</td>
+          </tr>
+          <tr>
+            <td>Output style</td>
+            <td>CBOM / CycloneDX, machine-readable inventory</td>
+            <td>Inventory dashboards, findings, risk lists</td>
+            <td>File/line findings plus migration worklist</td>
+          </tr>
+          <tr>
+            <td>Source line attribution</td>
+            <td>Sometimes partial, often limited</td>
+            <td>Varies</td>
+            <td>Core feature</td>
+          </tr>
+          <tr>
+            <td>Frontend vs backend classification</td>
+            <td>Usually no</td>
+            <td>Usually limited</td>
+            <td>Core feature</td>
+          </tr>
+          <tr>
+            <td>PQC migration advice</td>
+            <td>Usually generic</td>
+            <td>Medium</td>
+            <td>Deep, app-specific</td>
+          </tr>
+          <tr>
+            <td>Team ownership / work package grouping</td>
+            <td>No</td>
+            <td>Limited</td>
+            <td>Core feature</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <span>Application PQC Readiness Scanner Assessment Tool</span>
+      <span>Page 2</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>Metrics, Positioning, And Customer Outcome</h2>
+    <div class="grid-2">
+      <div class="panel">
+        <h3>Important Output Attributes</h3>
+        <ul>
+          <li><code>pqc_summary_by_category</code></li>
+          <li><code>pqc_migration_classes</code></li>
+          <li><code>pqc_likely_change_target</code></li>
+          <li><code>pqc_recommended_change_action</code></li>
+          <li><code>pqc_complexity_rating</code></li>
+          <li><code>pqc_complexity_score</code></li>
+          <li><code>dependency_references</code></li>
+          <li><code>cbom_components</code></li>
+        </ul>
+        <p>These fields help teams filter for protocol work, signing work, certificate lifecycle work, and dependency-driven remediation.</p>
+      </div>
+      <div class="panel">
+        <h3>Typical Work Packages</h3>
+        <ul>
+          <li>JWT and application-signing review</li>
+          <li>TLS and certificate lifecycle modernization</li>
+          <li>KMS or HSM dependency review</li>
+          <li>SSH protocol and key-management review</li>
+          <li>Code-signing workflow review</li>
+          <li>Reference-only triage for docs and frontend artifacts</li>
+        </ul>
+        <p>The scanner helps keep these tracks separate so one large crypto backlog does not hide the real sequence of work.</p>
+      </div>
+    </div>
+
+    <div class="card-grid" style="margin-top: 20px;">
+      <div class="card">
+        <strong>Best Use</strong>
+        <p>Application modernization planning where teams need code-level PQC impact, not only a portfolio inventory.</p>
+      </div>
+      <div class="card">
+        <strong>Where CBOM Helps</strong>
+        <p>CBOM import and export enrich dependency-level understanding and make it easier to compare packaged crypto components with observed source findings.</p>
+      </div>
+      <div class="card">
+        <strong>Thales Fit</strong>
+        <p>The scanner is designed to support Thales-specific recommendation logic and migration conversations around certs, protocols, signing, and key-management transitions.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 20px;">
+      <div class="panel">
+        <h3>How It Compares</h3>
+        <ul>
+          <li>CBOM tools are strongest for baseline machine-readable inventory.</li>
+          <li>Enterprise crypto scanners are strongest for broad asset discovery and posture visibility.</li>
+          <li>This scanner is strongest when teams need source-line attribution, implementation context, effort sizing, and a modernization worklist.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Who Benefits</h3>
+        <ul>
+          <li>Architects estimating PQC modernization scope</li>
+          <li>Security teams reviewing crypto transition hotspots</li>
+          <li>Platform teams grouping protocol, certificate, and signing work</li>
+          <li>Developers validating likely code owners and change boundaries</li>
+          <li>Program leads preparing phased migration plans</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 24px;">Customer Outcome</h2>
+    <p>
+      Instead of stopping at "we found RSA, certs, and JWT libraries," customers can review concrete evidence showing which files are likely to require implementation change, which items are mostly reference-only, how crypto dependencies map to source files, and where remediation should begin.
+    </p>
+    <p>
+      The result is faster scoping, clearer ownership conversations, better sequencing of certificate and protocol work, and more practical PQC migration planning across application and infrastructure teams.
+    </p>
+
+    <div class="callout">
+      The strongest value of the scanner is not replacing CBOM or enterprise crypto discovery. It is translating those signals, plus source evidence, into an application migration plan.
+    </div>
+
+    <div class="footer">
+      <span>Application PQC Readiness Scanner Assessment Tool</span>
+      <span>Page 3</span>
+    </div>
+  </section>
+</body>
+</html>
+

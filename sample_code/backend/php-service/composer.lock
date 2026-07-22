@@ -1,0 +1,13 @@
+{
+  "packages": [
+    {
+      "name": "firebase/php-jwt",
+      "version": "v6.10.0"
+    },
+    {
+      "name": "phpseclib/phpseclib",
+      "version": "3.0.37"
+    }
+  ],
+  "packages-dev": []
+}

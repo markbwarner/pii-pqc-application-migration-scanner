@@ -1,0 +1,22 @@
+{
+  "exact_meanings": {
+    "/ai_usage": "Ai Usage Return simple in-memory metrics about AI calls made by this process. Note: these counters are process-local and reset when the process restarts.",
+    "/api/generate-text": "Generate Text Mimic Java endpoint /api/generate-text: accept JSON body with 'prompt' and 'userEmail' or 'userId'. Behavior mirrors `/stringfindreplacesensitive` but the UI sends a `prompt` and optionally a `userEmail`. Use `userEmail` when present, otherwise fall back to JWT-derived email or provided `userId` in the body.",
+    "/findreplacesensitive": "Findreplacesensitive",
+    "findreplacesensitive_findreplacesensitive_post": "Swagger-discovered operation `findreplacesensitive_findreplacesensitive_post` associated with the custom API surface.",
+    "/findsensitive": "Findsensitive",
+    "findsensitive_findsensitive_post": "Swagger-discovered operation `findsensitive_findsensitive_post` associated with the custom API surface.",
+    "/stringfindreplacesensitive": "Stringfindreplacesensitive Find PII in the supplied text and replace/protect it. The request body is a JSON object with a single `text` field. The `TextRequest` model provides an example that will appear in Swagger.",
+    "stringfindreplacesensitive_stringfindreplacesensitive_post": "Stringfindreplacesensitive Find PII in the supplied text and replace/protect it. The request body is a JSON object with a single `text` field. The `TextRequest` model provides an example that will appear in Swagger.",
+    "/stringfindsensitive": "Stringfindsensitive Find PII in the supplied text. The request body is a JSON object with a single `text` field. The `TextRequest` model provides an example that will appear in Swagger.",
+    "stringfindsensitive_stringfindsensitive_post": "Stringfindsensitive Find PII in the supplied text. The request body is a JSON object with a single `text` field. The `TextRequest` model provides an example that will appear in Swagger.",
+    "/stringreveal": "Stringreveal",
+    "stringreveal_stringreveal_post": "Swagger-discovered operation `stringreveal_stringreveal_post` associated with the custom API surface.",
+    "/v1/chat/completions": "Chat Completions",
+    "/v1/chat/completions/audit": "Chat Completions Audit"
+  },
+  "partial_meanings": [],
+  "category_why": {
+    "KMS_OR_HSM_ASYMMETRIC": "Draft Swagger-derived service routes or request markers that may indicate managed protection, reveal, tokenization, or cryptographic service usage. Review before merging into live scanner config."
+  }
+}

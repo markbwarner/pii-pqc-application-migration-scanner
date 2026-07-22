@@ -1,0 +1,13 @@
+{
+  "name": "sample-node-service",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@aws-sdk/client-kms": "^3.840.0",
+    "jose": "^5.9.0",
+    "jsonwebtoken": "^9.0.2",
+    "ssh2": "^1.16.0",
+    "node-vault": "^0.10.4",
+    "akeyless-javascript": "^1.0.0"
+  }
+}

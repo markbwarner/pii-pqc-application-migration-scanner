@@ -1,0 +1,48 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:12345678-90ab-cdef-1234-567890abcdef",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-01-01T12:00:00Z",
+    "component": { "bom-ref": "app:inventory", "type": "application",
+                   "name": "Inventory Service", "version": "2.3.1" }
+  },
+  "components": [
+    { "bom-ref": "lib:openssl@3.0.13", "type": "library",
+      "name": "OpenSSL", "version": "3.0.13" },
+
+    { "name": "AES-256-GCM",
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/aes-256-gcm@2.16.840.1.101.3.4.1.46",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "ae", "mode": "gcm", "parameterSetIdentifier": "256",
+          "cryptoFunctions": ["encrypt","decrypt"]
+        },
+        "oid": "2.16.840.1.101.3.4.1.46"
+      }
+    },
+
+    { "name": "www.example.com",
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/cert/www.example.com@sha256:abcdef...",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "subjectName": "CN=www.example.com",
+          "issuerName": "C=US, O=Example Trust, CN=ET CA 1",
+          "notValidBefore": "2024-09-01T00:00:00Z",
+          "notValidAfter":  "2026-09-01T00:00:00Z"
+        }
+      }
+    }
+  ],
+  "dependencies": [
+    { "ref": "app:inventory",
+      "dependsOn": ["lib:openssl@3.0.13", "crypto/cert/www.example.com@sha256:abcdef..."] },
+    { "ref": "lib:openssl@3.0.13",
+      "provides": ["crypto/algorithm/aes-256-gcm@2.16.840.1.101.3.4.1.46"] }
+  ]
+}

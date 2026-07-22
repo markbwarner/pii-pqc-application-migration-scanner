@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PII Migration Scanner Report</title>
+<style>
+
+body {
+  margin: 0;
+  background: #f4f1ea;
+  color: #1f2430;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+.page {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+h1, h2, h3 {
+  color: #11233b;
+}
+.lede {
+  margin-bottom: 24px;
+}
+.stats, .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.grid {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+  align-items: start;
+}
+.grid > * {
+  min-width: 0;
+}
+.stat-card, .panel {
+  background: #fffdf8;
+  border: 1px solid #d9cdb8;
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 8px 22px rgba(17, 35, 59, 0.06);
+}
+.panel {
+  overflow: hidden;
+}
+.markdown-panel {
+  white-space: normal;
+  line-height: 1.55;
+}
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.stacked-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.stacked-section-divider {
+  border-top: 1px solid #e5d9c7;
+  padding-top: 12px;
+}
+.stacked-section h3 {
+  margin: 0 0 10px;
+}
+.stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7b6f60;
+}
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+section {
+  margin-top: 24px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fffdf8;
+  border: 1px solid #d9cdb8;
+  border-radius: 14px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 12px 14px;
+  border-bottom: 1px solid #eadfcd;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+th {
+  background: #efe6d6;
+  color: #31445c;
+  font-size: 13px;
+}
+tr:nth-child(even) td {
+  background: #fcf8f1;
+}
+code {
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.badge-low { background: #d6f0d8; color: #22543d; }
+.badge-medium { background: #fef0c7; color: #92400e; }
+.badge-high { background: #ffd5d5; color: #9b1c1c; }
+.table-note {
+  margin: 0 0 12px;
+  color: #5e5a52;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.custom-family-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #d9eef9;
+  border: 1px solid #8fbfd4;
+  color: #174a63;
+  font-weight: 700;
+}
+.pqc-capable-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.pqc-capable-tag-nist_current {
+  background: #d7f4df;
+  border: 1px solid #84c49a;
+  color: #1f5f36;
+}
+.pqc-capable-tag-approved_specialized,
+.pqc-capable-tag-alias_or_legacy_name {
+  background: #fef0c7;
+  border: 1px solid #d9a441;
+  color: #8a5a00;
+}
+.pqc-capable-tag-experimental_or_watchlist {
+  background: #dde6f7;
+  border: 1px solid #98acd6;
+  color: #29456f;
+}
+.pqc-capable-row-nist_current td:first-child {
+  border-left: 4px solid #84c49a;
+}
+.pqc-capable-row-approved_specialized td:first-child,
+.pqc-capable-row-alias_or_legacy_name td:first-child {
+  border-left: 4px solid #d9a441;
+}
+.pqc-capable-row-experimental_or_watchlist td:first-child {
+  border-left: 4px solid #98acd6;
+}
+.file-findings-wrap table {
+  table-layout: fixed;
+}
+.file-findings-table th:nth-child(1),
+.file-findings-table td:nth-child(1) {
+  width: 16%;
+}
+.file-findings-table th:nth-child(2),
+.file-findings-table td:nth-child(2) {
+  width: 6%;
+}
+.file-findings-table th:nth-child(3),
+.file-findings-table td:nth-child(3) {
+  width: 9%;
+}
+.file-findings-table th:nth-child(4),
+.file-findings-table td:nth-child(4) {
+  width: 9%;
+}
+.file-findings-table th:nth-child(5),
+.file-findings-table td:nth-child(5) {
+  width: 8%;
+}
+.file-findings-table th:nth-child(6),
+.file-findings-table td:nth-child(6),
+.file-findings-table th:nth-child(7),
+.file-findings-table td:nth-child(7),
+.file-findings-table th:nth-child(8),
+.file-findings-table td:nth-child(8) {
+  width: 4%;
+  text-align: center;
+}
+.file-findings-table th:nth-child(9),
+.file-findings-table td:nth-child(9) {
+  width: 10%;
+}
+.file-findings-table th:nth-child(10),
+.file-findings-table td:nth-child(10) {
+  width: 30%;
+}
+.file-findings-table td:nth-child(1),
+.file-findings-table td:nth-child(9),
+.file-findings-table td:nth-child(10) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.file-findings-table td:nth-child(10) {
+  line-height: 1.45;
+}
+.summary-grid-equal {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.pii-file-findings-wrap table {
+  table-layout: fixed;
+}
+.pii-file-findings-table th:nth-child(1),
+.pii-file-findings-table td:nth-child(1) {
+  width: 22%;
+}
+.pii-file-findings-table th:nth-child(2),
+.pii-file-findings-table td:nth-child(2),
+.pii-file-findings-table th:nth-child(3),
+.pii-file-findings-table td:nth-child(3) {
+  width: 7%;
+}
+.pii-file-findings-table th:nth-child(4),
+.pii-file-findings-table td:nth-child(4) {
+  width: 5%;
+  text-align: center;
+}
+.pii-file-findings-table th:nth-child(5),
+.pii-file-findings-table td:nth-child(5) {
+  width: 13%;
+}
+.pii-file-findings-table th:nth-child(6),
+.pii-file-findings-table td:nth-child(6) {
+  width: 11%;
+}
+.pii-file-findings-table th:nth-child(7),
+.pii-file-findings-table td:nth-child(7) {
+  width: 12%;
+}
+.pii-file-findings-table th:nth-child(8),
+.pii-file-findings-table td:nth-child(8) {
+  width: 6%;
+  text-align: center;
+}
+.pii-file-findings-table th:nth-child(9),
+.pii-file-findings-table td:nth-child(9) {
+  width: 17%;
+  line-height: 1.45;
+}
+@media (max-width: 720px) {
+  .page { padding: 20px 12px 40px; }
+  .grid { grid-template-columns: 1fr; }
+  th, td { padding: 10px; }
+}
+
+</style>
+</head>
+<body>
+<main class="page">
+<h1>PII Migration Scanner Report</h1>
+<p class="lede">Root path: <code>E:\codex\work\migration\sample_code</code></p>
+<div class="panel markdown-panel"><p>This standalone PII report focuses on application-change planning for sensitive data handling. It intentionally omits PQC-only summary sections so the output stays centered on PII discovery, likely change ownership, JDBC substitution candidates, and migration work targeting.</p></div>
+<section><div class="stats"><section class="stat-card"><div class="stat-label">Scan domains</div><div class="stat-value">pii</div></section><section class="stat-card"><div class="stat-label">Files scanned</div><div class="stat-value">156</div></section><section class="stat-card"><div class="stat-label">Files with PII</div><div class="stat-value">50</div></section><section class="stat-card"><div class="stat-label">Total PII matches</div><div class="stat-value">586</div></section><section class="stat-card"><div class="stat-label">Likely change targets</div><div class="stat-value">17</div></section><section class="stat-card"><div class="stat-label">JDBC candidates</div><div class="stat-value">73</div></section><section class="stat-card"><div class="stat-label">Code change candidates</div><div class="stat-value">263</div></section><section class="stat-card"><div class="stat-label">Custom categories</div><div class="stat-value">3</div></section></div></section>
+<section>
+<h2>How To Read These Metrics</h2>
+<div class="panel markdown-panel">
+<p>This legend explains the PII summary cards, what each number counts, and whether the value is a unique file count or a raw observation count.</p>
+<table><thead><tr><th>Metric</th><th>Definition</th><th>How this report's value is derived</th></tr></thead><tbody>
+<tr><td><code>Files scanned</code></td><td>Total files included in the scan scope.</td><td>This report scanned <strong>156</strong> files under <code>E:\codex\work\migration\sample_code</code>.</td></tr>
+<tr><td><code>Files with PII</code></td><td>Files with one or more PII detections from built-in or custom keyword / regex patterns.</td><td>The value is <strong>50</strong>, matching the PII-positive files shown in the file findings table below.</td></tr>
+<tr><td><code>Total PII matches</code></td><td>Raw detection count across all files and categories. This is not a unique-field count.</td><td>The value <strong>586</strong> includes repeated matches when the same field or category appears multiple times in a file or across files.</td></tr>
+<tr><td><code>Likely change targets</code></td><td>PII-positive files that the ownership heuristics marked as likely implementation or migration owners instead of reference-only files.</td><td>The value <strong>17</strong> comes from actionable files with recommended changes <code>supporting_model_only</code> = 24, <code>review_jdbc_substitution</code> = 10, <code>frontend_reference_only</code> = 9, <code>review_crdp_rest_change</code> = 6, <code>review_data_access_change</code> = 1. The remaining <strong>33</strong> PII-positive files are reference-only or supporting-model oriented.</td></tr>
+<tr><td><code>JDBC candidates</code></td><td>Raw count of JDBC-oriented planning signals observed in the scan.</td><td>The value <strong>73</strong> is an observation count, so a single file can contribute more than once if it contains multiple JDBC migration hints.</td></tr>
+<tr><td><code>Code change candidates</code></td><td>Raw count of code-level change indicators that suggest application updates may be needed.</td><td>The value <strong>263</strong> is also a raw signal count rather than a unique-file count.</td></tr>
+<tr><td><code>Custom categories</code></td><td>Scanner categories added through customer-maintained custom keyword or regex patterns.</td><td>This report observed <strong>3</strong> custom categories: <code>CUSTOM_ACCOUNT_NUMBER</code>, <code>CUSTOM_HOUSEHOLD_ID</code>, <code>CUSTOM_SALARY</code></td></tr>
+</tbody></table>
+</div>
+</section>
+<section>
+<h2>PII Planning Summary</h2>
+<div class="panel markdown-panel"><p>This section groups PII-positive files by detection category, likely change ownership, remediation lane, role in flow, and complexity so implementation teams can quickly separate primary change targets from reference-only files.</p></div>
+<div class="grid summary-grid-equal">
+<section class="panel">
+<h3>PII Categories</h3>
+<div class="table-wrap">
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>EMAIL_ADDRESS</td><td>98</td></tr>
+<tr><td>ADDRESS</td><td>79</td></tr>
+<tr><td>CUSTOM_HOUSEHOLD_ID</td><td>70</td></tr>
+<tr><td>CUSTOM_ACCOUNT_NUMBER</td><td>51</td></tr>
+<tr><td>DATE_OF_BIRTH</td><td>50</td></tr>
+<tr><td>CUSTOM_SALARY</td><td>49</td></tr>
+<tr><td>BANK_ACCOUNT</td><td>46</td></tr>
+<tr><td>PHONE_NUMBER</td><td>45</td></tr>
+<tr><td>US_SSN</td><td>37</td></tr>
+<tr><td>PERSON</td><td>24</td></tr>
+<tr><td>CREDIT_CARD</td><td>15</td></tr>
+<tr><td>HEALTH</td><td>9</td></tr>
+<tr><td>GOVERNMENT_ID</td><td>7</td></tr>
+<tr><td>TAX_ID</td><td>6</td></tr>
+</tbody></table>
+</div>
+</section>
+<section class="panel">
+<h3>File Contexts</h3>
+<div class="table-wrap">
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>backend</td><td>37</td></tr>
+<tr><td>frontend</td><td>10</td></tr>
+<tr><td>batch_integration</td><td>2</td></tr>
+<tr><td>docs</td><td>1</td></tr>
+</tbody></table>
+</div>
+</section>
+</div>
+<div class="grid summary-grid-equal">
+<section class="panel">
+<h3>Likely Change Owners</h3>
+<div class="table-wrap">
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>supporting_model</td><td>24</td></tr>
+<tr><td>jdbc_candidate</td><td>10</td></tr>
+<tr><td>frontend_reference_only</td><td>9</td></tr>
+<tr><td>backend_logic_owner</td><td>6</td></tr>
+<tr><td>data_access_owner</td><td>1</td></tr>
+</tbody></table>
+</div>
+</section>
+<section class="panel">
+<h3>Recommended Actions</h3>
+<div class="table-wrap">
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>supporting_model_only</td><td>24</td></tr>
+<tr><td>review_jdbc_substitution</td><td>10</td></tr>
+<tr><td>frontend_reference_only</td><td>9</td></tr>
+<tr><td>review_crdp_rest_change</td><td>6</td></tr>
+<tr><td>review_data_access_change</td><td>1</td></tr>
+</tbody></table>
+</div>
+</section>
+</div>
+<div class="grid summary-grid-equal">
+<section class="panel">
+<h3>Role In Flow</h3>
+<div class="table-wrap">
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>supporting_model</td><td>24</td></tr>
+<tr><td>persists_or_publishes</td><td>10</td></tr>
+<tr><td>collects_and_sends</td><td>9</td></tr>
+<tr><td>receives_and_transforms</td><td>6</td></tr>
+<tr><td>protects_or_tokenizes</td><td>1</td></tr>
+</tbody></table>
+</div>
+</section>
+<section class="panel">
+<h3>Complexity Distribution</h3>
+<div class="table-wrap">
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>high</td><td>23</td></tr>
+<tr><td>medium</td><td>14</td></tr>
+<tr><td>low</td><td>13</td></tr>
+</tbody></table>
+</div>
+</section>
+</div>
+</section>
+<section>
+<h2>Inferred Data Store Summary</h2>
+<div class="panel markdown-panel"><p>The scanner also rolls repeated field detections into likely data-store or table groupings when source files suggest a shared persistence target. These are planning hints, not authoritative schema definitions.</p></div>
+<section class="panel">
+<h3>Inferred Tables / Collections</h3>
+<div class="table-wrap">
+<table><thead><tr><th>Store or Table</th><th>Matches</th><th>Files</th><th>Observed Sensitive Fields</th></tr></thead><tbody>
+<tr><td><code>customer_profile</code></td><td>10</td><td>2</td><td>date_of_birth, email, first_name, last_name, phone_number</td></tr>
+<tr><td><code>claim_review</code></td><td>8</td><td>2</td><td>home_address, household_id, member_email, salary_amount</td></tr>
+<tr><td><code>billing_account</code></td><td>5</td><td>1</td><td>account_number, billing_address, card_number, cvv, routing_number</td></tr>
+<tr><td><code>household_member_profile</code></td><td>5</td><td>1</td><td>account_number, home_address, household_id, primary_email, salary_amount</td></tr>
+<tr><td><code>customer_audit</code></td><td>4</td><td>1</td><td>date_of_birth, email, phone_number, ssn</td></tr>
+<tr><td><code>customer_event_audit</code></td><td>4</td><td>1</td><td>email, home_address, phone_number, ssn</td></tr>
+</tbody></table>
+</div>
+</section>
+</section>
+<section>
+<h2>PII File Findings</h2>
+<div class="table-wrap pii-file-findings-wrap">
+<table class="pii-file-findings-table"><thead><tr><th>Path</th><th>Layer</th><th>Context</th><th>PII Matches</th><th>Top Categories</th><th>Likely Owner</th><th>Recommended Action</th><th>Complexity</th><th>Notes</th></tr></thead><tbody>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Services\CustomerService.cs</code></td><td>backend_with_data_access</td><td>backend</td><td>64</td><td>BANK_ACCOUNT=18, CUSTOM_ACCOUNT_NUMBER=9, DATE_OF_BIRTH=9, PHONE_NUMBER=8</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-high">high</span></td><td>Role: persists_or_publishes | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\customer\CustomerDataStore.java</code></td><td>data_access</td><td>backend</td><td>38</td><td>ADDRESS=7, CUSTOM_HOUSEHOLD_ID=7, DATE_OF_BIRTH=7, EMAIL_ADDRESS=7</td><td>data_access_owner</td><td>review_data_access_change</td><td><span class="badge badge-high">high</span></td><td>Role: receives_and_transforms | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\customer\CustomerService.java</code></td><td>data_access</td><td>backend</td><td>35</td><td>ADDRESS=6, DATE_OF_BIRTH=6, EMAIL_ADDRESS=6, US_SSN=6</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-high">high</span></td><td>Role: persists_or_publishes | Payload fields: date_of_birth, email, phone_number, home_address, ssn, phoneNumber | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Services\ClaimReviewService.cs</code></td><td>backend_with_data_access</td><td>backend</td><td>32</td><td>ADDRESS=8, CUSTOM_HOUSEHOLD_ID=8, CUSTOM_SALARY=8, EMAIL_ADDRESS=8</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-high">high</span></td><td>Role: persists_or_publishes | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\household\HouseholdRepository.java</code></td><td>data_access</td><td>backend</td><td>31</td><td>CUSTOM_HOUSEHOLD_ID=8, ADDRESS=5, CUSTOM_ACCOUNT_NUMBER=5, CUSTOM_SALARY=5</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-high">high</span></td><td>Role: persists_or_publishes | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\python-fastapi\app\main.py</code></td><td>backend_with_data_access</td><td>backend</td><td>23</td><td>DATE_OF_BIRTH=6, PHONE_NUMBER=5, EMAIL_ADDRESS=4, GOVERNMENT_ID=4</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-high">high</span></td><td>Role: persists_or_publishes | Payload fields: email, phone_number, phoneNumber, date_of_birth, dateOfBirth, passport | Endpoints: /api/member/protect | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\frontend\react\src\components\CustomerProfile.tsx</code></td><td>frontend</td><td>frontend</td><td>23</td><td>PERSON=6, ADDRESS=4, PHONE_NUMBER=4, DATE_OF_BIRTH=3</td><td>frontend_reference_only</td><td>frontend_reference_only</td><td><span class="badge badge-high">high</span></td><td>Role: collects_and_sends | Payload fields: firstName, lastName, email, phoneNumber, ssnLast4, dateOfBirth | Endpoints: /api/customers/12345/profile | Front-end classified file references sensitive fields but lacks direct data-access ownership.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\node-service\claims-service.js</code></td><td>frontend_with_service_calls</td><td>frontend</td><td>20</td><td>ADDRESS=5, CUSTOM_HOUSEHOLD_ID=5, CUSTOM_SALARY=5, EMAIL_ADDRESS=5</td><td>frontend_reference_only</td><td>frontend_reference_only</td><td><span class="badge badge-high">high</span></td><td>Role: collects_and_sends | Payload fields: home_address, household_id, member_email, salary_amount, memberEmail, householdId | Endpoints: https://ciphertrust.example.com/v1/protect/claim-review, /api/claims/:claimId, /api/claims/:claimId/protect | Front-end classified file references sensitive fields but lacks direct data-access ownership.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\node-service\customer-service.js</code></td><td>data_access</td><td>backend</td><td>18</td><td>EMAIL_ADDRESS=5, US_SSN=5, DATE_OF_BIRTH=3, PHONE_NUMBER=3</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-high">high</span></td><td>Role: persists_or_publishes | Payload fields: firstName, lastName, email, phoneNumber, dateOfBirth, ssn | Endpoints: https://ciphertrust.example.com/v1/protect/customer, /api/customer/protect | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\household\HouseholdProtectionService.java</code></td><td>backend</td><td>backend</td><td>18</td><td>CUSTOM_HOUSEHOLD_ID=6, ADDRESS=3, CUSTOM_ACCOUNT_NUMBER=3, CUSTOM_SALARY=3</td><td>backend_logic_owner</td><td>review_crdp_rest_change</td><td><span class="badge badge-high">high</span></td><td>Role: receives_and_transforms | Payload fields: householdId, primaryEmail, salaryAmount, accntNbr, homeAddress | Back-end service file appears to own business logic or transformation of sensitive fields.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\frontend\react\src\components\HouseholdMemberScreen.tsx</code></td><td>frontend</td><td>frontend</td><td>18</td><td>ADDRESS=4, CUSTOM_SALARY=4, EMAIL_ADDRESS=4, CUSTOM_ACCOUNT_NUMBER=3</td><td>frontend_reference_only</td><td>frontend_reference_only</td><td><span class="badge badge-high">high</span></td><td>Role: collects_and_sends | Payload fields: householdId, primaryEmail, salaryAmount, accntNbr, homeAddress, Email | Endpoints: /api/households/7788/protect | Front-end classified file references sensitive fields but lacks direct data-access ownership.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\go-service\customer_handler.go</code></td><td>backend_with_data_access</td><td>backend</td><td>17</td><td>BANK_ACCOUNT=3, CUSTOM_ACCOUNT_NUMBER=3, DATE_OF_BIRTH=3, EMAIL_ADDRESS=3</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-high">high</span></td><td>Role: persists_or_publishes | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\vector-search\python\member_embeddings.py</code></td><td>backend</td><td>backend</td><td>15</td><td>EMAIL_ADDRESS=5, HEALTH=5, DATE_OF_BIRTH=3, PHONE_NUMBER=2</td><td>backend_logic_owner</td><td>review_crdp_rest_change</td><td><span class="badge badge-high">high</span></td><td>Role: receives_and_transforms | Payload fields: email, phoneNumber, dateOfBirth, diagnosis | Back-end service file appears to own business logic or transformation of sensitive fields.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\frontend\react\src\components\ClaimReviewScreen.tsx</code></td><td>frontend</td><td>frontend</td><td>15</td><td>ADDRESS=4, CUSTOM_SALARY=4, EMAIL_ADDRESS=4, CUSTOM_HOUSEHOLD_ID=3</td><td>frontend_reference_only</td><td>frontend_reference_only</td><td><span class="badge badge-high">high</span></td><td>Role: collects_and_sends | Payload fields: memberEmail, householdId, salaryAmount, homeAddress, Email, Salary | Endpoints: /api/claims/CLM-101/protect | Front-end classified file references sensitive fields but lacks direct data-access ownership.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Models\CustomPatternLiterals.cs</code></td><td>backend</td><td>backend</td><td>13</td><td>CUSTOM_ACCOUNT_NUMBER=5, CUSTOM_HOUSEHOLD_ID=5, CUSTOM_SALARY=2, BANK_ACCOUNT=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-high">high</span></td><td>Role: supporting_model | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\frontend\angular\src\app\payment-editor.component.ts</code></td><td>frontend</td><td>frontend</td><td>13</td><td>CREDIT_CARD=7, ADDRESS=4, EMAIL_ADDRESS=2</td><td>frontend_reference_only</td><td>frontend_reference_only</td><td><span class="badge badge-high">high</span></td><td>Role: collects_and_sends | Payload fields: cardNumber, CVV, cvv, billingAddress, emailAddress | Front-end classified file references sensitive fields but lacks direct data-access ownership.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\frontend\node-express-ui\server.js</code></td><td>frontend</td><td>frontend</td><td>13</td><td>EMAIL_ADDRESS=3, TAX_ID=3, BANK_ACCOUNT=2, PERSON=2</td><td>frontend_reference_only</td><td>frontend_reference_only</td><td><span class="badge badge-high">high</span></td><td>Role: collects_and_sends | Payload fields: email, phoneNumber, taxId, firstName, lastName, bankAccount | Endpoints: http://backend.internal/api/beneficiary, http://backend.internal/api/customer-search, /customer-search, /beneficiary | Front-end classified file references sensitive fields but lacks direct data-access ownership.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\vector-search\node\customerVectorIndexer.js</code></td><td>frontend</td><td>frontend</td><td>12</td><td>EMAIL_ADDRESS=4, ADDRESS=3, DATE_OF_BIRTH=3, PHONE_NUMBER=2</td><td>frontend_reference_only</td><td>frontend_reference_only</td><td><span class="badge badge-high">high</span></td><td>Role: collects_and_sends | Payload fields: email, phoneNumber, homeAddress, dateOfBirth | Endpoints: https://ciphertrust.example.com/v1/protect/customer-vector | Front-end classified file references sensitive fields but lacks direct data-access ownership.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Models\HouseholdCompensation.cs</code></td><td>backend</td><td>backend</td><td>10</td><td>CUSTOM_ACCOUNT_NUMBER=3, CUSTOM_HOUSEHOLD_ID=3, CUSTOM_SALARY=3, BANK_ACCOUNT=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-high">high</span></td><td>Role: supporting_model | Payload fields: HouseholdId, HouseholdNbr, HhId, AccountNumber, AcctNbr, AccntNbr | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\python-fastapi\app\sensitive_data_wrapper_gemini_app.py</code></td><td>backend</td><td>backend</td><td>8</td><td>BANK_ACCOUNT=2, CUSTOM_ACCOUNT_NUMBER=2, CUSTOM_HOUSEHOLD_ID=2, CUSTOM_SALARY=2</td><td>backend_logic_owner</td><td>review_crdp_rest_change</td><td><span class="badge badge-high">high</span></td><td>Role: receives_and_transforms | Endpoints: /healthz, /stringfindsensitive, /stringfindreplacesensitive, /stringreveal | Back-end service file appears to own business logic or transformation of sensitive fields.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\java-kafka\src\main\java\com\example\events\CustomerEventProcessor.java</code></td><td>data_access</td><td>backend</td><td>7</td><td>EMAIL_ADDRESS=2, PHONE_NUMBER=2, US_SSN=2, ADDRESS=1</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-high">high</span></td><td>Role: persists_or_publishes | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\household\HouseholdController.java</code></td><td>backend</td><td>backend</td><td>6</td><td>CUSTOM_HOUSEHOLD_ID=6</td><td>backend_logic_owner</td><td>review_crdp_rest_change</td><td><span class="badge badge-high">high</span></td><td>Role: receives_and_transforms | Endpoints: /api/households/{householdId}/members, /api/households/{householdId}/protect | Back-end service file appears to own business logic or transformation of sensitive fields.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\security\ThalesCtvlTokenizationService.java</code></td><td>backend</td><td>backend</td><td>6</td><td>ADDRESS=2, BANK_ACCOUNT=2, CUSTOM_ACCOUNT_NUMBER=2</td><td>backend_logic_owner</td><td>review_crdp_rest_change</td><td><span class="badge badge-high">high</span></td><td>Role: receives_and_transforms | Payload fields: tokenizeAccountNumber, detokenizeAccountNumber | Back-end service file appears to own business logic or transformation of sensitive fields.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\jdbc-only\src\main\java\com\example\billing\BillingRepository.java</code></td><td>data_access</td><td>backend</td><td>16</td><td>BANK_ACCOUNT=6, CREDIT_CARD=4, CUSTOM_ACCOUNT_NUMBER=4, ADDRESS=2</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-medium">medium</span></td><td>Role: persists_or_publishes | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Models\CustomerProfile.cs</code></td><td>backend</td><td>backend</td><td>9</td><td>BANK_ACCOUNT=2, PERSON=2, CUSTOM_ACCOUNT_NUMBER=1, DATE_OF_BIRTH=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: FirstName, LastName, Email, PhoneNumber, DateOfBirth, Ssn | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\customer\CustomerProfile.java</code></td><td>backend</td><td>backend</td><td>8</td><td>PERSON=2, ADDRESS=1, DATE_OF_BIRTH=1, EMAIL_ADDRESS=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: firstName, lastName, email, phoneNumber, dateOfBirth, ssn | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Models\ProtectCustomerRequest.cs</code></td><td>backend</td><td>backend</td><td>7</td><td>BANK_ACCOUNT=2, CUSTOM_ACCOUNT_NUMBER=1, DATE_OF_BIRTH=1, EMAIL_ADDRESS=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: Email, PhoneNumber, DateOfBirth, Ssn, AccountNumber, RoutingNumber | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\customer\CustomerAliasFields.java</code></td><td>backend</td><td>backend</td><td>7</td><td>CUSTOM_HOUSEHOLD_ID=4, CUSTOM_ACCOUNT_NUMBER=3</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: acctNbr, accntNbr, accountNbr, householdNbr, householdNum, hhId | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Models\ProtectedCustomerPayload.cs</code></td><td>backend</td><td>backend</td><td>6</td><td>BANK_ACCOUNT=2, CUSTOM_ACCOUNT_NUMBER=1, DATE_OF_BIRTH=1, EMAIL_ADDRESS=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: ProtectedEmail, ProtectedDateOfBirth, ProtectedSsn, ProtectedAccountNumber, ProtectedRoutingNumber | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\jdbc-only\src\main\java\com\example\billing\BillingRecord.java</code></td><td>backend</td><td>backend</td><td>6</td><td>BANK_ACCOUNT=2, CREDIT_CARD=2, ADDRESS=1, CUSTOM_ACCOUNT_NUMBER=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: accountNumber, routingNumber, cardNumber, cvv, billingAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\security\ProtegrityApplicationProtectorService.java</code></td><td>backend</td><td>backend</td><td>6</td><td>US_SSN=6</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: protectCustomerSsn, unprotectCustomerSsn, reprotectCustomerSsn | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\customer\CrdpProtectRequest.java</code></td><td>backend</td><td>backend</td><td>5</td><td>ADDRESS=1, DATE_OF_BIRTH=1, EMAIL_ADDRESS=1, PHONE_NUMBER=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: email, phoneNumber, dateOfBirth, ssn, homeAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\customer\ProtectCustomerRequest.java</code></td><td>backend</td><td>backend</td><td>5</td><td>ADDRESS=1, DATE_OF_BIRTH=1, EMAIL_ADDRESS=1, PHONE_NUMBER=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: email, phoneNumber, dateOfBirth, ssn, homeAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\household\HouseholdMemberProfile.java</code></td><td>backend</td><td>backend</td><td>5</td><td>ADDRESS=1, CUSTOM_ACCOUNT_NUMBER=1, CUSTOM_HOUSEHOLD_ID=1, CUSTOM_SALARY=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: householdId, primaryEmail, salaryAmount, accntNbr, homeAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\household\HouseholdProtectionPayload.java</code></td><td>backend</td><td>backend</td><td>5</td><td>ADDRESS=1, CUSTOM_ACCOUNT_NUMBER=1, CUSTOM_HOUSEHOLD_ID=1, CUSTOM_SALARY=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: householdId, primaryEmail, salaryAmount, accntNbr, homeAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\household\HouseholdProtectionRequest.java</code></td><td>backend</td><td>backend</td><td>5</td><td>ADDRESS=1, CUSTOM_ACCOUNT_NUMBER=1, CUSTOM_HOUSEHOLD_ID=1, CUSTOM_SALARY=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-medium">medium</span></td><td>Role: supporting_model | Payload fields: householdId, primaryEmail, salaryAmount, accntNbr, homeAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\README.md</code></td><td>backend_with_data_access</td><td>docs</td><td>4</td><td>CUSTOM_ACCOUNT_NUMBER=2, CUSTOM_HOUSEHOLD_ID=2</td><td>jdbc_candidate</td><td>review_jdbc_substitution</td><td><span class="badge badge-medium">medium</span></td><td>Role: persists_or_publishes | Back-end/data-access file contains direct SQL/JDBC or system-of-record indicators.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Models\ClaimProtectionPayload.cs</code></td><td>backend</td><td>backend</td><td>4</td><td>ADDRESS=1, CUSTOM_HOUSEHOLD_ID=1, CUSTOM_SALARY=1, EMAIL_ADDRESS=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | Payload fields: MemberEmail, HouseholdId, SalaryAmount, HomeAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Models\ClaimProtectionRequest.cs</code></td><td>backend</td><td>backend</td><td>4</td><td>ADDRESS=1, CUSTOM_HOUSEHOLD_ID=1, CUSTOM_SALARY=1, EMAIL_ADDRESS=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | Payload fields: MemberEmail, HouseholdId, SalaryAmount, HomeAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\dotnet-api\Models\ClaimReviewRecord.cs</code></td><td>backend</td><td>backend</td><td>4</td><td>ADDRESS=1, CUSTOM_HOUSEHOLD_ID=1, CUSTOM_SALARY=1, EMAIL_ADDRESS=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | Payload fields: MemberEmail, HouseholdId, SalaryAmount, HomeAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\customer\CrdpProtectResponse.java</code></td><td>backend</td><td>backend</td><td>4</td><td>ADDRESS=1, DATE_OF_BIRTH=1, EMAIL_ADDRESS=1, US_SSN=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | Payload fields: protectedEmail, protectedDateOfBirth, protectedSsn, protectedHomeAddress | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\frontend\node-express-ui\claims-api-proxy.js</code></td><td>frontend</td><td>frontend</td><td>4</td><td>ADDRESS=1, CUSTOM_HOUSEHOLD_ID=1, CUSTOM_SALARY=1, EMAIL_ADDRESS=1</td><td>frontend_reference_only</td><td>frontend_reference_only</td><td><span class="badge badge-low">low</span></td><td>Role: collects_and_sends | Payload fields: memberEmail, householdId, salaryAmount, homeAddress | Endpoints: /api/claims/:claimId, /api/claims/:claimId/protect | Front-end classified file references sensitive fields but lacks direct data-access ownership.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\frontend\node-express-ui\claims-proxy.js</code></td><td>frontend</td><td>frontend</td><td>4</td><td>ADDRESS=1, CUSTOM_HOUSEHOLD_ID=1, CUSTOM_SALARY=1, EMAIL_ADDRESS=1</td><td>frontend_reference_only</td><td>frontend_reference_only</td><td><span class="badge badge-low">low</span></td><td>Role: collects_and_sends | Payload fields: memberEmail, householdId, salaryAmount, homeAddress | Endpoints: /claims-review/:claimId, /claims-review/:claimId/protect | Front-end classified file references sensitive fields but lacks direct data-access ownership.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\spring-boot\src\main\java\com\example\security\VoltageSecureDataService.java</code></td><td>backend</td><td>backend</td><td>3</td><td>CREDIT_CARD=2, EMAIL_ADDRESS=1</td><td>backend_logic_owner</td><td>review_crdp_rest_change</td><td><span class="badge badge-low">low</span></td><td>Role: protects_or_tokenizes | Payload fields: protectCreditCard, revealCreditCard, protectEmail | Back-end service file appears to own business logic or transformation of sensitive fields.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\go-service\hashicorp_vault_transit_client.go</code></td><td>backend</td><td>backend</td><td>2</td><td>ADDRESS=2</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\node-service\hashicorp-vault-transit-client.js</code></td><td>frontend</td><td>frontend</td><td>2</td><td>ADDRESS=2</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\python-fastapi\app\protegrity_developer_client.py</code></td><td>backend</td><td>backend</td><td>2</td><td>EMAIL_ADDRESS=2</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | Payload fields: protect_customer_email, unprotect_customer_email | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\ops\call_thales_ctvl_tokenize.sh</code></td><td>unknown</td><td>batch_integration</td><td>2</td><td>ADDRESS=2</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\backend\ruby-service\hashicorp_vault_transit_ruby_service.rb</code></td><td>backend</td><td>backend</td><td>1</td><td>ADDRESS=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | Payload fields: address | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+<tr><td><code>E:\codex\work\migration\sample_code\ops\call_thales_wrapper_endpoint.sh</code></td><td>unknown</td><td>batch_integration</td><td>1</td><td>US_SSN=1</td><td>supporting_model</td><td>supporting_model_only</td><td><span class="badge badge-low">low</span></td><td>Role: supporting_model | Payload fields: ssn | File looks like a DTO/model/supporting type and not the primary implementation owner.</td></tr>
+</tbody></table>
+</div>
+</section>
+</main>
+</body>
+</html>

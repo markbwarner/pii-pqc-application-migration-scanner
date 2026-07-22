@@ -1,0 +1,12 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    jwt (2.9.3)
+    vault (0.18.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  jwt
+  vault

@@ -1,0 +1,613 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How The PII Scanner Works</title>
+  <style>
+    :root {
+      --bg: #f5f1e8;
+      --panel: #fffdf8;
+      --ink: #18263b;
+      --muted: #5f6570;
+      --line: #d8c9ad;
+      --accent: #174a63;
+      --accent-soft: #dcecf5;
+      --focus: #d7f4df;
+      --focus-ink: #1f5f36;
+      --data: #fef0c7;
+      --data-ink: #8a5a00;
+      --ref: #dde6f7;
+      --ref-ink: #29456f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #f8f4ec 0%, var(--bg) 100%);
+      color: var(--ink);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+    h1, h2, h3 { color: #0f2945; margin-top: 0; }
+    h1 { font-size: 34px; margin-bottom: 10px; }
+    h2 { font-size: 24px; margin-bottom: 14px; }
+    h3 { font-size: 18px; margin-bottom: 10px; }
+    p.lede {
+      font-size: 18px;
+      color: #30445e;
+      max-width: 1050px;
+      margin-bottom: 24px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 24px rgba(33, 45, 63, 0.05);
+    }
+    .callout {
+      border-left: 5px solid var(--accent);
+      background: #fbf7ef;
+      padding: 16px 18px;
+      border-radius: 12px;
+      margin: 18px 0;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: #fffaf2;
+    }
+    .mini-card h3 { font-size: 16px; margin-bottom: 8px; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+      align-items: stretch;
+    }
+    .flow-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fffaf3;
+      padding: 14px 14px 18px;
+      min-height: 196px;
+    }
+    .flow-card:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -13px;
+      width: 14px;
+      height: 2px;
+      background: #b49666;
+    }
+    .flow-card:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      top: calc(50% - 4px);
+      right: -14px;
+      border-left: 8px solid #b49666;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+    .step {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6f5627;
+      margin-bottom: 8px;
+    }
+    .flow-card h3 { font-size: 16px; }
+    .flow-card ul, .stack ul, .plain-list {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid #e7dcc7;
+      text-align: left;
+      padding: 11px 10px;
+      vertical-align: top;
+    }
+    th {
+      background: #efe4ce;
+      color: #17345a;
+      font-weight: 700;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      background: #f7efe1;
+      padding: 1px 5px;
+      border-radius: 5px;
+      word-break: break-word;
+    }
+    .status-row {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .focus { background: var(--focus); color: var(--focus-ink); }
+    .data { background: var(--data); color: var(--data-ink); }
+    .ref { background: var(--ref); color: var(--ref-ink); }
+    .file-box {
+      border: 1px dashed #bca57d;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fffcf6;
+      margin-top: 12px;
+    }
+    .footer-note {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    @media (max-width: 1180px) {
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow-card:not(:last-child)::after,
+      .flow-card:not(:last-child)::before { display: none; }
+    }
+    @media (max-width: 860px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .status-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>How The PII Scanner Works</h1>
+    <p class="lede">This document explains the <strong>PII</strong> side of the migration scanner in plain English. It is meant to help architects, delivery teams, DBAs, and developers explain how the scanner finds sensitive-data impact and how it decides which files are more likely to require real migration work.</p>
+
+    <section>
+      <h2>One-Sentence Explanation</h2>
+      <div class="callout">
+        The PII scanner walks a source tree, classifies each file, looks for likely sensitive-data references in identifiers and literals, estimates whether the work is more likely code-change or JDBC or data-access oriented, correlates likely ownership across UI, service, and persistence layers, and then produces reports that help teams focus on the files most likely to matter.
+      </div>
+    </section>
+
+    <section>
+      <h2>High-Level Flow</h2>
+      <div class="flow">
+        <div class="flow-card">
+          <span class="step">Step 1</span>
+          <h3>Choose Scan Domain</h3>
+          <ul>
+            <li><code>--scan pii</code></li>
+            <li><code>--scan pii,pqc</code></li>
+            <li><code>pii</code> is the default if no domain is specified</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 2</span>
+          <h3>Walk Files And Classify Context</h3>
+          <ul>
+            <li>Each file is labeled as frontend, backend, data access, docs, test, infrastructure, and related layers</li>
+            <li>This affects later ownership and migration interpretation</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 3</span>
+          <h3>Detect PII Clues</h3>
+          <ul>
+            <li>Identifier-style keyword matching</li>
+            <li>Custom customer rules</li>
+            <li>Custom regex literal detection when needed</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 4</span>
+          <h3>Extract Architecture Hints</h3>
+          <ul>
+            <li>REST endpoints, payload fields, SQL verbs, table names, system-of-record paths, and JDBC markers are extracted</li>
+            <li>This turns raw field hits into migration signals</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 5</span>
+          <h3>Estimate Migration Path</h3>
+          <ul>
+            <li>The scanner estimates whether the work looks code-change-heavy, JDBC-substitution-friendly, or mostly reference-only</li>
+            <li>It also assigns low, medium, or high complexity</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 6</span>
+          <h3>Assess Ownership</h3>
+          <ul>
+            <li>Frontend collectors, backend API owners, supporting DTOs, and data-access owners are separated</li>
+            <li>Related files are correlated into likely change chains</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 7</span>
+          <h3>Write Planning Outputs</h3>
+          <ul>
+            <li>JSON, CSV, file-report JSON or CSV, and DBA planning SQL are produced</li>
+            <li>Optional workbook tools build PII-assessment-informed planning artifacts</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div>
+        <h2>What The Scanner Is Actually Looking For</h2>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>Identifier and field names</h3>
+            <p>Examples: <code>ssn</code>, <code>email</code>, <code>phoneNumber</code>, <code>acctNbr</code>, <code>householdNbr</code>, <code>customerDob</code>.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Customer-defined aliases</h3>
+            <p>Custom rules let teams search for organization-specific names that are meaningful locally even if they are not standard PII terminology.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Integration and persistence clues</h3>
+            <p>Examples: SQL verbs, JDBC markers, endpoint mappings, REST calls, payload fields, repository hints, and data-access patterns.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Role in the flow</h3>
+            <p>The same PII field reference means something different in a display-only React screen, a Spring controller, a DTO, or a JDBC repository.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>What Comes Out</h2>
+        <div class="stack">
+          <div class="mini-card">
+            <h3>Per-file match and category totals</h3>
+            <p>Each file gets line-level PII matches, category summaries, complexity, and migration notes.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Likely change-target guidance</h3>
+            <p>The scanner separates support models and UI references from likely API-side or data-access-side change owners.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Delivery-ready planning outputs</h3>
+            <p>CSV exports, DBA planning SQL, and workbook-oriented outputs help teams turn scanner results into scoping and execution work.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How Data Elements Are Detected</h2>
+      <div class="grid-2">
+        <div>
+          <div class="mini-card">
+            <h3>1. Built-in identifier matching</h3>
+            <p>The scanner tokenizes code-like identifiers, normalizes naming style, and compares the normalized form to built-in PII keyword rules.</p>
+            <p>Examples:</p>
+            <ul class="plain-list">
+              <li><code>accountNumber</code> becomes <code>account_number</code></li>
+              <li><code>acctNbr</code> becomes a normalized alias that can still match customer-defined keywords</li>
+              <li><code>customerDob</code> can match a date-of-birth style rule after normalization</li>
+            </ul>
+          </div>
+          <div class="mini-card" style="margin-top:12px;">
+            <h3>2. Custom keyword patterns</h3>
+            <p>Customers can define their own business-specific field names and categories without changing Python code. This is useful when the data is sensitive to the organization but does not use standard PII terminology.</p>
+          </div>
+          <div class="mini-card" style="margin-top:12px;">
+            <h3>3. Custom regex patterns</h3>
+            <p>Customers can also define literal formats, such as account-number strings, household IDs, or compensation values, when identifier matching alone is not enough.</p>
+          </div>
+          <div class="mini-card" style="margin-top:12px;">
+            <h3>4. Literal-format matching</h3>
+            <p>Literal formats such as account numbers, household IDs, or salary-like values can be detected through customer-defined regex patterns when identifier matching alone is not enough.</p>
+          </div>
+        </div>
+        <div>
+          <div class="callout">
+            In simple terms, the scanner does not only look for exact field names. It first normalizes identifiers, then checks them against built-in and customer-defined aliases, and can optionally look for literal formats too. That is why names like <code>acct_nbr</code>, <code>accountNum</code>, and <code>customer_account_number</code> can all be treated as the same business concept when configured.
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Detection type</th>
+                <th>Best for</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Built-in keyword rules</td>
+                <td>Common PII field names</td>
+                <td><code>email</code>, <code>phone</code>, <code>ssn</code></td>
+              </tr>
+              <tr>
+                <td>Custom keyword rules</td>
+                <td>Customer vocabulary and aliases</td>
+                <td><code>acct_nbr</code>, <code>hh_id</code>, <code>annual_salary</code></td>
+              </tr>
+              <tr>
+                <td>Custom regex rules</td>
+                <td>Literal value formats</td>
+                <td><code>HH-123456</code>, <code>123456789012</code>, <code>$125,000</code></td>
+              </tr>
+              <tr>
+                <td>Literal-format matching</td>
+                <td>Literal text and string analysis</td>
+                <td>Free-form sensitive text in comments or strings</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How Custom Elements Are Supported</h2>
+      <p>Customer-specific PII definitions are supplied through JSON files rather than hard-coded edits to the scanner. There are two main extension styles.</p>
+
+      <div class="mini-card">
+        <h3>Custom keyword example</h3>
+        <p>Use this when you want identifier-like names to map to a customer-defined category.</p>
+<pre><code>{
+  "custom_patterns": [
+    {
+      "name": "account-number",
+      "category": "CUSTOM_ACCOUNT_NUMBER",
+      "keywords": [
+        "account_number",
+        "account_num",
+        "account_nbr",
+        "acct_number",
+        "acct_num",
+        "acct_nbr",
+        "accnt_nbr",
+        "customer_account_number"
+      ],
+      "impact_hint": "Customer-defined account number field"
+    },
+    {
+      "name": "household-id",
+      "category": "CUSTOM_HOUSEHOLD_ID",
+      "keywords": [
+        "household_id",
+        "household_identifier",
+        "family_household_id",
+        "household_nbr",
+        "household_num",
+        "hh_id",
+        "hh_number"
+      ],
+      "impact_hint": "Customer-defined household identifier"
+    },
+    {
+      "name": "salary",
+      "category": "CUSTOM_SALARY",
+      "keywords": ["salary", "annual_salary", "base_salary", "compensation_amount"],
+      "impact_hint": "Customer-defined compensation field"
+    }
+  ]
+}</code></pre>
+      </div>
+
+      <div class="mini-card" style="margin-top:12px;">
+        <h3>Custom regex example</h3>
+        <p>Use this when the signal is a literal format rather than just a field name.</p>
+<pre><code>{
+  "custom_regex_patterns": [
+    {
+      "name": "household-id-literal",
+      "category": "CUSTOM_HOUSEHOLD_ID_LITERAL",
+      "pattern": "HH-[0-9]{5,10}",
+      "impact_hint": "Literal household identifier format"
+    },
+    {
+      "name": "account-number-literal",
+      "category": "CUSTOM_ACCOUNT_NUMBER_LITERAL",
+      "pattern": "\b[0-9]{10,12}\b",
+      "impact_hint": "Literal account number format"
+    },
+    {
+      "name": "salary-literal",
+      "category": "CUSTOM_SALARY_LITERAL",
+      "pattern": "\$[0-9]{2,3},[0-9]{3}",
+      "impact_hint": "Literal salary amount format"
+    }
+  ]
+}</code></pre>
+      </div>
+
+      <div class="callout">
+        A useful way to explain this to others: custom keyword rules help the scanner understand <em>what your organization calls the data</em>, while custom regex rules help it understand <em>what the data values look like</em>.
+      </div>
+    </section>
+
+    <section>
+      <h2>How To Run With Custom PII Definitions</h2>
+      <p>The usual pattern is to keep custom keyword and regex definitions in a JSON file and pass it at runtime with <code>--custom-patterns</code>.</p>
+<pre><code>python E:\codex\work\migrationpp.py E:/codex/work/migration/sample_code --scan pii --custom-patterns E:/codex/work/migration/config/pii/examples/custom-patterns.example.json</code></pre>
+      <p>If you want customer-defined keyword categories to replace the built-in keyword category for the same identifier, add <code>--custom-patterns-override-defaults</code>.</p>
+<pre><code>python E:\codex\work\migrationpp.py E:/codex/work/migration/sample_code --scan pii --custom-patterns E:/codex/work/migration/config/pii/examples/custom-patterns.example.json --custom-patterns-override-defaults</code></pre>
+    </section>
+
+    <section>
+      <h2>Key Files Involved</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Role</th>
+            <th>Why It Matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>scanner/cli.py</code></td>
+            <td>Command-line entry and run options</td>
+            <td>Controls <code>--scan pii</code>, custom patterns, output files, and run modes.</td>
+          </tr>
+          <tr>
+            <td><code>scanner/scanner.py</code></td>
+            <td>Main scan pipeline</td>
+            <td>Coordinates file classification, PII detection, ownership analysis, complexity scoring, and final report assembly.</td>
+          </tr>
+          <tr>
+            <td><code>scanner/detectors.py</code></td>
+            <td>PII detection engine</td>
+            <td>Runs built-in keyword detection and customer regex-based literal detection.</td>
+          </tr>
+          <tr>
+            <td><code>scanner/classifiers.py</code></td>
+            <td>File and layer classification</td>
+            <td>Classifies files as frontend, backend, backend with data access, docs, infra, test, and related contexts.</td>
+          </tr>
+          <tr>
+            <td><code>scanner/ownership.py</code></td>
+            <td>Ownership and correlation logic</td>
+            <td>Extracts endpoints, payload fields, SQL clues, and role-in-flow heuristics to decide likely change owners and correlate related files.</td>
+          </tr>
+          <tr>
+            <td><code>scanner/reporting.py</code></td>
+            <td>Output generation</td>
+            <td>Builds JSON, CSV, summary JSON, file-report JSON or CSV, and DBA planning SQL output.</td>
+          </tr>
+          <tr>
+            <td><code>config/pii/examples/custom-patterns.example.json</code></td>
+            <td>Customer extension point</td>
+            <td>Lets teams add customer-specific sensitive field names and categories without changing Python code.</td>
+          </tr>
+          <tr>
+            <td><code>tools/generate_support_estimate_workbook.py</code></td>
+            <td>PII-assessment-informed estimator workbook</td>
+            <td>Produces a workbook-oriented planning artifact aligned to the PII and CRDP assessment workflow.</td>
+          </tr>
+          <tr>
+            <td><code>tools/generate_support_estimate_workbook_from_pii_report.py</code></td>
+            <td>Report-driven estimator workbook</td>
+            <td>Builds a workbook from a real PII file-report JSON export rather than using only a static baseline.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="grid-2">
+      <div>
+        <h2>What Is Config-Driven Vs Code-Driven</h2>
+        <div class="mini-card">
+          <h3>Mostly config-driven</h3>
+          <ul class="plain-list">
+            <li>Customer-specific keyword categories and aliases</li>
+            <li>Customer-specific regex patterns</li>
+            <li>Whether custom rules override built-in keyword categories</li>
+          </ul>
+        </div>
+        <div class="mini-card" style="margin-top:12px;">
+          <h3>Mostly code-driven</h3>
+          <ul class="plain-list">
+            <li>How identifiers are normalized and matched</li>
+            <li>How endpoints, payload fields, SQL verbs, and JDBC markers are extracted</li>
+            <li>How ownership confidence is estimated</li>
+            <li>How frontend reference-only files are separated from likely back-end or data-access owners</li>
+            <li>How complexity and recommended actions are scored</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h2>Typical Output Meanings</h2>
+        <div class="status-row">
+          <span class="badge focus">review_code_change</span>
+          <div>The file looks like a likely implementation-side change target where application logic probably needs direct review.</div>
+        </div>
+        <div class="status-row">
+          <span class="badge data">review_jdbc_substitution</span>
+          <div>The scanner sees stronger JDBC or direct data-access clues, which may support lower-code-impact protection or substitution planning.</div>
+        </div>
+        <div class="status-row">
+          <span class="badge ref">frontend_reference_only</span>
+          <div>The file touches PII, but it looks more like a UI or proxy reference than the primary implementation owner.</div>
+        </div>
+        <div class="status-row">
+          <span class="badge ref">supporting_model_only</span>
+          <div>The file looks like a DTO, request or response model, payload type, or other supporting structure rather than the main change owner.</div>
+        </div>
+        <div class="callout">
+          The PII scanner is not just counting fields. It is trying to answer a more practical question: <em>where is the work likely to land if we need to protect or migrate this sensitive data flow?</em>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Example: How One File Becomes A PII Change Target</h2>
+      <div class="file-box">
+        <strong>Example file:</strong> a Spring Boot repository or service that handles <code>ssn</code>, <code>emailAddress</code>, and <code>householdNbr</code>, calls a database, and issues SQL updates.
+      </div>
+      <div class="flow" style="grid-template-columns: repeat(5, minmax(160px, 1fr)); margin-top: 16px;">
+        <div class="flow-card">
+          <span class="step">Signal A</span>
+          <h3>PII Match</h3>
+          <p>Identifiers like <code>ssn</code> and <code>emailAddress</code> match built-in or customer-defined PII patterns.</p>
+        </div>
+        <div class="flow-card">
+          <span class="step">Signal B</span>
+          <h3>Architecture Clues</h3>
+          <p>The scanner sees SQL verbs, JDBC markers, or repository-style access that suggests persistence ownership.</p>
+        </div>
+        <div class="flow-card">
+          <span class="step">Signal C</span>
+          <h3>Ownership Logic</h3>
+          <p>The file is more likely labeled <code>jdbc_candidate</code> or <code>data_access_owner</code> than a supporting model or frontend reference.</p>
+        </div>
+        <div class="flow-card">
+          <span class="step">Signal D</span>
+          <h3>Path Estimation</h3>
+          <p>The scanner estimates whether the work is better framed as code change or JDBC-style substitution planning.</p>
+        </div>
+        <div class="flow-card">
+          <span class="step">Signal E</span>
+          <h3>Report Output</h3>
+          <p>The file may appear in <code>likely-change-targets.csv</code> with <code>review_jdbc_substitution</code>, <code>jdbc_tables</code>, and related planning columns.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Simple Explanation You Can Reuse With Others</h2>
+      <div class="callout">
+        The PII scanner works in two practical layers. First, it finds likely sensitive-data references in identifiers, fields, payloads, and optional literal text. Second, it asks where those references appear in the application architecture: a frontend display, a backend API, a supporting model, or a JDBC and data-access layer. That allows it to move beyond raw field counting and give teams a better first-pass answer about where migration, protection, and testing work are most likely to concentrate.
+      </div>
+      <p class="footer-note">Suggested doc location: <code>docs/pii/how-the-pii-scanner-works.html</code></p>
+    </section>
+  </main>
+</body>
+</html>
+

@@ -1,0 +1,700 @@
+{
+  "exact_meanings": {
+    "system.security.cryptography.pkcs": ".NET library for PKCS/CMS message handling and certificate-based signing workflows.",
+    "system.security.cryptography.x509certificates": ".NET certificate API for working with X.509 certificates, stores, and trust material.",
+    "microsoft.identitymodel.tokens": ".NET token-security library commonly used for JWT validation and signing configuration.",
+    "system.identitymodel.tokens.jwt": ".NET JWT library used for issuing, parsing, or validating JSON Web Tokens.",
+    "azure.security.keyvault.keys": "Azure Key Vault client library for key-management operations, including asymmetric key usage.",
+    "amazon.keymanagementservice": "AWS KMS client library for managed key operations, including asymmetric key usage.",
+    "@aws-sdk/client-kms": "AWS SDK client for KMS operations, often used for encryption, signing, or asymmetric key management.",
+    "boto3": "Python AWS SDK that can be used to call KMS and other managed security services.",
+    "cloud.google.com/go/kms/apiv1": "Google Cloud KMS client library for managed key operations.",
+    "google.cloud.kms": "Google Cloud KMS client library for managed key operations.",
+    "golang.org/x/crypto": "Go cryptography extension module that includes SSH and other security-related packages.",
+    "io.jsonwebtoken.jwts": "Java JJWT API entry point used to build or parse JWT tokens.",
+    "io.jsonwebtoken.signaturealgorithm": "Java JJWT type used to select token-signing algorithms such as RSA or HMAC variants.",
+    "jsonwebtoken": "JavaScript JWT library used to sign, verify, or decode tokens.",
+    "jose": "JavaScript JOSE library used for JWT, JWS, or JWE operations.",
+    "github.com/golang-jwt/jwt/v5": "Go JWT library used for token creation, signing, or validation.",
+    "pyjwt": "Python JWT library used for token creation or validation.",
+    "golang.org/x/crypto/ssh": "Go SSH library used for SSH client, server, or key-handling operations.",
+    "paramiko": "Python SSH library used for remote access, automation, and SSH key handling.",
+    "ssh2": "Node.js SSH library used for SSH connections and key-based remote operations.",
+    "java.io.fileinputstream": "Java file input stream often used here to load keystores, certificates, or key material from disk.",
+    "java.security.keystore": "Java keystore API used to load or manage certificate and key material.",
+    "java.security.privatekey": "Java private-key interface used for signing or key-handling operations.",
+    "java.security.signature": "Java signature engine API used to create or verify digital signatures.",
+    "java.security.interfaces.rsaprivatekey": "Java RSA private-key interface that indicates explicit RSA key usage.",
+    "java.security.interfaces.rsapublickey": "Java RSA public-key interface that indicates explicit RSA key usage.",
+    "java.security.cert.x509certificate": "Java X.509 certificate API used to inspect or validate certificates.",
+    "ssl": "Python standard TLS and SSL module used to configure secure connections, certificate validation, or mTLS behavior.",
+    "cryptography": "Python cryptography library commonly used for certificates, keys, and cryptographic primitives.",
+    "pyopenssl": "Python OpenSSL wrapper used for certificate and TLS operations.",
+    "openssl": "Widely used cryptographic and TLS toolkit often associated with certificate and protocol handling.",
+    "signedcms": ".NET API for CMS/PKCS signed-message handling, often tied to code-signing or signed payload workflows.",
+    "ciphertrust.cadp.netcore": ".NET SDK for Thales CipherTrust Application Data Protection, typically used for externalized key management, crypto operations, and protected signing or encryption workflows.",
+    "io.github.thalescpl-io.cadp:cadp_for_java": "Maven dependency for Thales CADP for Java, used to access CipherTrust-managed cryptographic functions, keys, and provider-based operations.",
+    "com.ingrian.security.nae.ingrianprovider": "Thales CADP Java security provider used to route cryptographic operations through CipherTrust-managed keys and services.",
+    "com.ingrian.security.nae.naesession": "Thales CADP Java session API used to authenticate to CipherTrust or NAE services before using protected keys.",
+    "com.ingrian.security.nae.naekey": "Thales CADP Java key-access API used to retrieve managed secret, private, or public keys from CipherTrust services.",
+    "com.ingrian.security.nae.naeprivatekey": "Thales CADP Java private-key type that indicates signing or decryption may rely on externally managed keys.",
+    "com.ingrian.security.nae.naepublickey": "Thales CADP Java public-key type associated with externally managed verification or encryption workflows.",
+    "com.gemalto.ps.keysecure.crypto.cryptodatautility": "Thales/Gemalto crypto utility API tied to CipherTrust or KeySecure-managed cryptographic processing.",
+    "com.centralmanagement.centralmanagementprovider": "Thales CADP centralized management provider used to register the client and add the CADP security provider for managed cryptographic operations.",
+    "pkcs11.h": "PKCS#11 header used by native C/C++ code to access HSM or key-manager-backed cryptographic operations via a standard interface.",
+    "azure.security.keyvault.cryptography": ".NET Azure Key Vault cryptography client used to sign, verify, wrap, unwrap, or otherwise operate on keys held in Key Vault or Managed HSM.",
+    "azure.security.keyvault.administration": ".NET Azure Key Vault administration client used to manage HSM-backed resources, including Managed HSM environments and security domains.",
+    "managedhsm.azure.net": "Azure Managed HSM endpoint indicator showing that key operations may be routed to a dedicated HSM-backed service rather than a standard software-backed store.",
+    "amazon.cloudhsm": "AWS CloudHSM-related SDK or namespace associated with dedicated HSM-backed cryptographic operations and externally managed keys.",
+    "cloudhsm_pkcs11.h": "AWS CloudHSM PKCS#11 header used by native code to drive HSM-backed key discovery, signing, or encryption operations.",
+    "libcloudhsm_pkcs11.so": "AWS CloudHSM PKCS#11 shared library reference used to connect native or provider-backed code to CloudHSM cryptographic operations.",
+    "vormetric.pkcs11sample": "Legacy Vormetric sample namespace associated with PKCS#11-based key management, signing, and encryption operations against an external security platform.",
+    "com.vormetric.pkcs11.sample": "Legacy Vormetric Java PKCS#11 sample package used to access HSM-style key operations and managed cryptographic services.",
+    "net.pkcs11interop.highlevelapi": ".NET PKCS#11 wrapper API commonly used to call external HSM or key-manager-backed cryptographic operations from managed code.",
+    "vpkcs11session": "Vormetric PKCS#11 session wrapper used to authenticate, open sessions, and execute managed cryptographic operations.",
+    "vorpkcs11.dll": "Vormetric PKCS#11 client library used to connect applications to the Vormetric or DSM-backed cryptographic service.",
+    "vpkcs11libpath": "Environment variable used to point applications to the Vormetric PKCS#11 client library on disk.",
+    "com.outerbay.foundation.components.datamasking.datamasking": "Voltage SecureData or SimpleAPI-style masking helper used to protect or reveal sensitive values through a managed data protection service.",
+    "securedata.cc": "Voltage SecureData format identifier for credit card style protection or reveal operations.",
+    "securedata.auto": "Voltage SecureData format identifier used to apply automatic format-aware protection or reveal behavior.",
+    "securedata.ora-date": "Voltage SecureData format identifier used to protect or reveal Oracle-style date values.",
+    "securedata simpleapi": "Voltage SecureData SimpleAPI product family used to mask, unmask, encrypt, or identify protected data through a managed service.",
+    "securedata appliance": "Voltage SecureData appliance reference indicating dependency on an external data protection platform rather than only local cryptographic code.",
+    "voltage fusion": "OpenText Voltage Fusion reference associated with the Voltage data protection portfolio and SecureData integrations.",
+    "applicationprotectorjava": "Protegrity Application Protector Java library used to protect, unprotect, or reprotect sensitive data inside application code.",
+    "protegritydeveloperjava": "Protegrity Java client library for the Developer Edition API used for discovery, tokenization, masking, or unprotection workflows.",
+    "protector": "Protegrity protector object used to create sessions and execute protect, unprotect, or reprotect operations against managed policies or APIs.",
+    "encrypted resilient package": "Protegrity encrypted resilient package reference tied to policy deployment and externally managed data protection behavior.",
+    "policy management rest api": "Protegrity policy-management API used to create or manage data protection policies that application protectors rely on.",
+    "com.safenetinc.luna.provider.lunaprovider": "Thales Luna HSM Java security provider used to route keystore, certificate, signing, or crypto operations through a Luna HSM partition.",
+    "com.safenetinc.luna.lunaslotmanager": "Thales Luna HSM slot-management API used to enumerate partitions, authenticate to slots, and manage HSM-backed sessions.",
+    "com.microsoft.azure.keyvault.keyvaultclient": "Legacy Azure Key Vault Java client used to encrypt, decrypt, or otherwise operate on keys held in Azure Key Vault.",
+    "com.microsoft.azure.keyvault.keyvaultclientservice": "Legacy Azure Key Vault Java service factory used to create clients for Azure Key Vault key operations.",
+    "com.microsoft.azure.keyvault.keyvaultconfiguration": "Legacy Azure Key Vault Java configuration helper used to bind credentials and create Azure Key Vault client settings.",
+    "com.microsoft.azure.keyvault.authentication.keyvaultcredentials": "Legacy Azure Key Vault Java credential type used to authenticate client calls to Azure Key Vault.",
+    "com.google.cloud.kms.v1.keymanagementserviceclient": "Google Cloud KMS client used to call encrypt, decrypt, sign, verify, or key-management operations against Cloud KMS.",
+    "com.google.cloud.kms.v1.cryptokeyname": "Google Cloud KMS key-resource identifier used to target a specific Cloud KMS key for cryptographic operations.",
+    "com.google.cloud.kms.v1.cryptokeyversiontemplate": "Google Cloud KMS key-template type used when creating keys or versions, including HSM-backed protection settings.",
+    "com.google.cloud.kms.v1.protectionlevel": "Google Cloud KMS protection-level enum used to distinguish software-backed keys from HSM-backed keys.",
+    "com.google.cloud.kms.v1.keyringname": "Google Cloud KMS key-ring identifier used to organize or create managed cryptographic keys.",
+    "awskmsclientbuilder": "AWS KMS client builder used to create service clients for managed key operations, including encryption, decryption, signing, and key administration.",
+    "createkeyresult": "AWS KMS create-key result object used when provisioning or inspecting managed cryptographic keys.",
+    "com.amazonaws.services.s3.model.kmsencryptionmaterialsprovider": "Amazon S3 encryption materials provider that wraps data keys with AWS KMS-managed keys for client-side or envelope encryption workflows.",
+    "kmsencryptionmaterialsprovider": "Amazon S3 encryption materials provider that uses AWS KMS-managed keys for envelope encryption workflows.",
+    "com.amazonaws.services.s3.amazons3encryption": "Amazon S3 encryption client that automatically encrypts and decrypts S3 objects using client-side materials or KMS-backed wrapping keys.",
+    "amazons3encryption": "Amazon S3 encryption client used for client-side encryption and decryption workflows around S3 objects.",
+    "com.amazonaws.services.s3.amazons3encryptionclientbuilder": "Amazon S3 encryption client builder used to configure client-side or KMS-backed S3 encryption behavior.",
+    "amazons3encryptionclientbuilder": "Amazon S3 encryption client builder used to create S3 clients with encryption behavior enabled.",
+    "com.amazonaws.services.s3.model.encryptionmaterials": "Amazon S3 encryption materials object used to supply symmetric keys, asymmetric key pairs, or other wrapping materials for client-side encryption.",
+    "encryptionmaterials": "Amazon S3 encryption materials object used to supply client-side wrapping keys or key pairs.",
+    "com.amazonaws.services.s3.model.staticencryptionmaterialsprovider": "Amazon S3 static encryption materials provider that binds fixed client-side key material into S3 encryption operations.",
+    "staticencryptionmaterialsprovider": "Amazon S3 static encryption materials provider used for fixed client-side encryption key material.",
+    "com.amazonaws.services.s3.model.ssecustomerkey": "Amazon S3 SSE-C key wrapper used when applications provide their own encryption key material for server-side encryption.",
+    "ssecustomerkey": "Amazon S3 server-side encryption with customer-provided key wrapper.",
+    "listpublickeysrequest": "AWS CloudTrail public-key lookup request used to fetch keys that verify signed log digest files.",
+    "publickey": "Public-key type used for signature verification or asymmetric cryptographic workflows.",
+    "x509encodedkeyspec": "Java key-spec type used to reconstruct or serialize X.509-encoded public keys for verification or key distribution.",
+    "awssecretsmanager": "AWS Secrets Manager client interface used to retrieve secret values that may include certificates, private keys, or other cryptographic material.",
+    "awssecretsmanagerclientbuilder": "AWS Secrets Manager client builder used to configure access to stored secrets, including certificate or key material.",
+    "getsecretvaluerequest": "AWS Secrets Manager request used to retrieve a stored secret value that may contain certificate, key, or trust material.",
+    "software.amazon.awssdk.services.secretsmanager.secretsmanagerclient": "AWS SDK v2 Secrets Manager client used to retrieve or manage stored secrets, certificates, or key material.",
+    "awscertificatemanager": "AWS Certificate Manager client used to request, describe, export, or manage certificate resources.",
+    "awscertificatemanagerclientbuilder": "AWS Certificate Manager client builder used to create clients for certificate lifecycle operations.",
+    "describecertificaterequest": "AWS Certificate Manager request used to inspect certificate metadata, status, and lifecycle details.",
+    "exportcertificaterequest": "AWS Certificate Manager export request used to retrieve certificate and private-key material for eligible certificates.",
+    "awspca": "AWS Private CA client used to issue or retrieve private certificates from ACM PCA.",
+    "awspcaclientbuilder": "AWS Private CA client builder used to configure access to ACM PCA certificate authority operations.",
+    "issuecertificaterequest": "AWS Private CA request used to issue a certificate from a private certificate authority.",
+    "getcertificaterequest": "AWS Private CA request used to retrieve issued certificate material from a private certificate authority.",
+    "listcertificateauthoritiesrequest": "AWS Private CA request used to enumerate certificate authorities and their lifecycle states.",
+    "certificateauthorityarn": "AWS Private CA resource identifier that ties certificate issuance or retrieval to a specific private certificate authority.",
+    "com.amazonaws.encryptionsdk.awscrypto": "AWS Encryption SDK entry point used to encrypt and decrypt data with keyrings or KMS-backed master key providers.",
+    "com.amazonaws.encryptionsdk.kms.kmsmasterkeyprovider": "AWS Encryption SDK KMS master key provider used to wrap and unwrap data keys through AWS KMS.",
+    "software.amazon.cryptography.materialproviders.materialproviders": "AWS Encryption SDK material providers factory used to build KMS keyrings and cryptographic materials managers.",
+    "software.amazon.cryptography.materialproviders.ikeyring": "AWS Encryption SDK keyring interface used to manage wrapping keys and data-key operations.",
+    "software.amazon.cryptography.materialproviders.model.createawskmsmultikeyringinput": "AWS Encryption SDK input type used to create a multi-key KMS keyring for envelope encryption workflows.",
+    "software.amazon.cryptography.materialproviders.model.createawskmskeyringinput": "AWS Encryption SDK input type used to create a KMS keyring for envelope encryption workflows.",
+    "software.amazon.awssdk.services.kms.kmsclient": "AWS SDK v2 KMS client used for managed key operations including encryption, decryption, signing, and key management.",
+    "secretbinary": "Secrets Manager binary secret payload that may contain certificate, keystore, or private-key material.",
+    "secretstring": "Secrets Manager string secret payload that may contain PEM, certificate, or private-key material.",
+    "com.oracle.bmc.keymanagement.kmsmanagementclient": "Oracle OCI Key Management management client used to create, inspect, rotate, or administer managed cryptographic keys.",
+    "com.oracle.bmc.keymanagement.kmscryptoclient": "Oracle OCI Key Management crypto client used to encrypt, decrypt, sign, or verify through OCI-managed keys.",
+    "com.oracle.bmc.keymanagement.model.keyshape": "Oracle OCI Key Management key-shape model used to define key algorithm and key-size properties.",
+    "com.oracle.bmc.keymanagement.requests.encryptrequest": "Oracle OCI Key Management request used to encrypt data through a managed key in OCI Vault or KMS.",
+    "com.oracle.bmc.keymanagement.requests.decryptrequest": "Oracle OCI Key Management request used to decrypt data through a managed key in OCI Vault or KMS.",
+    "com.oracle.bmc.vault.vaultsclient": "Oracle OCI Vaults client used by the Secret Management API to create, retrieve, and manage secrets and secret versions.",
+    "oracle.security.pki.oraclewallet": "Oracle Wallet API used to open Oracle wallets and access certificate, trust, or secret-store material.",
+    "oracle.security.pki.oraclesecretstore": "Oracle secret-store API used to retrieve secrets from Oracle wallets or PKI stores.",
+    "oraclepki": "Oracle PKI library used for wallet, certificate, and secret-store access in Oracle-integrated applications.",
+    "osdt_core": "Oracle Security Developer Tools core library commonly used with Oracle PKI and wallet-based certificate handling.",
+    "osdt_cert": "Oracle Security Developer Tools certificate library used for Oracle PKI, wallet, and certificate operations.",
+    "thales.orace-gg.plugin": "Thales Oracle GoldenGate plugin reference associated with externalized key-provider logic for Oracle GoldenGate deployments.",
+    "thalesoracleggkeyproviderplugin": "Thales Oracle GoldenGate key-provider plugin used to resolve keys for GoldenGate encryption workflows through CADP or REST-based providers.",
+    "com.oracle.bmc.certificatesmanagement.certificatesmanagementclient": "Oracle OCI Certificates management client used to create and manage certificate authorities, certificates, and related PKI resources.",
+    "com.oracle.bmc.certificatesmanagement.requests.createcertificaterequest": "Oracle OCI Certificates request used to create a certificate through the Certificates service.",
+    "com.oracle.bmc.certificatesmanagement.requests.createcertificateauthorityrequest": "Oracle OCI Certificates request used to create a certificate authority backed by OCI key management resources.",
+    "com.oracle.bmc.certificatesmanagement.requests.getcertificateauthorityrequest": "Oracle OCI Certificates request used to retrieve certificate authority metadata and lifecycle state.",
+    "com.oracle.bmc.certificatesmanagement.model.createcertificatedetails": "Oracle OCI Certificates model used to define certificate issuance details and CA relationships.",
+    "com.oracle.bmc.certificatesmanagement.model.createcertificateauthoritydetails": "Oracle OCI Certificates model used to define certificate authority creation details, including KMS-backed key associations.",
+    "com.oracle.bmc.vault.requests.createsecretrequest": "Oracle OCI Vault request used to create a managed secret in the Secret Management API.",
+    "com.oracle.bmc.vault.requests.getsecretrequest": "Oracle OCI Vault request used to retrieve metadata about a managed secret.",
+    "com.oracle.bmc.vault.model.createsecretdetails": "Oracle OCI Vault secret-creation model used to define content, compartment, and vault association for a secret.",
+    "com.oracle.bmc.vault.model.secret": "Oracle OCI Vault secret metadata model representing a managed secret resource.",
+    "com.oracle.bmc.certificates.certificatesclient": "Oracle OCI Certificates client used to retrieve certificate bundles, CA bundles, and certificate authority bundles.",
+    "com.oracle.bmc.certificates.requests.getcabundlerequest": "Oracle OCI Certificates request used to retrieve a CA bundle.",
+    "com.oracle.bmc.certificates.requests.getcertificateauthoritybundlerequest": "Oracle OCI Certificates request used to retrieve a certificate authority bundle.",
+    "com.thales.cm.rest.cmhelper": "Java package for a customer-facing Thales CipherTrust REST helper that wraps encryption, signing, MAC, and token calls behind simpler application APIs.",
+    "ciphertrustmanagerhelper": "Customer-style Thales CipherTrust REST wrapper class that centralizes key selection, token handling, and crypto API calls behind helper methods.",
+    "cmrestprotect": "Wrapper method that hides Thales CipherTrust encrypt or decrypt REST calls behind a single application-facing API.",
+    "cmrestsign": "Wrapper method that hides Thales CipherTrust sign or verify REST calls behind a simplified application-facing API.",
+    "cmrestmac": "Wrapper method that hides Thales CipherTrust MAC or MAC-verify REST calls behind a simplified application-facing API.",
+    "/api/v1/crypto/encrypt": "Thales CipherTrust REST encryption endpoint used to encrypt data through a managed key service.",
+    "/api/v1/crypto/decrypt": "Thales CipherTrust REST decryption endpoint used to decrypt data through a managed key service.",
+    "/api/v1/crypto/sign": "Thales CipherTrust REST signing endpoint used to produce signatures with a managed asymmetric key.",
+    "/api/v1/crypto/signv": "Thales CipherTrust REST signature-verification endpoint used to verify signatures through the CipherTrust service.",
+    "/api/v1/crypto/mac": "Thales CipherTrust REST MAC endpoint used to generate a managed message-authentication code.",
+    "/api/v1/crypto/macv": "Thales CipherTrust REST MAC-verification endpoint used to validate a managed message-authentication code.",
+    "/api/v1/vault/keys2/": "Thales CipherTrust REST key metadata endpoint used to inspect managed key properties such as key size and attributes.",
+    "com.centralmanagement.registerclientparameters": "Thales CADP registration helper used to register and configure a client with CipherTrust Manager or central management services.",
+    "com.centralmanagement.ciphertextdata": "Thales CADP ciphertext container used to hold protected data and related metadata for protect, reveal, or reprotect operations.",
+    "com.centralmanagement.policy.cryptomanager": "Thales CADP CryptoManager API used to protect, reveal, and reprotect application data under managed protection policies.",
+    "thalescadpprotectrevealhelper": "Sample helper class that wraps Thales CADP protect, reveal, and reprotect operations behind simpler application-facing methods.",
+    "thalesprotectrevealhelper": "Base helper class that defines shared protect and reveal behavior for Thales CADP and CRDP-style wrappers.",
+    "thalesrestprotectrevealhelper": "Sample helper class that wraps Thales CRDP REST protect and reveal operations behind simpler application-facing methods.",
+    "/v1/protect": "Thales CRDP endpoint used to protect plaintext through the vendor REST data-protection service.",
+    "/v1/reveal": "Thales CRDP endpoint used to reveal previously protected data through the vendor REST data-protection service.",
+    "thalesgcpprotectserveropenai": "Example Spark Java gateway that exposes application-facing routes while delegating data protection or reveal behavior to a Thales CRDP-backed backend flow.",
+    "thalesprotectgatewayservice": "Example service-layer abstraction that centralizes protect and reveal calls behind business-friendly web-service routes rather than exposing low-level CRDP operations directly.",
+    "authenticateRequest": "Gateway authentication helper that protects CRDP-backed endpoints using API key, JWT, or similar request validation before allowing protect or reveal flows.",
+    "protectinputandcallllm": "Application-facing endpoint that protects input before forwarding it into an LLM or downstream service call.",
+    "protectinput": "Application-facing endpoint that accepts caller data and routes it into a backend CRDP protect flow.",
+    "revealinput": "Application-facing endpoint that accepts protected data and routes it into a backend CRDP reveal flow.",
+    "/protectinputandcallllm": "Abstract web-service endpoint that suggests CRDP-backed protection is applied before an LLM or downstream processing step.",
+    "/protectinput": "Abstract web-service endpoint that suggests caller data is being routed into a CRDP-backed protect operation.",
+    "/revealinput": "Abstract web-service endpoint that suggests protected data is being routed into a CRDP-backed reveal operation.",
+    "cadp.netcore.crypto": ".NET CADP cryptography namespace used to encrypt, decrypt, sign, verify, or otherwise execute CipherTrust-managed crypto operations from application code.",
+    "cadp.netcore.keymanagement": ".NET CADP key-management namespace used to discover, generate, retrieve, or delete CipherTrust-managed keys.",
+    "cadp.netcore.sessions": ".NET CADP session namespace used to open authenticated sessions to CipherTrust or NAE services before protected key use.",
+    "naesession": "Thales CADP .NET session object used to authenticate and establish a managed crypto session with CipherTrust or NAE services.",
+    "naekeymanagement": "Thales CADP .NET key-management helper used to retrieve, create, rotate, or delete managed keys.",
+    "naersakey": "Thales CADP .NET RSA key type indicating that encryption, decryption, or signing is routed through a managed external key service.",
+    "cadp.netcore_properties.xml": ".NET CADP properties file used to configure connection details and client behavior for CipherTrust CADP sessions.",
+    "cadp_capi.h": "Thales CADP for C CAPI header used by native code to initialize sessions, build cipher specifications, and execute managed crypto operations against CipherTrust or NAE services.",
+    "cadp_capi.properties": "Thales CADP for C properties file used to configure native C CAPI client connectivity and session behavior for CipherTrust services.",
+    "cadp_pkcs11.properties": "Thales CADP PKCS#11 properties file used to configure the CipherTrust PKCS#11 provider or client module for managed signing, encryption, and key access operations.",
+    "kmipsession": "KMIP session object used to establish an authenticated session for key-management or cryptographic operations through a KMIP service endpoint.",
+    "kmipcipher": "KMIP cipher helper used to encrypt or decrypt through KMIP-managed keys rather than only local application key material.",
+    "kmipgcmkeyinformation": "KMIP key-information object used to describe a KMIP-managed key and the attributes used for GCM-style encryption operations.",
+    "kmipgcmspec": "KMIP GCM specification object used to configure IVs, authentication-tag handling, or AES-GCM operations through a KMIP service.",
+    "kmipivspec": "KMIP IV specification used to supply initialization-vector material for KMIP-backed crypto operations.",
+    "kmipcryptoresult": "KMIP crypto-result object used to receive ciphertext, plaintext, tags, or status from KMIP-backed crypto operations.",
+    "kmipkey": "KMIP key wrapper representing a key resolved or managed through the KMIP service.",
+    "kmipdata": "KMIP payload wrapper used to pass data into KMIP-managed encryption or decryption calls.",
+    "kmipresponse": "KMIP response wrapper carrying results or status from a KMIP key-management or crypto request.",
+    "naeclientcertificate": "Thales client-certificate helper used to authenticate a KMIP-capable client toward CipherTrust-managed services.",
+    "kmip.h": "KMIP C header used by native code to build requests and execute key-management or cryptographic operations against a KMIP service endpoint.",
+    "libkmip": "KMIP client library reference used by native code to connect to a remote KMIP-compatible key-management service.",
+    "kmipclient": "KMIP client helper or namespace indicating application dependency on a KMIP service for key lookup or crypto operations.",
+    "/vts/rest/v2.0/tokenize": "Thales CT-VL tokenize endpoint used to transform plaintext into a vaultless token using a configured token group and token template.",
+    "/vts/rest/v2.0/detokenize": "Thales CT-VL detokenize endpoint used to convert a vaultless token back into plaintext using the configured token group and template.",
+    "tokengroup": "CT-VL request field used to select the tokenization group or policy that governs how data is tokenized or detokenized.",
+    "tokentemplate": "CT-VL request field used to select the token template that controls token format and behavior.",
+    "ff1_tok_group": "Example CT-VL token group name from the Thales sample API showing vaultless tokenization policy selection.",
+    "ff1_tok_template": "Example CT-VL token template name from the Thales sample API showing token format selection.",
+    "vts_ip_address": "Legacy/sample placeholder for the Thales tokenization service endpoint host used by VTS or CT-VL integrations.",
+    "vaultless tokenization": "Thales CT-VL product capability where applications call a tokenization service to protect or restore sensitive values without storing mappings in application code.",
+    "ct-vl": "Short-form product marker for Thales CipherTrust Vaultless Tokenization integrations.",
+    "cadp/cadp.h": "Thales CADP PKCS#11-oriented native header reference indicating application linkage to CipherTrust-managed cryptographic services from native C code.",
+    "sun.security.pkcs11.sunpkcs11": "Java SunPKCS11 provider class commonly used to load a PKCS#11 module, here relevant when paired with Thales CADP PKCS#11 provider configuration.",
+    "sun.security.pkcs11.wrapper.ck_mechanism": "Java PKCS#11 mechanism wrapper used to configure low-level PKCS#11 sign, verify, encrypt, or decrypt operations.",
+    "ckm_rsa_pkcs": "PKCS#11 RSA mechanism constant used to request RSA signing or encryption operations through a PKCS#11 provider.",
+    "c_signinit": "PKCS#11 initialization call that prepares a signing operation against a key held by an external provider or HSM service.",
+    "c_sign": "PKCS#11 sign call that executes a managed signing operation through an external provider or HSM service.",
+    "thalescadppkcs11signer": "Sample Java class representing application code that binds SunPKCS11 to Thales CADP PKCS#11 configuration for managed key operations.",
+    "/v1/protectbulk": "Thales CRDP bulk-protect endpoint used to protect multiple values through the vendor REST data-protection service.",
+    "/v1/revealbulk": "Thales CRDP bulk-reveal endpoint used to reveal multiple protected values through the vendor REST data-protection service.",
+    "/v2/protect": "Thales CRDP v2 endpoint used to protect plaintext through the vendor REST data-protection service.",
+    "/v2/reveal": "Thales CRDP v2 endpoint used to reveal previously protected data through the vendor REST data-protection service.",
+    "/v2/protectbulk": "Thales CRDP v2 bulk-protect endpoint used to protect multiple values through the vendor REST data-protection service.",
+    "/v2/revealbulk": "Thales CRDP v2 bulk-reveal endpoint used to reveal multiple protected values through the vendor REST data-protection service.",
+    "crdprestclient": "Sample-style direct CRDP REST client class indicating application code is calling vendor CRDP endpoints without a customer abstraction layer.",
+    "crdprequestbuilder": "Helper used to build direct CRDP protect or reveal requests against vendor endpoints.",
+    "protectrequest": "Direct CRDP request model used when calling vendor protect endpoints.",
+    "revealrequest": "Direct CRDP request model used when calling vendor reveal endpoints.",
+    "github.com/hashicorp/vault/api": "HashiCorp Vault Go API client used to authenticate, call transit encryption or signing endpoints, and access managed secrets or key material.",
+    "node-vault": "HashiCorp Vault Node.js client used to call transit, KV, auth, or secret-management endpoints from application code.",
+    "hvac": "Python HashiCorp Vault client used to authenticate and call transit, KV, or other Vault-managed security services.",
+    "vault.logical": "HashiCorp Vault logical API surface used to read, write, or invoke named backend paths such as transit or KV operations.",
+    "vault.transit": "HashiCorp Vault transit engine reference used for managed encrypt, decrypt, sign, or verify operations without exporting raw key material.",
+    "io.akeyless.client.apiclient": "Akeyless Java API client used to authenticate and call managed secret, certificate, signing, or key-management operations.",
+    "io.akeyless.client.configuration": "Akeyless Java configuration helper used to point the SDK at the Akeyless gateway or SaaS API endpoint.",
+    "io.akeyless.client.api.v2api": "Akeyless Java V2 API surface used to create dynamic secrets, provision certificates, rotate keys, or request cryptographic operations.",
+    "github.com/akeylesslabs/akeyless-go": "Akeyless Go SDK used to authenticate and call managed secret, certificate, signing, or key-management APIs.",
+    "akeyless-python": "Akeyless Python SDK marker used to integrate application code with managed secret, certificate, or key-management services.",
+    "akeyless-javascript": "Akeyless JavaScript SDK marker used to integrate Node.js or browser-adjacent services with managed secret or cryptographic APIs.",
+    "akeyless-csharp-netcore": "Akeyless .NET SDK marker used to call managed secret, certificate, signing, or key-management APIs from .NET applications.",
+    "api.akeyless.io": "Akeyless API endpoint reference indicating managed secret, certificate, signing, or key operations are delegated to the Akeyless service.",
+    "vault\\transit\\client": "PHP-style HashiCorp Vault transit client reference used to call managed encryption, decryption, signing, or verification endpoints.",
+    "vault\\client": "PHP-style HashiCorp Vault client reference used to authenticate and invoke managed Vault backends such as transit or KV.",
+    "com.bettercloud.vault.vault": "JVM Vault client reference commonly used to authenticate and call transit, secret, or AppRole endpoints from Scala or Java services.",
+    "akeyless\\api\\client": "PHP-style Akeyless client reference used to authenticate and call managed secret, signing, certificate, or key operations.",
+    "ciphertrust\\protect\\client": "PHP-style Thales CipherTrust protection client reference used to call managed encrypt, decrypt, sign, or key-inspection REST APIs.",
+    "ciphertrust\\manager\\client": "PHP-style Thales CipherTrust manager client reference used to call centralized key and crypto management APIs.",
+    "hashicorpvaulttransitbridge": "Application-owned PHP service class that wraps HashiCorp Vault transit calls behind simpler signing or encryption helper methods.",
+    "akeylessphpsigninggateway": "Application-owned PHP service class that routes signing, key rotation, or dynamic secret calls through Akeyless-managed APIs.",
+    "thalescadpscalasigningservice": "Application-owned Scala service class that routes signing or key access through Thales CADP or CipherTrust-managed APIs.",
+    "ciphertrustprotectclient": "Application-owned PHP service class that wraps Thales CipherTrust REST protect, sign, or key-inspection calls.",
+    "vault::client": "Ruby-style HashiCorp Vault client reference used to authenticate and invoke managed transit or secret endpoints.",
+    "vault::logical": "Ruby-style HashiCorp Vault logical API reference used to call named backend paths such as transit encryption or signing.",
+    "vaultrs": "Rust HashiCorp Vault client crate used to call transit, KV, or authentication endpoints from Rust services.",
+    "akeylessopenapiclient": "Ruby/Rust-style Akeyless client helper used to call managed secret, certificate, signing, or key APIs.",
+    "hashicorpvaulttransitrubyservice": "Application-owned Ruby service class that wraps HashiCorp Vault transit operations behind simpler helper methods.",
+    "hashicorpvaulttransitrustservice": "Application-owned Rust service type that wraps HashiCorp Vault transit operations behind simpler helper methods.",
+    "akeylessrubygateway": "Application-owned Ruby service class that routes signing, key rotation, or dynamic secret calls through Akeyless-managed APIs.",
+    "akeylessrustgateway": "Application-owned Rust service type that routes signing, key rotation, or dynamic secret calls through Akeyless-managed APIs.",
+    "ciphertrustrubygateway": "Application-owned Ruby service class that wraps Thales CipherTrust REST protect, sign, or key-inspection calls."
+  },
+  "partial_meanings": [
+    {
+      "match": "x509",
+      "meaning": "Certificate-related API or library for working with X.509 certificates or trust chains."
+    },
+    {
+      "match": "rsa",
+      "meaning": "RSA-related API or key type that may indicate quantum-vulnerable asymmetric cryptography."
+    },
+    {
+      "match": "privatekey",
+      "meaning": "Private-key API used for signing or asymmetric key handling."
+    },
+    {
+      "match": "tls",
+      "meaning": "TLS-related API or library used for secure transport or mTLS configuration."
+    },
+    {
+      "match": "keystore",
+      "meaning": "Keystore-related API for loading or managing certificate and private-key material."
+    },
+    {
+      "match": "jwt",
+      "meaning": "JWT-related library or API used for token issuing, validation, or signing."
+    },
+    {
+      "match": "kms",
+      "meaning": "Key-management service client or dependency used for managed key operations."
+    },
+    {
+      "match": "ssh",
+      "meaning": "SSH-related library used for remote access, protocol handling, or SSH key operations."
+    },
+    {
+      "match": "pkcs",
+      "meaning": "PKCS or CMS-related API often associated with certificate-based signing or message protection."
+    },
+    {
+      "match": "cryptography",
+      "meaning": "Cryptography library that may support keys, certificates, or encryption primitives."
+    },
+    {
+      "match": "signature",
+      "meaning": "Signature-related API used to select, produce, or validate digital signatures."
+    },
+    {
+      "match": "keyvault",
+      "meaning": "Managed key-vault client used to access or operate on cryptographic keys."
+    },
+    {
+      "match": "ciphertrust",
+      "meaning": "Thales CipherTrust-related SDK, API, or component associated with managed cryptographic services and keys."
+    },
+    {
+      "match": "cadp",
+      "meaning": "Thales CADP-related SDK, package, or API used for application-level crypto, key access, or provider integration."
+    },
+    {
+      "match": "ingrian",
+      "meaning": "Legacy Thales/Gemalto Ingrian namespace commonly used by CADP Java APIs and provider-backed key operations."
+    },
+    {
+      "match": "keysecure",
+      "meaning": "Thales/Gemalto KeySecure-related API or component tied to managed cryptographic services."
+    },
+    {
+      "match": "pkcs11",
+      "meaning": "PKCS#11 interface used to access HSM, external key managers, or provider-backed cryptographic operations from native or managed code."
+    },
+    {
+      "match": "cloudhsm",
+      "meaning": "AWS CloudHSM-related SDK, library, or provider reference tied to dedicated HSM-backed cryptographic operations."
+    },
+    {
+      "match": "managedhsm",
+      "meaning": "Azure Managed HSM-related endpoint, SDK, or configuration reference used for dedicated HSM-backed key management."
+    },
+    {
+      "match": "cavium",
+      "meaning": "CloudHSM/Cavium-related provider or library reference commonly associated with HSM-backed PKCS#11 operations."
+    },
+    {
+      "match": "vormetric",
+      "meaning": "Legacy Vormetric-related SDK, namespace, or library tied to managed cryptographic services and PKCS#11-style key operations."
+    },
+    {
+      "match": "vpkcs11",
+      "meaning": "Vormetric PKCS#11-related client, namespace, or sample reference associated with externally managed key operations."
+    },
+    {
+      "match": "vorpkcs11",
+      "meaning": "Vormetric PKCS#11 client library reference used to connect code to a managed encryption or key service."
+    },
+    {
+      "match": "voltage",
+      "meaning": "Voltage-related SDK, platform, or integration reference tied to managed data protection or format-preserving protection services."
+    },
+    {
+      "match": "securedata",
+      "meaning": "SecureData-related API, configuration, or format marker used for managed masking, de-identification, or reveal operations."
+    },
+    {
+      "match": "simpleapi",
+      "meaning": "SimpleAPI-related reference indicating integration with the SecureData masking or identification service layer."
+    },
+    {
+      "match": "datamasking",
+      "meaning": "Data masking helper or API used to protect or reveal sensitive values through a managed service."
+    },
+    {
+      "match": "protegrity",
+      "meaning": "Protegrity-related SDK, API, or policy reference tied to tokenization, masking, encryption, or managed data protection."
+    },
+    {
+      "match": "protector",
+      "meaning": "Application-side protection object or API used to protect, unprotect, or reprotect sensitive values."
+    },
+    {
+      "match": "reprotect",
+      "meaning": "Managed data protection workflow that re-protects already protected values under a different policy or format."
+    },
+    {
+      "match": "lunaprovider",
+      "meaning": "Thales Luna HSM provider reference associated with HSM-backed keystore, TLS, certificate, or signing operations."
+    },
+    {
+      "match": "lunaslotmanager",
+      "meaning": "Thales Luna HSM slot-management reference associated with partition login, token selection, and HSM session control."
+    },
+    {
+      "match": "safenetinc.luna",
+      "meaning": "Legacy SafeNet / Thales Luna HSM namespace tied to HSM-backed provider, keystore, and slot-management operations."
+    },
+    {
+      "match": "com.microsoft.azure.keyvault",
+      "meaning": "Legacy Azure Key Vault Java namespace used for key encryption, decryption, or authentication against Azure Key Vault."
+    },
+    {
+      "match": "keyvaultclient",
+      "meaning": "Azure Key Vault client reference associated with managed key operations in Azure Key Vault."
+    },
+    {
+      "match": "google.cloud.kms",
+      "meaning": "Google Cloud KMS-related namespace used for managed key operations and cryptographic service integration."
+    },
+    {
+      "match": "protectionlevel",
+      "meaning": "Key protection-level setting that may indicate a distinction between software-backed keys and HSM-backed keys."
+    },
+    {
+      "match": "amazons3encryption",
+      "meaning": "Amazon S3 encryption client or builder used for client-side or envelope encryption workflows."
+    },
+    {
+      "match": "kmsencryptionmaterialsprovider",
+      "meaning": "AWS KMS-backed S3 encryption materials provider used for envelope encryption and managed key wrapping."
+    },
+    {
+      "match": "ssecustomerkey",
+      "meaning": "Amazon S3 server-side encryption with customer-provided key material."
+    },
+    {
+      "match": "cloudtrail",
+      "meaning": "AWS CloudTrail-related API or artifact that may involve signed digest verification, certificate trust, or log-integrity validation."
+    },
+    {
+      "match": "secretsmanager",
+      "meaning": "AWS Secrets Manager-related client or request that may handle certificate, key, or trust material stored outside source code."
+    },
+    {
+      "match": "awscertificatemanager",
+      "meaning": "AWS Certificate Manager-related client or request associated with certificate issuance, inspection, export, or lifecycle management."
+    },
+    {
+      "match": "acm-pca",
+      "meaning": "AWS Private CA-related reference associated with private certificate authority operations and certificate lifecycle management."
+    },
+    {
+      "match": "awspca",
+      "meaning": "AWS Private CA-related client or request associated with certificate issuance and private PKI operations."
+    },
+    {
+      "match": "encryptionsdk",
+      "meaning": "AWS Encryption SDK-related API used for envelope encryption and managed key wrapping."
+    },
+    {
+      "match": "keyring",
+      "meaning": "Keyring-related API used to manage wrapping keys or route envelope encryption operations through managed providers."
+    },
+    {
+      "match": "oraclewallet",
+      "meaning": "Oracle wallet-related API used to load certificate, trust, or secret-store material from Oracle wallet files."
+    },
+    {
+      "match": "oraclesecretstore",
+      "meaning": "Oracle secret-store API used to retrieve credentials or keying material from Oracle wallet-backed storage."
+    },
+    {
+      "match": "oraclepki",
+      "meaning": "Oracle PKI-related library used for wallet, certificate, and trust material handling."
+    },
+    {
+      "match": "goldengate",
+      "meaning": "Oracle GoldenGate-related component that may own or consume encryption key-provider workflows for replication."
+    },
+    {
+      "match": "com.oracle.bmc.keymanagement",
+      "meaning": "Oracle OCI Key Management-related namespace used for managed key operations in OCI Vault or KMS."
+    },
+    {
+      "match": "vaultsclient",
+      "meaning": "Oracle OCI Vault client used to access managed vaults that back key lifecycle or cryptographic operations."
+    },
+    {
+      "match": "certificatesmanagement",
+      "meaning": "Oracle OCI Certificates-related client or request used for certificate authority, certificate, and PKI lifecycle management."
+    },
+    {
+      "match": "createcertificateauthorityrequest",
+      "meaning": "Certificate-authority management request that may indicate private PKI or CA lifecycle ownership."
+    },
+    {
+      "match": "createsecretrequest",
+      "meaning": "Managed secret creation request associated with vault-backed secret or keying material lifecycle."
+    },
+    {
+      "match": "getcabundlerequest",
+      "meaning": "Certificate bundle retrieval request that may indicate trust-chain or CA bundle dependencies."
+    },
+    {
+      "match": "getcertificateauthoritybundlerequest",
+      "meaning": "Certificate authority bundle retrieval request used for CA trust and certificate distribution workflows."
+    },
+    {
+      "match": "cmrestprotect",
+      "meaning": "Customer-defined wrapper method for managed encryption or decryption operations."
+    },
+    {
+      "match": "cmrestsign",
+      "meaning": "Customer-defined wrapper method for managed signing or signature verification operations."
+    },
+    {
+      "match": "cmrestmac",
+      "meaning": "Customer-defined wrapper method for managed MAC generation or MAC verification operations."
+    },
+    {
+      "match": "com.centralmanagement",
+      "meaning": "Thales CADP centralized-management namespace used for client registration, managed crypto providers, and policy-driven data protection."
+    },
+    {
+      "match": "ThalesGCPProtectServerOpenAI",
+      "meaning": "Spark-style Java service exposing abstract web endpoints that still imply Thales CRDP-backed protection or reveal behavior behind the API boundary."
+    },
+    {
+      "match": "ciphertrustmanagerhelper",
+      "meaning": "Customer-defined helper layer that wraps Thales CipherTrust cryptographic APIs behind simpler application calls."
+    },
+    {
+      "match": "cadp.netcore",
+      "meaning": "Thales CADP .NET namespace tied to CipherTrust-managed crypto, session, and key-management operations."
+    },
+    {
+      "match": "cadp_capi",
+      "meaning": "Thales CADP for C CAPI reference tied to native session, cipher-spec, and managed crypto operations against CipherTrust services."
+    },
+    {
+      "match": "i_c_",
+      "meaning": "Thales CADP for C API function prefix used for native session handling, cipher creation, protect/reveal, and managed cryptographic operations."
+    },
+    {
+      "match": "naesession",
+      "meaning": "Thales CADP session reference associated with authenticated access to externally managed cryptographic services."
+    },
+    {
+      "match": "naekeymanagement",
+      "meaning": "Thales CADP key-management reference associated with managed key retrieval, generation, or lifecycle control."
+    },
+    {
+      "match": "naersakey",
+      "meaning": "Thales CADP RSA key reference indicating externalized RSA key operations through a managed Thales service."
+    },
+    {
+      "match": "kmip",
+      "meaning": "KMIP-related API, namespace, or client code used to talk to an external key-management service rather than relying only on local key material."
+    },
+    {
+      "match": "kmipsession",
+      "meaning": "KMIP session helper associated with authenticated calls to an external key-management service."
+    },
+    {
+      "match": "kmipcipher",
+      "meaning": "KMIP cipher helper associated with encryption or decryption routed through a managed key service."
+    },
+    {
+      "match": "naeclientcertificate",
+      "meaning": "Client-certificate helper associated with authenticating a CADP or KMIP client toward CipherTrust services."
+    },
+    {
+      "match": "tokengroup",
+      "meaning": "CT-VL tokenization field that usually indicates application dependency on a tokenization policy or token group."
+    },
+    {
+      "match": "tokentemplate",
+      "meaning": "CT-VL tokenization field that usually indicates application dependency on a token format or template definition."
+    },
+    {
+      "match": "vts/rest/v2.0",
+      "meaning": "Thales CT-VL or legacy VTS REST path indicating application calls to a vaultless tokenization service."
+    },
+    {
+      "match": "ct-vl",
+      "meaning": "Thales CipherTrust Vaultless Tokenization product marker."
+    },
+    {
+      "match": "vaultless tokenization",
+      "meaning": "Managed tokenization service reference indicating application data protection is being delegated to a tokenization platform."
+    },
+    {
+      "match": "cadp_pkcs11",
+      "meaning": "Thales CADP PKCS#11 configuration or provider reference tied to CipherTrust-managed PKCS#11 operations."
+    },
+    {
+      "match": "cadppkcs11",
+      "meaning": "Thales CADP PKCS#11 marker associated with Java or native code that routes crypto through the CADP PKCS#11 provider."
+    },
+    {
+      "match": "sunpkcs11",
+      "meaning": "Java PKCS#11 provider loader that may indicate external provider-backed signing or encryption when paired with vendor-specific module configuration."
+    },
+    {
+      "match": "ckm_rsa_pkcs",
+      "meaning": "PKCS#11 mechanism constant that usually indicates provider-backed RSA operations."
+    },
+    {
+      "match": "c_signinit",
+      "meaning": "PKCS#11 signing lifecycle call indicating managed or externally provided private-key operations."
+    },
+    {
+      "match": "crdp",
+      "meaning": "Thales CRDP-related API, route, or helper indicating direct use of the vendor REST data-protection service."
+    },
+    {
+      "match": "protectbulk",
+      "meaning": "Bulk data-protection route or method that usually indicates batched protect operations against a managed service."
+    },
+    {
+      "match": "revealbulk",
+      "meaning": "Bulk data-reveal route or method that usually indicates batched reveal operations against a managed service."
+    },
+    {
+      "match": "hashicorp/vault",
+      "meaning": "HashiCorp Vault-related SDK, API, or module used for managed secrets, transit encryption, signing, or authentication flows."
+    },
+    {
+      "match": "vault/api",
+      "meaning": "HashiCorp Vault API client reference used to call managed transit, secret, or authentication endpoints."
+    },
+    {
+      "match": "transit/encrypt",
+      "meaning": "HashiCorp Vault transit path used to encrypt data through a managed key without exposing raw key material to the application."
+    },
+    {
+      "match": "transit/decrypt",
+      "meaning": "HashiCorp Vault transit path used to decrypt data through a managed key service."
+    },
+    {
+      "match": "transit/sign",
+      "meaning": "HashiCorp Vault transit path used to sign payloads or digests through a managed key service."
+    },
+    {
+      "match": "transit/verify",
+      "meaning": "HashiCorp Vault transit path used to verify signatures through a managed key service."
+    },
+    {
+      "match": "auth/approle/login",
+      "meaning": "HashiCorp Vault AppRole authentication path used by applications or services to obtain a Vault token for managed crypto or secret operations."
+    },
+    {
+      "match": "akeyless",
+      "meaning": "Akeyless-related SDK, API, or service reference used for managed secret, certificate, signing, or key-management operations."
+    },
+    {
+      "match": "provision-certificate",
+      "meaning": "Akeyless or similar managed certificate-provisioning operation used to issue or retrieve certificate material through an external service."
+    },
+    {
+      "match": "verify-pkcs1",
+      "meaning": "Managed signature-verification operation indicating the application may rely on an external service for PKCS#1-style verification workflows."
+    },
+    {
+      "match": "upload-rsa",
+      "meaning": "Managed RSA key-upload operation indicating externally governed key onboarding or lifecycle management."
+    },
+    {
+      "match": "update-ssh-cert-issuer",
+      "meaning": "Managed SSH certificate issuer configuration operation tied to externalized SSH trust or certificate lifecycle management."
+    },
+    {
+      "match": "create-dynamic-secret",
+      "meaning": "Managed dynamic-secret creation operation indicating the application may request ephemeral or leased secret material from an external service."
+    },
+    {
+      "match": "rotate-key",
+      "meaning": "Managed key-rotation operation indicating lifecycle work is delegated to an external key or secret platform."
+    },
+    {
+      "match": "vault\\",
+      "meaning": "Vault-related namespace or client reference used to reach managed Vault transit, secret, or authentication endpoints."
+    },
+    {
+      "match": "com.bettercloud.vault",
+      "meaning": "JVM HashiCorp Vault client namespace used from Java or Scala services for managed crypto or secret operations."
+    },
+    {
+      "match": "akeyless\\",
+      "meaning": "Akeyless namespace or client reference used to call managed secret, certificate, signing, or key APIs from PHP services."
+    },
+    {
+      "match": "ciphertrust\\",
+      "meaning": "Thales CipherTrust namespace or client reference associated with externally managed protect, reveal, signing, or key-management services."
+    },
+    {
+      "match": "vault::",
+      "meaning": "Ruby-style Vault namespace used to reach managed transit, secret, or authentication endpoints."
+    },
+    {
+      "match": "vaultrs",
+      "meaning": "Rust Vault client crate or helper associated with managed transit, secret, or authentication endpoints."
+    },
+    {
+      "match": "akeyless_openapi",
+      "meaning": "Rust Akeyless client crate or helper used to call managed secret, certificate, signing, or key APIs."
+    }
+  ],
+  "category_why": {
+    "JWT_OR_TOKEN_SIGNING": "May indicate token-signing or token-validation logic that will need algorithm and key-strategy review for PQC migration.",
+    "CERTIFICATE_USAGE": "May indicate certificate lifecycle, trust-chain, keystore, or mTLS work that needs post-quantum planning.",
+    "TLS_CONFIGURATION": "May indicate TLS or mTLS configuration that could require coordinated protocol and certificate changes.",
+    "SSH_USAGE": "May indicate SSH protocol or SSH key-management usage that should be reviewed for post-quantum readiness.",
+    "KMS_OR_HSM_ASYMMETRIC": "May indicate managed key, KMS, or HSM usage that needs review for asymmetric key strategy and provider support.",
+    "CODE_SIGNING": "May indicate code-signing or signed-artifact workflows that could require certificate and signing-process updates.",
+    "ASYMMETRIC_ALGORITHM": "May indicate explicit asymmetric algorithm usage that should be reviewed for quantum-vulnerable key types or signing choices."
+  }
+}

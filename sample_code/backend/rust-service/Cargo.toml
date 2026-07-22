@@ -1,0 +1,12 @@
+[package]
+name = "pqc-rust-service"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+openssl = "0.10"
+jsonwebtoken = "9"
+ssh2 = "0.9"
+vaultrs = "0.7"
+akeyless_openapi = "0.1"
+

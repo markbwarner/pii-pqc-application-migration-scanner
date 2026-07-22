@@ -1,0 +1,230 @@
+{
+  "root_path": "E:\\codex\\work\\migration\\sample_code",
+  "scan_domains": [
+    "pii"
+  ],
+  "files_scanned": 156,
+  "files_with_findings": 50,
+  "executive_summary": {
+    "pii": {
+      "likely_change_owner_summary": {
+        "backend_logic_owner": 6,
+        "data_access_owner": 1,
+        "frontend_reference_only": 9,
+        "jdbc_candidate": 10,
+        "supporting_model": 24
+      },
+      "recommended_change_action_summary": {
+        "frontend_reference_only": 9,
+        "review_crdp_rest_change": 6,
+        "review_data_access_change": 1,
+        "review_jdbc_substitution": 10,
+        "supporting_model_only": 24
+      },
+      "role_in_flow_summary": {
+        "collects_and_sends": 9,
+        "persists_or_publishes": 10,
+        "protects_or_tokenizes": 1,
+        "receives_and_transforms": 6,
+        "supporting_model": 24
+      },
+      "complexity_distribution": {
+        "high": 23,
+        "low": 13,
+        "medium": 14
+      },
+      "tables_summary": {
+        "billing_account": {
+          "columns": [
+            "account_number",
+            "billing_address",
+            "card_number",
+            "cvv",
+            "routing_number"
+          ],
+          "files": [
+            "E:\\codex\\work\\migration\\sample_code\\backend\\jdbc-only\\src\\main\\java\\com\\example\\billing\\BillingRepository.java"
+          ],
+          "file_count": 1,
+          "match_count": 5
+        },
+        "claim_review": {
+          "columns": [
+            "home_address",
+            "household_id",
+            "member_email",
+            "salary_amount"
+          ],
+          "files": [
+            "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\ClaimReviewService.cs",
+            "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\claims-service.js"
+          ],
+          "file_count": 2,
+          "match_count": 8
+        },
+        "customer_audit": {
+          "columns": [
+            "date_of_birth",
+            "email",
+            "phone_number",
+            "ssn"
+          ],
+          "files": [
+            "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\customer-service.js"
+          ],
+          "file_count": 1,
+          "match_count": 4
+        },
+        "customer_event_audit": {
+          "columns": [
+            "email",
+            "home_address",
+            "phone_number",
+            "ssn"
+          ],
+          "files": [
+            "E:\\codex\\work\\migration\\sample_code\\backend\\java-kafka\\src\\main\\java\\com\\example\\events\\CustomerEventProcessor.java"
+          ],
+          "file_count": 1,
+          "match_count": 4
+        },
+        "customer_profile": {
+          "columns": [
+            "date_of_birth",
+            "email",
+            "first_name",
+            "last_name",
+            "phone_number"
+          ],
+          "files": [
+            "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\CustomerService.cs",
+            "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerService.java"
+          ],
+          "file_count": 2,
+          "match_count": 10
+        },
+        "household_member_profile": {
+          "columns": [
+            "account_number",
+            "home_address",
+            "household_id",
+            "primary_email",
+            "salary_amount"
+          ],
+          "files": [
+            "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdRepository.java"
+          ],
+          "file_count": 1,
+          "match_count": 5
+        }
+      }
+    }
+  },
+  "ai_summary": null,
+  "ai_recommendations": null,
+  "files_with_pii": 50,
+  "total_pii_matches": 586,
+  "jdbc_candidate_total": 73,
+  "code_change_candidate_total": 263,
+  "totals_by_category": {
+    "EMAIL_ADDRESS": 98,
+    "CUSTOM_HOUSEHOLD_ID": 70,
+    "CUSTOM_SALARY": 49,
+    "ADDRESS": 79,
+    "PERSON": 24,
+    "PHONE_NUMBER": 45,
+    "DATE_OF_BIRTH": 50,
+    "US_SSN": 37,
+    "BANK_ACCOUNT": 46,
+    "CUSTOM_ACCOUNT_NUMBER": 51,
+    "GOVERNMENT_ID": 7,
+    "CREDIT_CARD": 15,
+    "HEALTH": 9,
+    "TAX_ID": 6
+  },
+  "tables_summary": {
+    "billing_account": {
+      "columns": [
+        "account_number",
+        "billing_address",
+        "card_number",
+        "cvv",
+        "routing_number"
+      ],
+      "files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\jdbc-only\\src\\main\\java\\com\\example\\billing\\BillingRepository.java"
+      ],
+      "file_count": 1,
+      "match_count": 5
+    },
+    "claim_review": {
+      "columns": [
+        "home_address",
+        "household_id",
+        "member_email",
+        "salary_amount"
+      ],
+      "files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\ClaimReviewService.cs",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\claims-service.js"
+      ],
+      "file_count": 2,
+      "match_count": 8
+    },
+    "customer_audit": {
+      "columns": [
+        "date_of_birth",
+        "email",
+        "phone_number",
+        "ssn"
+      ],
+      "files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\customer-service.js"
+      ],
+      "file_count": 1,
+      "match_count": 4
+    },
+    "customer_event_audit": {
+      "columns": [
+        "email",
+        "home_address",
+        "phone_number",
+        "ssn"
+      ],
+      "files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\java-kafka\\src\\main\\java\\com\\example\\events\\CustomerEventProcessor.java"
+      ],
+      "file_count": 1,
+      "match_count": 4
+    },
+    "customer_profile": {
+      "columns": [
+        "date_of_birth",
+        "email",
+        "first_name",
+        "last_name",
+        "phone_number"
+      ],
+      "files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\CustomerService.cs",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerService.java"
+      ],
+      "file_count": 2,
+      "match_count": 10
+    },
+    "household_member_profile": {
+      "columns": [
+        "account_number",
+        "home_address",
+        "household_id",
+        "primary_email",
+        "salary_amount"
+      ],
+      "files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdRepository.java"
+      ],
+      "file_count": 1,
+      "match_count": 5
+    }
+  }
+}

@@ -1,0 +1,503 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How The PQC Scanner Works</title>
+  <style>
+    :root {
+      --bg: #f5f1e8;
+      --panel: #fffdf8;
+      --ink: #18263b;
+      --muted: #5f6570;
+      --line: #d8c9ad;
+      --accent: #174a63;
+      --accent-soft: #dcecf5;
+      --good: #d7f4df;
+      --good-ink: #1f5f36;
+      --warn: #fef0c7;
+      --warn-ink: #8a5a00;
+      --watch: #dde6f7;
+      --watch-ink: #29456f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #f8f4ec 0%, var(--bg) 100%);
+      color: var(--ink);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+    h1, h2, h3 { color: #0f2945; margin-top: 0; }
+    h1 { font-size: 34px; margin-bottom: 10px; }
+    h2 { font-size: 24px; margin-bottom: 14px; }
+    h3 { font-size: 18px; margin-bottom: 10px; }
+    p.lede {
+      font-size: 18px;
+      color: #30445e;
+      max-width: 1050px;
+      margin-bottom: 24px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 24px rgba(33, 45, 63, 0.05);
+    }
+    .callout {
+      border-left: 5px solid var(--accent);
+      background: #fbf7ef;
+      padding: 16px 18px;
+      border-radius: 12px;
+      margin: 18px 0;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: #fffaf2;
+    }
+    .mini-card h3 { font-size: 16px; margin-bottom: 8px; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+      align-items: stretch;
+    }
+    .flow-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fffaf3;
+      padding: 14px 14px 18px;
+      min-height: 188px;
+    }
+    .flow-card:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -13px;
+      width: 14px;
+      height: 2px;
+      background: #b49666;
+    }
+    .flow-card:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      top: calc(50% - 4px);
+      right: -14px;
+      border-left: 8px solid #b49666;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+    .step {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6f5627;
+      margin-bottom: 8px;
+    }
+    .flow-card h3 { font-size: 16px; }
+    .flow-card ul, .stack ul, .plain-list {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid #e7dcc7;
+      text-align: left;
+      padding: 11px 10px;
+      vertical-align: top;
+    }
+    th {
+      background: #efe4ce;
+      color: #17345a;
+      font-weight: 700;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      background: #f7efe1;
+      padding: 1px 5px;
+      border-radius: 5px;
+      word-break: break-word;
+    }
+    .status-row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .good { background: var(--good); color: var(--good-ink); }
+    .warn { background: var(--warn); color: var(--warn-ink); }
+    .watch { background: var(--watch); color: var(--watch-ink); }
+    .file-box {
+      border: 1px dashed #bca57d;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fffcf6;
+      margin-top: 12px;
+    }
+    .footer-note {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    @media (max-width: 1180px) {
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow-card:not(:last-child)::after,
+      .flow-card:not(:last-child)::before { display: none; }
+    }
+    @media (max-width: 860px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .status-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>How The PQC Scanner Works</h1>
+    <p class="lede">This document explains the <strong>PQC</strong> side of the migration scanner in plain English. It is meant to help architects, security teams, delivery leads, and developers explain the system quickly without having to read the Python code first.</p>
+
+    <section>
+      <h2>One-Sentence Explanation</h2>
+      <div class="callout">
+        The PQC scanner walks a source tree, classifies each file, looks for direct cryptographic clues in the file content, looks for crypto-related dependencies and SDK references, merges those signals into PQC findings, scores likely migration impact, and then produces reports, CBOM-style component inventory, and HTML summaries.
+      </div>
+    </section>
+
+    <section>
+      <h2>High-Level Flow</h2>
+      <div class="flow">
+        <div class="flow-card">
+          <span class="step">Step 1</span>
+          <h3>Choose Scan Domain</h3>
+          <ul>
+            <li><code>--scan pqc</code></li>
+            <li><code>--scan pii,pqc</code></li>
+            <li><code>pii</code> stays the default if no domain is specified</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 2</span>
+          <h3>Walk Files And Classify Context</h3>
+          <ul>
+            <li>Each file is labeled as backend, frontend, docs, test, infrastructure, data access, and related layers</li>
+            <li>This classification affects how findings are interpreted later</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 3</span>
+          <h3>Run Direct PQC Content Rules</h3>
+          <ul>
+            <li>Regex-style rules scan file contents for algorithms, TLS, JWT, certificates, SSH, KMS, HSM, and other crypto signals</li>
+            <li>These rules come primarily from <code>config/pqc-rules.json</code></li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 4</span>
+          <h3>Run Dependency Enrichment</h3>
+          <ul>
+            <li>The scanner extracts imports, package names, manifests, headers, namespaces, and selected route or wrapper markers</li>
+            <li>It maps those observations to crypto categories using <code>config/dependency-hints.json</code></li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 5</span>
+          <h3>Merge Findings</h3>
+          <ul>
+            <li>Direct content findings and dependency-derived findings are combined per file</li>
+            <li>Reference-only files are kept, but downgraded when appropriate</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 6</span>
+          <h3>Score Migration Impact</h3>
+          <ul>
+            <li>The scanner estimates complexity and recommended remediation lane</li>
+            <li>Examples: dependency-driven, protocol stack, PKI lifecycle, application signing, custom refactor</li>
+          </ul>
+        </div>
+        <div class="flow-card">
+          <span class="step">Step 7</span>
+          <h3>Write Reports</h3>
+          <ul>
+            <li>JSON, CSV, HTML, and CBOM-style outputs are produced</li>
+            <li>HTML adds vendor rollups, glossary guidance, and PQC-capable status tags</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div>
+        <h2>What The Scanner Is Actually Looking For</h2>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>Direct file-content signals</h3>
+            <p>Examples: <code>RSA</code>, <code>ECDSA</code>, <code>KeyStore</code>, <code>X509Certificate</code>, <code>JWT</code>, <code>ML-KEM</code>, <code>HQC</code>, <code>FrodoKEM</code>.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Dependency signals</h3>
+            <p>Examples: Maven coordinates, NuGet packages, npm modules, Go modules, Python imports, Java imports, C headers, .NET namespaces.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Wrapper and route signals</h3>
+            <p>Examples: custom CRDP endpoints, internal helper class names, and crypto-facing route markers that indicate managed crypto flows.</p>
+          </div>
+          <div class="mini-card">
+            <h3>File context signals</h3>
+            <p>The same algorithm mention means something different in a backend service, a front-end UI panel, a test harness, or a readme.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>What Comes Out</h2>
+        <div class="stack">
+          <div class="mini-card">
+            <h3>Per-file findings</h3>
+            <p>Each file gets its own PQC finding list, category totals, migration classes, complexity, notes, and recommended action.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Dependency and CBOM rollups</h3>
+            <p>Observed packages and SDK markers are rolled up into vendor families, ecosystems, and CBOM component inventory.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Human-readable HTML interpretation</h3>
+            <p>The HTML report explains the counts, adds vendor grouping, and applies <code>PQC-current</code>, <code>PQC-specialized</code>, or <code>PQC-watch-list</code> tags where appropriate.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Key Files Involved</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Role</th>
+            <th>Why It Matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>scanner/cli.py</code></td>
+            <td>Command-line entry and argument handling</td>
+            <td>Controls modes such as <code>--scan pqc</code>, output paths, CBOM import or export, and other run options.</td>
+          </tr>
+          <tr>
+            <td><code>scanner/scanner.py</code></td>
+            <td>Main scan pipeline</td>
+            <td>Coordinates file classification, dependency extraction, direct PQC detection, scoring, and final report assembly.</td>
+          </tr>
+          <tr>
+            <td><code>scanner/pqc.py</code></td>
+            <td>PQC rule engine</td>
+            <td>Loads PQC rules, detects direct content findings, classifies finding kinds, and computes PQC posture and complexity.</td>
+          </tr>
+          <tr>
+            <td><code>scanner/dependency.py</code></td>
+            <td>Dependency enrichment</td>
+            <td>Extracts package and import observations, maps them to crypto categories, and builds CBOM-style component inventory.</td>
+          </tr>
+          <tr>
+            <td><code>scanner/html_reporting.py</code></td>
+            <td>HTML report rendering</td>
+            <td>Turns scan results into the explainer-style HTML report, including glossary notes, rollups, and PQC status tags.</td>
+          </tr>
+          <tr>
+            <td><code>config/pqc-rules.json</code></td>
+            <td>Primary PQC content-rule catalog</td>
+            <td>Defines what algorithm names, protocol markers, certificate indicators, and related strings should count as direct PQC findings.</td>
+          </tr>
+          <tr>
+            <td><code>config/dependency-hints.json</code></td>
+            <td>Dependency-to-category mapping</td>
+            <td>Defines which imports, modules, namespaces, SDKs, and route markers should be treated as crypto-relevant.</td>
+          </tr>
+          <tr>
+            <td><code>config/dependency-explanations.json</code></td>
+            <td>Human-readable dependency wording</td>
+            <td>Supplies plain-English meaning and explanation text for dependency rows in the report.</td>
+          </tr>
+          <tr>
+            <td><code>config/cbom-vendor-families.json</code></td>
+            <td>Vendor/source-family rollup rules</td>
+            <td>Groups observed components and dependency references into families like Thales, AWS, Azure, Oracle, OpenSSL, or custom wrappers.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="grid-2">
+      <div>
+        <h2>What Is Config-Driven Vs Code-Driven</h2>
+        <div class="mini-card">
+          <h3>Mostly config-driven</h3>
+          <ul class="plain-list">
+            <li>Which algorithm strings are recognized as direct PQC content matches</li>
+            <li>Which dependency names count as crypto-related</li>
+            <li>How vendor/source family grouping works</li>
+            <li>Plain-English wording for dependency explanations</li>
+          </ul>
+        </div>
+        <div class="mini-card" style="margin-top:12px;">
+          <h3>Mostly code-driven</h3>
+          <ul class="plain-list">
+            <li>How files are walked and classified</li>
+            <li>How imports and manifests are parsed by language</li>
+            <li>How multiple signal types are merged into one file report</li>
+            <li>How complexity and recommended actions are scored</li>
+            <li>How frontend, docs, and test content is downgraded or interpreted</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h2>PQC Status Tags In The HTML Report</h2>
+        <div class="status-row">
+          <span class="badge good">PQC-current</span>
+          <div>Current or selected NIST-aligned signals such as <code>ML-KEM</code>, <code>ML-DSA</code>, <code>SLH-DSA</code>, <code>FN-DSA</code>, or <code>HQC</code>.</div>
+        </div>
+        <div class="status-row">
+          <span class="badge warn">PQC-specialized</span>
+          <div>Specialized approved PQC signals such as <code>XMSS</code>, <code>XMSSMT</code>, <code>LMS</code>, or <code>HSS</code>.</div>
+        </div>
+        <div class="status-row">
+          <span class="badge warn">PQC-alias</span>
+          <div>Alias or legacy naming such as <code>Kyber</code>, <code>Dilithium</code>, <code>Falcon</code>, or <code>SPHINCS+</code>.</div>
+        </div>
+        <div class="status-row">
+          <span class="badge watch">PQC-watch-list</span>
+          <div>Experimental or watch-list naming such as <code>FrodoKEM</code>, <code>Classic McEliece</code>, <code>BIKE</code>, <code>NTRU</code>, or <code>SABER</code>.</div>
+        </div>
+        <div class="callout">
+          Front-end files are treated carefully. A browser file only receives a PQC status tag when it contains both explicit PQC algorithm signals and real browser-side crypto implementation markers such as <code>window.crypto</code> or <code>crypto.subtle</code>. That keeps ordinary UI text or status panels from being mislabeled as implementation owners.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How PQC Complexity Is Determined</h2>
+      <div class="stack">
+        <p>The PQC scanner assigns each file a separate migration-complexity rating of <code>low</code>, <code>medium</code>, or <code>high</code>. This is not a vulnerability severity score. It is a directional estimate of how much migration design, integration, coordination, and testing effort the file is likely to trigger.</p>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>Thresholds</h3>
+            <ul class="plain-list">
+              <li><code>low</code>: score less than <code>6</code></li>
+              <li><code>medium</code>: score from <code>6</code> up to but not including <code>12</code></li>
+              <li><code>high</code>: score <code>12</code> or greater</li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <h3>What pushes complexity up</h3>
+            <ul class="plain-list">
+              <li>Implementation-style findings instead of reference-only mentions</li>
+              <li>Custom refactor, signing, key-exchange, PKI, protocol, and dependency-driven migration classes</li>
+              <li>More distinct crypto algorithms and more likely implementation ownership</li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <h3>What pulls complexity down</h3>
+            <ul class="plain-list">
+              <li>Test, documentation, and other reference-oriented files</li>
+              <li>Front-end-only files with no clear implementation ownership</li>
+              <li>Files that mostly mention crypto rather than implementing or configuring it</li>
+            </ul>
+          </div>
+        </div>
+        <p>The current scoring heuristic is:</p>
+        <pre><code>score =
+  (implementation findings x 3.0)
+  + (distinct algorithm names x 2.0)
+  + (CUSTOM_REFACTOR findings x 4.0)
+  + (APPLICATION_SIGNING findings x 3.0)
+  + (APPLICATION_KEY_EXCHANGE findings x 3.0)
+  + (PKI_CERTIFICATE_LIFECYCLE findings x 2.0)
+  + (PROTOCOL_STACK findings x 2.0)
+  + (DEPENDENCY_DRIVEN findings x 1.5)
+  + context and PQC-signal adjustments</code></pre>
+        <p>In plain English, a file trends toward <code>high</code> when it appears to own real crypto integration behavior such as signing, certificates, key exchange, vendor SDK integration, TLS, SSH, KMS, or HSM coordination. A file trends toward <code>low</code> when it looks more like documentation, testing, a UI reference, or a secondary mention.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Example: How One File Becomes A PQC Finding</h2>
+      <div class="file-box">
+        <strong>Example file:</strong> a Java service that uses <code>ML-KEM</code>, <code>LunaProvider</code>, <code>KeyStore</code>, and JWT signing.
+      </div>
+      <div class="flow" style="grid-template-columns: repeat(5, minmax(160px, 1fr)); margin-top: 16px;">
+        <div class="flow-card">
+          <span class="step">Signal A</span>
+          <h3>Content Match</h3>
+          <p><code>ML-KEM</code> matches the direct PQC algorithm rule.</p>
+        </div>
+        <div class="flow-card">
+          <span class="step">Signal B</span>
+          <h3>Dependency Match</h3>
+          <p><code>LunaProvider</code> and related imports are recognized as crypto-relevant dependency signals.</p>
+        </div>
+        <div class="flow-card">
+          <span class="step">Signal C</span>
+          <h3>Category Mapping</h3>
+          <p>The file may accumulate <code>PQC_CAPABLE_ALGORITHM</code>, <code>KMS_OR_HSM_ASYMMETRIC</code>, and <code>CERTIFICATE_USAGE</code>.</p>
+        </div>
+        <div class="flow-card">
+          <span class="step">Signal D</span>
+          <h3>Posture Scoring</h3>
+          <p>The scanner decides whether this looks low, medium, or high complexity and what remediation lane fits best.</p>
+        </div>
+        <div class="flow-card">
+          <span class="step">Signal E</span>
+          <h3>Report Output</h3>
+          <p>The HTML report may show a green <code>PQC-current</code> tag plus dependency notes and likely change-target guidance.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Simple Explanation You Can Reuse With Others</h2>
+      <div class="callout">
+        The PQC scanner works in two main passes. First, it looks directly inside files for cryptographic clues such as algorithm names, certificate handling, TLS settings, signing code, or KMS or HSM usage. Second, it enriches that result by looking at imports, packages, manifests, headers, and wrapper markers so it can tell whether the code is using vendor SDKs, PKI tooling, or protocol-stack components. It then merges those signals, scores likely migration effort, and writes reports that help teams focus on the files most likely to require real change.
+      </div>
+      <p class="footer-note">Suggested doc location: <code>docs/pqc/how-the-pqc-scanner-works.html</code></p>
+    </section>
+  </main>
+</body>
+</html>

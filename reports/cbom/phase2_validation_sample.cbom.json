@@ -1,0 +1,993 @@
+{
+  "bomFormat": "thales-phase2-cbom",
+  "specVersion": "1.0",
+  "metadata": {
+    "root_path": "E:\\codex\\work\\migration\\sample_code",
+    "scan_domains": [
+      "pqc"
+    ]
+  },
+  "components": [
+    {
+      "name": "Azure.Security.KeyVault.Keys",
+      "ecosystem": ".net",
+      "version": "4.8.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\SampleCompany.Api.csproj"
+      ],
+      "related_categories": [
+        "KMS_OR_HSM_ASYMMETRIC"
+      ]
+    },
+    {
+      "name": "Microsoft.AspNetCore.Mvc",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Controllers\\ClaimReviewController.cs",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Controllers\\CustomerController.cs"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "Microsoft.Data.SqlClient",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\CustomerService.cs"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "Microsoft.IdentityModel.Tokens",
+      "ecosystem": ".net",
+      "version": "8.0.2",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\SampleCompany.Api.csproj"
+      ],
+      "related_categories": [
+        "JWT_OR_TOKEN_SIGNING"
+      ]
+    },
+    {
+      "name": "Sample.DotNetApi.Models",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Controllers\\ClaimReviewController.cs",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\ClaimReviewService.cs"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "Sample.DotNetApi.Services",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Controllers\\ClaimReviewController.cs"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "SampleCompany.Models",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\CustomerService.cs"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "SampleCompany.Services",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Controllers\\CustomerController.cs"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "System.Data",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\CustomerService.cs"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "System.Data.SqlClient",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\ClaimReviewService.cs"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "System.Net.Http.Json",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\ClaimReviewService.cs"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "System.Security.Cryptography.Pkcs",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\ArtifactSigningService.cs"
+      ],
+      "related_categories": [
+        "CODE_SIGNING",
+        "CERTIFICATE_USAGE"
+      ]
+    },
+    {
+      "name": "System.Security.Cryptography.Pkcs",
+      "ecosystem": ".net",
+      "version": "9.0.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\SampleCompany.Api.csproj"
+      ],
+      "related_categories": [
+        "CODE_SIGNING",
+        "CERTIFICATE_USAGE"
+      ]
+    },
+    {
+      "name": "System.Security.Cryptography.X509Certificates",
+      "ecosystem": ".net",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\dotnet-api\\Services\\ArtifactSigningService.cs"
+      ],
+      "related_categories": [
+        "CERTIFICATE_USAGE"
+      ]
+    },
+    {
+      "name": "bytes",
+      "ecosystem": "go",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\customer_handler.go"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "cloud.google.com/go/kms/apiv1",
+      "ecosystem": "go",
+      "version": "1.21.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\go.mod"
+      ],
+      "related_categories": [
+        "KMS_OR_HSM_ASYMMETRIC"
+      ]
+    },
+    {
+      "name": "database/sql",
+      "ecosystem": "go",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\customer_handler.go"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "encoding/json",
+      "ecosystem": "go",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\customer_handler.go"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "fmt",
+      "ecosystem": "go",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\ssh_admin_client.go"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "github.com/golang-jwt/jwt/v5",
+      "ecosystem": "go",
+      "version": "5.2.1",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\go.mod"
+      ],
+      "related_categories": [
+        "JWT_OR_TOKEN_SIGNING"
+      ]
+    },
+    {
+      "name": "golang.org/x/crypto",
+      "ecosystem": "go",
+      "version": "0.31.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\go.mod"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "golang.org/x/crypto/ssh",
+      "ecosystem": "go",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\ssh_admin_client.go"
+      ],
+      "related_categories": [
+        "SSH_USAGE"
+      ]
+    },
+    {
+      "name": "net/http",
+      "ecosystem": "go",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\customer_handler.go"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "os",
+      "ecosystem": "go",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\go-service\\ssh_admin_client.go"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "io.jsonwebtoken.Jwts",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": [
+        "JWT_OR_TOKEN_SIGNING"
+      ]
+    },
+    {
+      "name": "io.jsonwebtoken.SignatureAlgorithm",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": [
+        "JWT_OR_TOKEN_SIGNING"
+      ]
+    },
+    {
+      "name": "jakarta.persistence.Column",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerDataStore.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "jakarta.persistence.Entity",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerDataStore.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "jakarta.persistence.EntityManager",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerDataStore.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "jakarta.persistence.PersistenceContext",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerDataStore.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "jakarta.persistence.Table",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerDataStore.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.io.FileInputStream",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.security.cert.X509Certificate",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": [
+        "CERTIFICATE_USAGE"
+      ]
+    },
+    {
+      "name": "java.security.interfaces.RSAPrivateKey",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.security.interfaces.RSAPublicKey",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.security.KeyStore",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": [
+        "CERTIFICATE_USAGE"
+      ]
+    },
+    {
+      "name": "java.security.PrivateKey",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.security.Signature",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.sql.Connection",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\java-kafka\\src\\main\\java\\com\\example\\events\\CustomerEventProcessor.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\jdbc-only\\src\\main\\java\\com\\example\\billing\\BillingRepository.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.sql.PreparedStatement",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\java-kafka\\src\\main\\java\\com\\example\\events\\CustomerEventProcessor.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\jdbc-only\\src\\main\\java\\com\\example\\billing\\BillingRepository.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.sql.ResultSet",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\jdbc-only\\src\\main\\java\\com\\example\\billing\\BillingRepository.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.time.Instant",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.util.Date",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "java.util.List",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerService.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\ProtectionResult.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdController.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdProtectionService.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdRepository.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "javax.sql.DataSource",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\java-kafka\\src\\main\\java\\com\\example\\events\\CustomerEventProcessor.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\jdbc-only\\src\\main\\java\\com\\example\\billing\\BillingRepository.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.apache.kafka.clients.consumer.ConsumerRecord",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\java-kafka\\src\\main\\java\\com\\example\\events\\CustomerEventProcessor.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.http.ResponseEntity",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerController.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdController.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.jdbc.core.JdbcTemplate",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerService.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdRepository.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.kafka.annotation.KafkaListener",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\java-kafka\\src\\main\\java\\com\\example\\events\\CustomerEventProcessor.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.stereotype.Component",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\java-kafka\\src\\main\\java\\com\\example\\events\\CustomerEventProcessor.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.stereotype.Repository",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerDataStore.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdRepository.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.stereotype.Service",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerService.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdProtectionService.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\security\\TokenSigningService.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.web.bind.annotation.GetMapping",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerController.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdController.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.web.bind.annotation.PathVariable",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerController.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdController.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.web.bind.annotation.PostMapping",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerController.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdController.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.web.bind.annotation.RequestBody",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerController.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdController.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.web.bind.annotation.RequestMapping",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerController.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdController.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.web.bind.annotation.RestController",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerController.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdController.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "org.springframework.web.client.RestTemplate",
+      "ecosystem": "jvm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\java-kafka\\src\\main\\java\\com\\example\\events\\CustomerEventProcessor.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\customer\\CustomerService.java",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\spring-boot\\src\\main\\java\\com\\example\\household\\HouseholdProtectionService.java"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "@angular/common/http",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\angular\\src\\app\\payment-editor.component.ts"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "@angular/core",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\angular\\src\\app\\payment-editor.component.ts"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "@aws-sdk/client-kms",
+      "ecosystem": "npm",
+      "version": "^3.840.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\package.json"
+      ],
+      "related_categories": [
+        "KMS_OR_HSM_ASYMMETRIC"
+      ]
+    },
+    {
+      "name": "axios",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\claims-service.js",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\node-express-ui\\claims-api-proxy.js",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\node-express-ui\\claims-proxy.js",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\node-express-ui\\server.js",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\react\\src\\components\\ClaimReviewScreen.tsx",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\react\\src\\components\\CustomerProfile.tsx",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\react\\src\\components\\HouseholdMemberScreen.tsx"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "express",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\claims-service.js",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\customer-service.js",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\node-express-ui\\claims-api-proxy.js",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\node-express-ui\\claims-proxy.js",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\node-express-ui\\server.js"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "fs",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\jwt-auth-service.js"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "jose",
+      "ecosystem": "npm",
+      "version": "^5.9.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\package.json"
+      ],
+      "related_categories": [
+        "JWT_OR_TOKEN_SIGNING"
+      ]
+    },
+    {
+      "name": "jsonwebtoken",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\jwt-auth-service.js"
+      ],
+      "related_categories": [
+        "JWT_OR_TOKEN_SIGNING"
+      ]
+    },
+    {
+      "name": "jsonwebtoken",
+      "ecosystem": "npm",
+      "version": "^9.0.2",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\package.json"
+      ],
+      "related_categories": [
+        "JWT_OR_TOKEN_SIGNING"
+      ]
+    },
+    {
+      "name": "kafkajs",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\customer-service.js"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "path",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\jwt-auth-service.js"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "pg",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\claims-service.js",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\customer-service.js"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "react",
+      "ecosystem": "npm",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\react\\src\\components\\CertificateStatusPanel.tsx",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\react\\src\\components\\ClaimReviewScreen.tsx",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\react\\src\\components\\CustomerProfile.tsx",
+        "E:\\codex\\work\\migration\\sample_code\\frontend\\react\\src\\components\\HouseholdMemberScreen.tsx"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "ssh2",
+      "ecosystem": "npm",
+      "version": "^1.16.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\node-service\\package.json"
+      ],
+      "related_categories": [
+        "SSH_USAGE"
+      ]
+    },
+    {
+      "name": "boto3",
+      "ecosystem": "python",
+      "version": "1.39.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\python-fastapi\\requirements.txt"
+      ],
+      "related_categories": [
+        "KMS_OR_HSM_ASYMMETRIC"
+      ]
+    },
+    {
+      "name": "cryptography",
+      "ecosystem": "python",
+      "version": "45.0.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\python-fastapi\\requirements.txt"
+      ],
+      "related_categories": [
+        "CERTIFICATE_USAGE"
+      ]
+    },
+    {
+      "name": "fastapi",
+      "ecosystem": "python",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\python-fastapi\\app\\main.py"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "paramiko",
+      "ecosystem": "python",
+      "version": "3.5.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\python-fastapi\\requirements.txt"
+      ],
+      "related_categories": [
+        "SSH_USAGE"
+      ]
+    },
+    {
+      "name": "pathlib",
+      "ecosystem": "python",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\python-fastapi\\app\\mtls_client.py"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "psycopg2",
+      "ecosystem": "python",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\python-fastapi\\app\\main.py"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "PyJWT",
+      "ecosystem": "python",
+      "version": "2.9.0",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\python-fastapi\\requirements.txt"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "requests",
+      "ecosystem": "python",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\python-fastapi\\app\\main.py",
+        "E:\\codex\\work\\migration\\sample_code\\backend\\vector-search\\python\\member_embeddings.py"
+      ],
+      "related_categories": []
+    },
+    {
+      "name": "ssl",
+      "ecosystem": "python",
+      "version": "",
+      "type": "library",
+      "origin": "observed",
+      "source_files": [
+        "E:\\codex\\work\\migration\\sample_code\\backend\\python-fastapi\\app\\mtls_client.py"
+      ],
+      "related_categories": []
+    }
+  ]
+}

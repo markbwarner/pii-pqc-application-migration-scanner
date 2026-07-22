@@ -1,0 +1,13 @@
+{
+  "pqc_rules": [
+    {
+      "category": "KMS_OR_HSM_ASYMMETRIC",
+      "algorithm": "Swagger-discovered service route",
+      "migration_class": "DEPENDENCY_DRIVEN",
+      "severity": "medium",
+      "confidence": 0.7,
+      "pattern": "/findreplacesensitive|/findsensitive|/stringfindreplacesensitive|/stringfindsensitive|/stringreveal|findreplacesensitive_findreplacesensitive_post|findsensitive_findsensitive_post|stringfindreplacesensitive_stringfindreplacesensitive_post|stringfindsensitive_stringfindsensitive_post|stringreveal_stringreveal_post",
+      "draft_only": true
+    }
+  ]
+}

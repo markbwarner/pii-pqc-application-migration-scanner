@@ -1,0 +1,19 @@
+[[package]]
+name = "openssl"
+version = "0.10.64"
+
+[[package]]
+name = "jsonwebtoken"
+version = "9.3.0"
+
+[[package]]
+name = "ssh2"
+version = "0.9.4"
+
+[[package]]
+name = "vaultrs"
+version = "0.7.2"
+
+[[package]]
+name = "akeyless_openapi"
+version = "0.1.0"
