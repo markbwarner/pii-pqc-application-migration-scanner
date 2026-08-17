@@ -2,6 +2,70 @@
 
 These helper scripts now include the scan domain in the filename so it is obvious whether a helper is meant for `pii`, `pqc`, or `combined` scanning.
 
+## Quick Start
+
+If you just want a first successful run, use the helper scripts with the local [sample_code](E:\codex\work\migration\sample_code) corpus.
+
+### PII quick start
+
+Windows:
+
+```powershell
+bin\run-pii-summary-only.bat sample_code
+bin\run-pii-summary-dba.bat sample_code
+```
+
+Shell:
+
+```bash
+./bin/run-pii-summary-only.sh sample_code
+./bin/run-pii-summary-dba.sh sample_code
+```
+
+Typical outputs:
+
+- `sample_code_pii-impact-summary_<timestamp>.json`
+- `sample_code_likely-change-targets_<timestamp>.csv`
+- `sample_code_dba-planning_<timestamp>.sql`
+
+### PQC quick start
+
+Windows:
+
+```powershell
+bin\run-pqc-summary-only.bat sample_code
+bin\run-pqc-full-assessment.bat sample_code
+```
+
+Shell:
+
+```bash
+./bin/run-pqc-summary-only.sh sample_code
+./bin/run-pqc-full-assessment.sh sample_code
+```
+
+Typical outputs:
+
+- `sample_code_pqc-impact-summary_<timestamp>.json`
+- `sample_code_pqc-report_<timestamp>.html`
+- `sample_code_pqc.cbom.json`
+
+### Combined quick start
+
+Windows:
+
+```powershell
+bin\run-combined-summary-only.bat sample_code
+bin\run-combined-full-assessment.bat sample_code
+```
+
+Shell:
+
+```bash
+./bin/run-combined-summary-only.sh sample_code
+./bin/run-combined-full-assessment.sh sample_code
+```
+
 Default behavior:
 
 - input directory: `sample_code`

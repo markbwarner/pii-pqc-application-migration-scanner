@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PQC Scanner Competitive Battlecard</title>
+  <style>
+    :root {
+      --ink: #132238;
+      --muted: #58677a;
+      --brand: #005bbb;
+      --brand-dark: #003f82;
+      --accent: #0f8b8d;
+      --line: #d9e1ec;
+      --page-width: 8.5in;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #dfe7f2;
+    }
+    .page {
+      width: var(--page-width);
+      min-height: 11in;
+      margin: 0 auto 18px;
+      background: #fff;
+      padding: 0.72in;
+      box-shadow: 0 8px 28px rgba(17, 32, 56, 0.12);
+      position: relative;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      background: rgba(0, 91, 187, 0.1);
+      margin-bottom: 18px;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.1; }
+    h1 { font-size: 28px; margin-bottom: 16px; }
+    h2 { font-size: 19px; margin-bottom: 12px; }
+    h3 { font-size: 14px; margin-bottom: 8px; }
+    p {
+      margin: 0 0 10px;
+      line-height: 1.48;
+      font-size: 12.8px;
+      color: var(--muted);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbfe 100%);
+    }
+    .callout {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-left: 5px solid var(--accent);
+      background: #effbfb;
+      border-radius: 0 16px 16px 0;
+      color: #244049;
+    }
+    ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: var(--muted);
+      font-size: 12.8px;
+      line-height: 1.45;
+    }
+    li { margin-bottom: 6px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    th, td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      color: var(--muted);
+    }
+    th {
+      background: #f7fbff;
+      color: var(--brand-dark);
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .footer {
+      position: absolute;
+      left: 0.72in;
+      right: 0.72in;
+      bottom: 0.48in;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      color: #71839a;
+    }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <div class="eyebrow">Internal Battlecard</div>
+    <h1>Application PQC Readiness Scanner Competitive Battlecard</h1>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h2>Use This Positioning First</h2>
+        <p>
+          Most competing tools are designed to create inventory, posture visibility, or broad discovery.
+          Our scanner is designed to help customers move from discovery to application migration planning.
+        </p>
+        <div class="callout">
+          Lead with: <strong>“Other tools tell you what crypto exists. This scanner helps tell you what is most likely to change, who likely owns it, and how to prioritize the work.”</strong>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Top Differentiators</h2>
+        <ul>
+          <li>file-level findings and source-line attribution</li>
+          <li>likely change target and recommended action outputs</li>
+          <li>reference-only versus implementation-aware classification</li>
+          <li>better fit for multi-tier application analysis</li>
+          <li>JSON, CSV, HTML, and CBOM-aligned output options</li>
+          <li>custom wrapper and Swagger / OpenAPI onboarding support</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top: 16px;">
+      <h2>Where Competitors Are Strong</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tool family</th>
+            <th>Strong at</th>
+            <th>Less strong at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CBOM / CycloneDX</td>
+            <td>portable machine-readable crypto inventory</td>
+            <td>owner identification and migration work packaging</td>
+          </tr>
+          <tr>
+            <td>Static analysis frameworks</td>
+            <td>custom source-code rules in existing pipelines</td>
+            <td>out-of-the-box program-level planning views</td>
+          </tr>
+          <tr>
+            <td>Network monitoring</td>
+            <td>runtime TLS, ciphers, and certificate observation</td>
+            <td>file-level remediation ownership</td>
+          </tr>
+          <tr>
+            <td>Simple scanners</td>
+            <td>fast first pass</td>
+            <td>context, confidence, and worklist quality</td>
+          </tr>
+          <tr>
+            <td>Enterprise discovery tools</td>
+            <td>estate-wide posture and asset visibility</td>
+            <td>developer-ready change planning</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="panel">
+        <h2>Good Buyer Questions</h2>
+        <ul>
+          <li>Which files are likely true migration owners rather than passive references?</li>
+          <li>Can the tool help separate frontend references from backend implementation paths?</li>
+          <li>Can the output feed Excel, Power Query, BI, or remediation workflows?</li>
+          <li>Can the tool recognize wrappers, shared libraries, and generated OpenAPI clients?</li>
+          <li>Can it help estimate or sequence migration work, not just inventory it?</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>When To Use This Scanner</h2>
+        <ul>
+          <li>scope validation before a PQC remediation program</li>
+          <li>triage of likely protocol, certificate, signing, or KMS-related work</li>
+          <li>multi-team planning where ownership is unclear</li>
+          <li>conversion of raw crypto discovery into application work packages</li>
+          <li>environments that need both CBOM portability and code-level planning</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      Safe positioning: this scanner is not a replacement for every CBOM, Zeek, CodeQL, SonarQube, or enterprise discovery use case. It is the best fit when customers need a migration planning layer on top of those signals.
+    </div>
+
+    <div class="footer">
+      <span>Application PQC Readiness Scanner</span>
+      <span>Competitive Battlecard</span>
+    </div>
+  </section>
+</body>
+</html>

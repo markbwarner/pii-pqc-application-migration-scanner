@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Use The Application PQC Readiness Scanner</title>
+  <style>
+    :root {
+      --ink: #132238;
+      --muted: #58677a;
+      --brand: #005bbb;
+      --brand-dark: #003f82;
+      --accent: #0f8b8d;
+      --line: #d9e1ec;
+      --page-width: 8.5in;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #dfe7f2;
+    }
+    .page {
+      width: var(--page-width);
+      min-height: 11in;
+      margin: 0 auto 18px;
+      background: #fff;
+      padding: 0.72in;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(17, 32, 56, 0.12);
+    }
+    .hero {
+      background:
+        radial-gradient(circle at top right, rgba(15, 139, 141, 0.16), transparent 28%),
+        radial-gradient(circle at left 20% top 10%, rgba(0, 91, 187, 0.13), transparent 24%),
+        linear-gradient(135deg, #f8fbff 0%, #edf4fb 100%);
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      background: rgba(0, 91, 187, 0.1);
+      margin-bottom: 18px;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.1; }
+    h1 { font-size: 30px; max-width: 6.6in; margin-bottom: 16px; }
+    h2 { font-size: 22px; margin-bottom: 14px; }
+    h3 { font-size: 15px; margin-bottom: 8px; }
+    p {
+      margin: 0 0 12px;
+      line-height: 1.5;
+      font-size: 13.1px;
+      color: var(--muted);
+    }
+    .lede {
+      font-size: 15px;
+      max-width: 6.8in;
+      color: #314157;
+      margin-bottom: 22px;
+    }
+    .band {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 22px 0 18px;
+    }
+    .band-card {
+      padding: 15px 14px;
+      border-radius: 16px;
+      background: #0f2036;
+      color: white;
+      min-height: 118px;
+    }
+    .band-card .label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 7px;
+    }
+    .band-card .copy {
+      font-size: 12px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.82);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .panel, .callout, .matrix-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+    .panel {
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbfe 100%);
+    }
+    .callout {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-left: 5px solid var(--accent);
+      background: #effbfb;
+      border-radius: 0 16px 16px 0;
+      color: #244049;
+    }
+    .matrix-box {
+      overflow: hidden;
+      margin-top: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      color: var(--muted);
+    }
+    th {
+      background: #f7fbff;
+      color: var(--brand-dark);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    tr:last-child td { border-bottom: 0; }
+    ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    li { margin-bottom: 7px; }
+    .footer {
+      position: absolute;
+      left: 0.72in;
+      right: 0.72in;
+      bottom: 0.48in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: #71839a;
+    }
+  </style>
+</head>
+<body>
+  <section class="page hero">
+    <div class="eyebrow">Thales PQC Positioning</div>
+    <h1>Why Use The Application PQC Readiness Scanner</h1>
+    <p class="lede">
+      Most crypto inventory tools are good at telling you what cryptography exists. This scanner is designed to tell you what is most likely to change, who likely owns the change, and how to turn those findings into an application migration plan.
+    </p>
+
+    <div class="band">
+      <div class="band-card">
+        <span class="label">Migration Planning</span>
+        <span class="copy">Built for practical change planning rather than only inventory creation or posture reporting.</span>
+      </div>
+      <div class="band-card">
+        <span class="label">Actionable Outputs</span>
+        <span class="copy">Produces likely change targets, recommended actions, JSON, CSV, HTML, and CBOM-aligned outputs.</span>
+      </div>
+      <div class="band-card">
+        <span class="label">Ownership Context</span>
+        <span class="copy">Helps distinguish implementation-heavy files from lower-priority references, wrappers, and passive dependency evidence.</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h2>Why Customers Choose It</h2>
+        <ul>
+          <li>easier to move from findings to remediation planning</li>
+          <li>stronger file-level prioritization than inventory-first tools</li>
+          <li>better at separating reference-only findings from implementation paths</li>
+          <li>more useful for multi-tier applications where frontend references can overstate true scope</li>
+          <li>supports custom wrappers and Swagger / OpenAPI onboarding</li>
+          <li>exports directly into Excel, Power Query, BI, and architecture-review workflows</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>The Core Buyer Question</h2>
+        <p>
+          A customer often does not need just another list of algorithms, certificates, or crypto libraries.
+        </p>
+        <p>
+          They usually need to know:
+        </p>
+        <ul>
+          <li>which files are likely true migration owners</li>
+          <li>which findings are implementation-heavy versus reference-only</li>
+          <li>which back-end services matter more than front-end references</li>
+          <li>which migration work packages should be reviewed first</li>
+          <li>how large the likely delivery and testing effort is</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      This scanner is best positioned as an <strong>application migration planning scanner</strong>, not just an inventory scanner.
+    </div>
+
+    <div class="footer">
+      <span>Application PQC Readiness Scanner</span>
+      <span>Page 1</span>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>How To Position It Against Other Tool Families</h2>
+    <div class="matrix-box">
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>CBOM / CycloneDX</th>
+            <th>Static Analysis</th>
+            <th>Network Monitoring</th>
+            <th>Enterprise Discovery</th>
+            <th>This Scanner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Best at</td>
+            <td>portable machine-readable inventory</td>
+            <td>custom source-code crypto rules</td>
+            <td>runtime protocol visibility</td>
+            <td>broad asset and posture discovery</td>
+            <td>migration work packages and likely owners</td>
+          </tr>
+          <tr>
+            <td>Source-line change planning</td>
+            <td>limited</td>
+            <td>medium</td>
+            <td>none</td>
+            <td>limited</td>
+            <td>core feature</td>
+          </tr>
+          <tr>
+            <td>Reference vs implementation separation</td>
+            <td>limited</td>
+            <td>limited to medium</td>
+            <td>none</td>
+            <td>limited</td>
+            <td>core feature</td>
+          </tr>
+          <tr>
+            <td>Recommended migration actions</td>
+            <td>no</td>
+            <td>rarely</td>
+            <td>no</td>
+            <td>rarely</td>
+            <td>core feature</td>
+          </tr>
+          <tr>
+            <td>Planning-friendly exports</td>
+            <td>varies</td>
+            <td>varies</td>
+            <td>varies</td>
+            <td>usually product-specific</td>
+            <td>JSON, CSV, HTML, CBOM support</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2" style="margin-top: 18px;">
+      <div class="panel">
+        <h3>Best Positioning Message</h3>
+        <p>
+          CBOM and discovery tools are good at telling you what cryptography exists.
+          This scanner is designed to tell you what is most likely to change, who likely owns the change, and how to turn those findings into a migration plan.
+        </p>
+      </div>
+      <div class="panel">
+        <h3>Best Use Cases</h3>
+        <ul>
+          <li>narrowing true migration scope</li>
+          <li>prioritizing likely change targets</li>
+          <li>separating frontend references from backend implementation paths</li>
+          <li>creating Excel- and BI-friendly worklists</li>
+          <li>onboarding custom wrappers and OpenAPI-generated clients</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      The strongest message is not that other tools are wrong. It is that they answer different questions. This scanner answers the delivery question: what needs to change first, and who likely owns it?
+    </div>
+
+    <div class="footer">
+      <span>Application PQC Readiness Scanner</span>
+      <span>Page 2</span>
+    </div>
+  </section>
+</body>
+</html>

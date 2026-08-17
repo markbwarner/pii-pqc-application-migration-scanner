@@ -385,13 +385,19 @@ Executive summary:
       The PQC executive summary is meant to help teams answer not just where crypto appears, but whether the issue is more likely certificate lifecycle work, protocol-stack work, signing modernization, or dependency and KMS/HSM review.
     </div>
 
+    <div class="callout">
+      Most crypto inventory tools are good at telling you what cryptography exists. This scanner is designed to help answer the harder delivery question: what is most likely to change, who likely owns the change, and how to turn the results into a migration worklist.
+    </div>
+
     <div class="matrix-box">
       <table>
         <thead>
           <tr>
             <th>Capability</th>
-            <th>cdxgen / CBOM-style tools</th>
-            <th>Crypto discovery scanners</th>
+            <th>CBOM / CycloneDX tools</th>
+            <th>Static analysis frameworks</th>
+            <th>Network monitoring</th>
+            <th>Enterprise discovery scanners</th>
             <th>Thales PQC scanner</th>
           </tr>
         </thead>
@@ -399,38 +405,66 @@ Executive summary:
           <tr>
             <td>Primary purpose</td>
             <td>Produce crypto/component inventory and BOM artifacts</td>
+            <td>Find crypto API usage and source patterns</td>
+            <td>Observe protocols, cipher suites, and certificates in traffic</td>
             <td>Find cryptographic assets, keys, certs, algorithms, libraries</td>
             <td>Explain migration impact in application code</td>
           </tr>
           <tr>
-            <td>Output style</td>
-            <td>CBOM / CycloneDX, machine-readable inventory</td>
-            <td>Inventory dashboards, findings, risk lists</td>
-            <td>File/line findings plus migration worklist</td>
+            <td>Best at</td>
+            <td>Portable inventory and governance</td>
+            <td>Custom code rules in existing pipelines</td>
+            <td>Runtime crypto posture</td>
+            <td>Broad estate visibility</td>
+            <td>Application migration planning</td>
           </tr>
           <tr>
             <td>Source line attribution</td>
             <td>Sometimes partial, often limited</td>
+            <td>Often strong</td>
+            <td>None</td>
             <td>Varies</td>
+            <td>Core feature</td>
+          </tr>
+          <tr>
+            <td>Distinguish reference vs implementation</td>
+            <td>Limited</td>
+            <td>Limited to medium</td>
+            <td>No</td>
+            <td>Limited</td>
             <td>Core feature</td>
           </tr>
           <tr>
             <td>Frontend vs backend classification</td>
             <td>Usually no</td>
+            <td>Rarely</td>
+            <td>No</td>
             <td>Usually limited</td>
             <td>Core feature</td>
           </tr>
           <tr>
-            <td>PQC migration advice</td>
-            <td>Usually generic</td>
-            <td>Medium</td>
+            <td>Recommended migration actions</td>
+            <td>No</td>
+            <td>Rarely</td>
+            <td>No</td>
+            <td>Rarely</td>
             <td>Deep, app-specific</td>
           </tr>
           <tr>
-            <td>Team ownership / work package grouping</td>
+            <td>Output options</td>
+            <td>Varies</td>
+            <td>Varies</td>
+            <td>Varies</td>
+            <td>Usually product-specific</td>
+            <td>JSON, CSV, HTML, and CBOM-aligned workflows</td>
+          </tr>
+          <tr>
+            <td>Swagger / OpenAPI wrapper onboarding</td>
+            <td>Rarely</td>
+            <td>Rarely</td>
             <td>No</td>
-            <td>Limited</td>
-            <td>Core feature</td>
+            <td>Rarely</td>
+            <td>Supported</td>
           </tr>
         </tbody>
       </table>
@@ -493,18 +527,20 @@ Executive summary:
         <h3>How It Compares</h3>
         <ul>
           <li>CBOM tools are strongest for baseline machine-readable inventory.</li>
+          <li>Static analysis is strongest for custom crypto rules inside existing developer platforms.</li>
+          <li>Network monitoring is strongest for deployed TLS and certificate posture.</li>
           <li>Enterprise crypto scanners are strongest for broad asset discovery and posture visibility.</li>
-          <li>This scanner is strongest when teams need source-line attribution, implementation context, effort sizing, and a modernization worklist.</li>
+          <li>This scanner is strongest when teams need source-line attribution, implementation context, effort sizing, likely change targets, and a modernization worklist.</li>
         </ul>
       </div>
       <div class="panel">
-        <h3>Who Benefits</h3>
+        <h3>Why Customers Choose It</h3>
         <ul>
-          <li>Architects estimating PQC modernization scope</li>
-          <li>Security teams reviewing crypto transition hotspots</li>
-          <li>Platform teams grouping protocol, certificate, and signing work</li>
-          <li>Developers validating likely code owners and change boundaries</li>
-          <li>Program leads preparing phased migration plans</li>
+          <li>easier to move from findings to planning output</li>
+          <li>better file-level prioritization than inventory-first tools</li>
+          <li>stronger support for likely change targets and recommended actions</li>
+          <li>more useful for multi-tier application analysis</li>
+          <li>better fit for Excel, Power Query, BI, and architecture-review workflows</li>
         </ul>
       </div>
     </div>
