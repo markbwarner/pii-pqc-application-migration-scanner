@@ -131,23 +131,39 @@ These fields help teams filter for protocol work, signing work, certificate life
 - code-signing workflow review
 - reference-only triage for docs and frontend artifacts
 
-### Positioning Matrix
+### Why Use This Scanner Versus Other Tool Families
 
-| Capability | cdxgen / CBOM-style tools | Crypto discovery scanners | Your proposed scanner |
-| --- | --- | --- | --- |
-| Primary purpose | Produce crypto/component inventory and BOM artifacts | Find cryptographic assets, keys, certs, algorithms, libraries | Explain migration impact in application code |
-| Output style | CBOM / CycloneDX, machine-readable inventory | Inventory dashboards, findings, risk lists | File/line findings plus migration worklist |
-| Source line attribution | Sometimes partial, often limited | Varies | Core feature |
-| Dependency visibility | Strong | Medium to strong | Medium |
-| Certificate / keystore discovery | Good | Strong | Good |
-| Runtime / network visibility | Weak | Sometimes strong | Weak unless you add integrations |
-| Frontend vs backend classification | Usually no | Usually limited | Core feature |
-| Distinguish reference vs implementation | Limited | Limited to medium | Core feature |
-| PQC migration advice | Usually generic | Medium | Deep, app-specific |
-| Estimate level of effort | No | Rarely | Core feature |
-| Team ownership / work package grouping | No | Limited | Core feature |
-| Thales-specific recommendation logic | No | No | Core feature |
-| Best use | Build inventory baseline | Enterprise crypto posture discovery | Application modernization planning |
+Most crypto inventory tools are good at telling you what cryptography exists.
+
+This scanner is designed to help answer the harder delivery question:
+
+- what is most likely to change
+- who likely owns the change
+- which findings are implementation-heavy versus reference-only
+- how to turn the results into a migration worklist
+
+### Expanded Positioning Matrix
+
+| Capability | CBOM / CycloneDX tools | Static analysis frameworks | Network monitoring | Enterprise crypto discovery scanners | This scanner |
+| --- | --- | --- | --- | --- | --- |
+| Primary purpose | Produce crypto/component inventory and BOM artifacts | Find crypto API usage and coding patterns in source | Observe protocols, cipher suites, and certificates in traffic | Find cryptographic assets, keys, certs, algorithms, libraries | Explain migration impact in application code |
+| Best at | Portable inventory and governance | Custom code rules in existing pipelines | Runtime crypto posture | Broad estate visibility | Application migration planning |
+| Source line attribution | Sometimes partial, often limited | Often strong | None | Varies | Core feature |
+| Distinguish reference vs implementation | Limited | Limited to medium | No | Limited | Core feature |
+| Frontend vs backend classification | Usually no | Rarely | No | Usually limited | Core feature |
+| Recommended migration actions | No | Rarely | No | Rarely | Core feature |
+| Output options | Varies | Varies | Varies | Usually product-specific | JSON, CSV, HTML, and CBOM-aligned workflows |
+| Swagger / OpenAPI wrapper onboarding | Rarely | Rarely | No | Rarely | Supported |
+| Best use | Build inventory baseline | Add crypto rules to existing developer tooling | Validate deployed protocol posture | Enterprise crypto posture discovery | Application modernization planning |
+
+### Buyer-Friendly Differentiators
+
+- easier to move from findings to planning output
+- better file-level prioritization than inventory-first tools
+- stronger support for likely change targets and recommended actions
+- more useful for multi-tier application analysis
+- better fit for Excel, Power Query, BI, and architecture-review workflows
+- better support for custom wrappers and OpenAPI-generated clients
 
 ### Customer Outcome
 

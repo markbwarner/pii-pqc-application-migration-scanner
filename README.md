@@ -108,6 +108,121 @@ You can also run the scanner directly with an existing Python environment if you
 
 ## Usage
 
+## Quick Start
+
+If you want the fastest way to see the scanner working, use the helper scripts in [bin](E:\codex\work\migration\bin) against the synthetic sample corpus in [sample_code](E:\codex\work\migration\sample_code).
+
+### PII Quick Start
+
+Use this when you want to test the sensitive-data scan path first.
+
+What it gives you:
+
+- PII-only scan
+- sample custom alias support
+- executive-summary output
+- optional likely-change-target and DBA planning outputs
+
+Windows:
+
+```powershell
+bin\run-pii-summary-only.bat sample_code
+bin\run-pii-summary-dba.bat sample_code
+```
+
+Linux or macOS shell:
+
+```bash
+./bin/run-pii-summary-only.sh sample_code
+./bin/run-pii-summary-dba.sh sample_code
+```
+
+Expected outputs in `reports`:
+
+- `sample_code_pii-impact-summary_<timestamp>.json`
+- `sample_code_likely-change-targets_<timestamp>.csv`
+- `sample_code_dba-planning_<timestamp>.sql`
+
+When to use each:
+
+- `run-pii-summary-only`
+  - fastest first validation
+- `run-pii-summary-dba`
+  - best first demo for developers, DBAs, and project planners
+
+### PQC Quick Start
+
+Use this when you want to test the post-quantum-readiness scan path first.
+
+What it gives you:
+
+- PQC-only scan
+- dependency and CBOM-aware output
+- recommended PQC migration actions
+- optional HTML and CBOM export in the full assessment path
+
+Windows:
+
+```powershell
+bin\run-pqc-summary-only.bat sample_code
+bin\run-pqc-full-assessment.bat sample_code
+```
+
+Linux or macOS shell:
+
+```bash
+./bin/run-pqc-summary-only.sh sample_code
+./bin/run-pqc-full-assessment.sh sample_code
+```
+
+Expected outputs in `reports`:
+
+- `sample_code_pqc-impact-summary_<timestamp>.json`
+- `sample_code_pqc-report_<timestamp>.html`
+- `sample_code_pqc.cbom.json`
+
+When to use each:
+
+- `run-pqc-summary-only`
+  - fastest first validation
+- `run-pqc-full-assessment`
+  - best first demo when you want HTML and CBOM-style output
+
+### Combined Quick Start
+
+Use this when you want one run that shows both migration domains together.
+
+Windows:
+
+```powershell
+bin\run-combined-summary-only.bat sample_code
+bin\run-combined-full-assessment.bat sample_code
+```
+
+Linux or macOS shell:
+
+```bash
+./bin/run-combined-summary-only.sh sample_code
+./bin/run-combined-full-assessment.sh sample_code
+```
+
+This is the best option when you want to show:
+
+- PII planning output
+- PQC readiness output
+- shared file classification and likely change targets
+- combined HTML and planning artifacts
+
+### Quick Start Output Locations
+
+By default the helper scripts:
+
+- read sample custom patterns from `config/pii/examples/custom-patterns.example.json` for PII and combined runs
+- write timestamped output files under `reports`
+- use `sample_code` as the input corpus when you pass `sample_code` as the first argument
+
+If you prefer to run the scanner directly instead of using the scripts, the equivalent sample commands are shown later in this README and in [sample_code/README.md](E:\codex\work\migration\sample_code\README.md).
+
 ```powershell
 python app.py C:\yourproject\sample_code --json-out C:\yourproject\pii-impact-report.json
 ```
@@ -374,7 +489,7 @@ What each factor is trying to represent:
 - `JDBC candidates x 1.5`
   - likely JDBC-driver coverage reduces direct application-code change complexity
 - front-end adjustment
-  - front-end-only references often have lower direct CRDP migration impact than back-end and data-access files
+  - front-end-only references often have lower direct migration impact than back-end and data-access files
 
 Example:
 
@@ -704,7 +819,7 @@ Typical values for `likely_change_owner`:
 
 Typical values for `recommended_change_action`:
 
-- `review_crdp_rest_change`
+- `review_service_rest_change`
 - `review_data_access_change`
 - `review_jdbc_substitution`
 - `frontend_reference_only`
@@ -715,8 +830,8 @@ How to use these fields:
 
 - `likely_change_target=true`
   - easiest first-pass filter for files worth reviewing first
-- `recommended_change_action=review_crdp_rest_change`
-  - likely CRDP REST code-change candidates
+- `recommended_change_action=review_service_rest_change`
+  - likely service-layer REST code-change candidates
 - `recommended_change_action=review_jdbc_substitution`
   - likely JDBC-driver substitution candidates
 - `recommended_change_action=review_data_access_change`
@@ -726,10 +841,10 @@ Definitions:
 
 - `frontend_reference_only`
   - File references sensitive fields but mostly looks like UI, client, proxy, or pass-through code.
-  - Usually not the primary CRDP or JDBC implementation point.
+  - Usually not the primary implementation point.
 - `backend_logic_owner`
   - File appears to own business logic, orchestration, transformation, or protection workflow.
-  - Often the likely code-change location for CRDP REST integration.
+  - Often the likely code-change location for service-layer REST integration.
 - `data_access_owner`
   - File appears to own persistence, retrieval, or integration-layer handling of sensitive fields.
   - Common examples are repositories, DAOs, and storage-oriented handlers.
@@ -781,7 +896,7 @@ Examples:
 - `likely_change_owner=frontend_reference_only` with `role_in_flow=collects_and_sends`
   - A React or Node.js UI file references PII and sends it to the back end, but is not the likely primary change owner.
 - `likely_change_owner=backend_logic_owner` with `role_in_flow=receives_and_transforms`
-  - A service receives sensitive fields and performs business logic or CRDP orchestration.
+  - A service receives sensitive fields and performs business logic or protection orchestration.
 - `likely_change_owner=jdbc_candidate` with `role_in_flow=persists_or_publishes`
   - A repository or SQL-heavy service persists sensitive fields and may be covered by a JDBC-driver approach.
 
@@ -838,7 +953,7 @@ The CSV includes fields such as:
 
 This is usually the easiest format to filter in Excel for:
 
-- `review_crdp_rest_change`
+- `review_service_rest_change`
 - `review_jdbc_substitution`
 - `review_data_access_change`
 
@@ -921,7 +1036,7 @@ Sample CSV output:
 
 ```csv
 path,likely_change_target,recommended_change_action,likely_change_owner,ownership_confidence,role_in_flow,code_change_candidate_count,jdbc_candidate_count,complexity_rating,complexity_score
-C:\yourproject\backend\spring-boot\CustomerController.java,True,review_crdp_rest_change,backend_logic_owner,0.84,receives_and_transforms,3,0,high,24.9
+C:\yourproject\backend\spring-boot\CustomerController.java,True,review_service_rest_change,backend_logic_owner,0.84,receives_and_transforms,3,0,high,24.9
 C:\yourproject\backend\spring-boot\CustomerDataStore.java,True,review_data_access_change,data_access_owner,0.82,receives_and_transforms,37,1,high,207.2
 C:\yourproject\backend\spring-boot\CustomerRepository.java,True,review_jdbc_substitution,jdbc_candidate,0.90,persists_or_publishes,11,20,high,92.8
 C:\yourproject\frontend\react\CustomerProfile.tsx,False,frontend_reference_only,frontend_reference_only,0.82,collects_and_sends,0,0,low,6.0
